@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial Videos - Sonora</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .videos-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .videos-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .videos-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .videos-header p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .category-section {
+            margin-bottom: 50px;
+        }
+
+        .category-title {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .video-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .video-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(107, 182, 214, 0.3);
+        }
+
+        .video-thumbnail {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-thumbnail::after {
+            content: "▶";
+            position: absolute;
+            font-size: 3rem;
+            color: white;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .video-card:hover .video-thumbnail::after {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .video-content {
+            padding: 20px;
+        }
+
+        .video-title {
+            color: var(--primary);
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .video-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--tertiary);
+            padding-top: 15px;
+            border-top: 1px solid rgba(107, 182, 214, 0.2);
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .difficulty-beginner {
+            background: #A8E6CF;
+            color: #2d5a4a;
+        }
+
+        .difficulty-intermediate {
+            background: #E8956E;
+            color: #6b3d28;
+        }
+
+        .difficulty-advanced {
+            background: #6BB6D6;
+            color: #2d4a5a;
+        }
+
+        .playlist-section {
+            background: linear-gradient(135deg, rgba(107, 182, 214, 0.1), rgba(168, 230, 207, 0.1));
+            border: 2px solid var(--primary);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 50px;
+        }
+
+        .playlist-section h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .recommended-box {
+            background: white;
+            border-left: 4px solid var(--secondary);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        .recommended-box h4 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        .recommended-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .recommended-box li {
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .recommended-box li:before {
+            content: "▶";
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+        }
+
+        @media (max-width: 768px) {
+            .videos-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .category-title {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">🎵 Sonora</a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/learn/scales">Learn</a>
+                <a href="/detector">Scale Analyzer</a>
+                <a href="/profile">Profile</a>
+                <a href="/about">About</a>
+                <a href="/contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="videos-container">
+        <div class="videos-header">
+            <h1>Tutorial Videos</h1>
+            <p>Learn from master musicians and instructors. Watch comprehensive tutorials on Bansuri technique, scale training, and classical Indian music theory.</p>
+        </div>
+
+        <!-- Beginner Level -->
+        <div class="category-section">
+            <div class="category-title">🌱 Beginner Level</div>
+            
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="video-thumbnail">🎵</div>
+                    <div class="video-content">
+                        <div class="video-title">Bansuri Basics - Getting Started</div>
+                        <p class="video-description">Learn the fundamentals of holding the Bansuri, proper breathing technique, and how to produce your first clear notes.</p>
+                        <div class="video-meta">
+                            <span class="difficulty-badge difficulty-beginner">Beginner</span>
+                            <span>⏱️ 15 min</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">🎶</div>
+                    <div class="video-content">
+                        <div class="video-title">The Seven Notes - Sargam</div>
+                        <p class="video-description">Master playing all seven notes (Sa-Re-Ga-Ma-Pa-Dha-Ni) with clear, distinct tones. Essential foundation for all flute playing.</p>
+                        <div class="video-meta">
+                            <span class="difficulty-badge difficulty-beginner">Beginner</span>
+                            <span>⏱️ 20 min</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">💨</div>
+                    <div class="video-content">
+                        <div class="video-title">Breath Control & Stamina</div>
+                        <p class="video-description">Develop diaphragmic breathing and learn to play longer phrases without losing tone quality. Build your musical endurance.</p>
+                        <div class="video-meta">
+                            <span class="difficulty-badge difficulty-beginner">Beginner</span>
+                            <span>⏱️ 18 min</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">📖</div>
+                    <div class="video-content">
+                        <div class="video-title">Understanding Indian Classical Music Basics</div>
+                        <p class="video-description">Introduction to Raag, Thaat, and the foundational concepts of Indian classical music. Essential theory for every musician.</p>
+                        <div class="video-meta">
+                            <span class="difficulty-badge difficulty-beginner">Beginner</span>
+                            <span>⏱️ 25 min</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Intermediate Level -->
+        <div class="category-section">
+            <div class="category-title">🌳 Intermediate Level</div>
+            
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="video-thumbnail">🌊</div>
+                    <div class="video-content">
+                        <div class="video-title">Meend - The Art of Gliding</div>
+                        <p class="video-description">Master the most characteristic ornament of Indian flute music. Learn smooth pitch transitions and control techniques.</p>
+                        <div class="video-meta">
+                            <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
+                            <span>⏱️ 22 min</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">✨</div>
+                    <div class="video-content">
+                        <div class="video-title">Gamak & Ornamentations</div>
+                        <p class="video-description">Explore rapid oscillations and embellishments to add character and emotion to your playing style.</p>
+                        <div class="video-meta">
+                            <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
+                            <span>⏱️ 20 min</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">🎭</div>
+                    <div class="video-content">
+                        <div class="video-title">Playing a Complete Raag - Bhairav</div>
+                        <p class="video-description">Learn the structure and progression of a complete Raag Bhairav with multiple phrases and variations.</p>
+                        <div class="video-meta">
+                            <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
+                            <span>⏱️ 30 min</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">🥁</div>
+                    <div class="video-content">
+                        <div class="video-title">Rhythm & Taal - Synchronizing with Tabla</div>
+                        <p class="video-description">Understand rhythmic cycles (Taals) and how to play in synchronization with percussion instruments.</p>
+                        <div class="video-meta">
+                            <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
+                            <span>⏱️ 28 min</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">🌀</div>
+                    <div class="video-content">
+                        <div class="video-title">Advanced Scale Jumping</div>
+                        <p class="video-description">Develop flexibility to jump between different scales and raags smoothly and accurately.</p>
+                        <div class="video-meta">
+                            <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
+                            <span>⏱️ 24 min</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">🎵</div>
+                    <div class="video-content">
+                        <div class="video-title">Ear Training for Raag Recognition</div>
+                        <p class="video-description">Train your ear to identify different raags and their characteristic phrases through active listening exercises.</p>
+                        <div class="video-meta">
+                            <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
+                            <span>⏱️ 26 min</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Advanced Level -->
+        <div class="category-section">
+            <div class="category-title">🏔️ Advanced Level</div>
+            
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="video-thumbnail">🎼</div>
+                    <div class="video-content">
+                        <div class="video-title">Improvisation Techniques - Alaap</div>
+                        <p class="video-description">Master the art of free-form improvisation and creating your own variations on raag frameworks.</p>
+                        <div class="video-meta">
+                            <span class="difficulty-badge difficulty-advanced">Advanced</span>
+                            <span>⏱️ 35 min</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">🌟</div>
+                    <div class="video-content">
+                        <div class="video-title">Master Class - Raag Yaman</div>
+                        <p class="video-description">Deep dive into the most classical and aesthetic raag with performance tips from accomplished musicians.</p>
+                        <div class="video-meta">
+                            <span class="difficulty-badge difficulty-advanced">Advanced</span>
+                            <span>⏱️ 45 min</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">🔮</div>
+                    <div class="video-content">
+                        <div class="video-title">Developing Your Unique Style</div>
+                        <p class="video-description">Explore how to maintain raag identity while expressing personal musicality and creating a distinctive sound.</p>
+                        <div class="video-meta">
+                            <span class="difficulty-badge difficulty-advanced">Advanced</span>
+                            <span>⏱️ 40 min</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">🎪</div>
+                    <div class="video-content">
+                        <div class="video-title">Performance & Stage Techniques</div>
+                        <p class="video-description">Learn how to deliver compelling performances, manage stage presence, and connect with audiences emotionally.</p>
+                        <div class="video-meta">
+                            <span class="difficulty-badge difficulty-advanced">Advanced</span>
+                            <span>⏱️ 32 min</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Learning Path & Recommendations -->
+        <div class="playlist-section">
+            <h3>📚 Recommended Learning Path</h3>
+            
+            <div class="recommended-box">
+                <h4>Month 1: Foundation</h4>
+                <ul>
+                    <li>Bansuri Basics - Getting Started</li>
+                    <li>The Seven Notes - Sargam</li>
+                    <li>Breath Control & Stamina</li>
+                    <li>Understanding Indian Classical Music Basics</li>
+                </ul>
+            </div>
+
+            <div class="recommended-box">
+                <h4>Month 2-3: Core Skills</h4>
+                <ul>
+                    <li>Meend - The Art of Gliding</li>
+                    <li>Gamak & Ornamentations</li>
+                    <li>Playing a Complete Raag - Bhairav</li>
+                    <li>Rhythm & Taal - Synchronizing with Tabla</li>
+                </ul>
+            </div>
+
+            <div class="recommended-box">
+                <h4>Month 4+: Mastery</h4>
+                <ul>
+                    <li>Advanced Scale Jumping</li>
+                    <li>Ear Training for Raag Recognition</li>
+                    <li>Improvisation Techniques - Alaap</li>
+                    <li>Master Class - Raag Yaman</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer style="text-align: center; padding: 20px; color: var(--text-secondary); margin-top: 60px; border-top: 1px solid rgba(107, 182, 214, 0.2);">
+        <p>🎵 Learn, Practice, Perform! 🎵</p>
+    </footer>
+</body>
+</html>

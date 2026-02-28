@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonora - Scale Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header with Navigation -->
+        <header class="header">
+            <div class="header-content">
+                <div class="nav-container">
+                    <div class="brand-section">
+                        <h1 class="title">🎵 Sonora</h1>
+                        <p class="tagline">Discover Your Musical Voice</p>
+                    </div>
+                    <nav class="nav-menu">
+                        <a href="{{ url_for('index') }}" class="nav-link">Home</a>
+                        <a href="{{ url_for('learn_scales') }}" class="nav-link">Learn</a>
+                        <a href="{{ url_for('detector') }}" class="nav-link active">Scale Analyzer</a>
+                        <a href="{{ url_for('profile') }}" class="nav-link">Profile</a>
+                        <a href="{{ url_for('about') }}" class="nav-link">About</a>
+                        <a href="{{ url_for('contact') }}" class="nav-link">Contact</a>
+                    </nav>
+                </div>
+                <p class="subtitle">Identify musical scales with perfect clarity</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Mode Selection -->
+            <section class="mode-selector">
+                <div class="mode-buttons">
+                    <button class="mode-btn active" data-mode="record">
+                        <span class="icon">🎤</span>
+                        <span class="label">Live Recording</span>
+                    </button>
+                    <button class="mode-btn" data-mode="upload">
+                        <span class="icon">📁</span>
+                        <span class="label">Upload your music</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Live Recording Section -->
+            <section id="record-section" class="mode-section active">
+                <div class="card">
+                    <h2>Live Recording</h2>
+                    <p class="description">Play your flute and the detector will analyze the scale in real-time</p>
+                    
+                    <div class="recorder-container">
+                        <div class="recording-indicator">
+                            <div class="status-light" id="statusLight"></div>
+                            <span id="statusText">Ready to record</span>
+                        </div>
+
+                        <div class="controls">
+                            <button id="startBtn" class="btn btn-primary">
+                                <span class="icon">▶️</span> Start Recording
+                            </button>
+                            <button id="stopBtn" class="btn btn-secondary" disabled>
+                                <span class="icon">⏹️</span> Stop Recording
+                            </button>
+                        </div>
+
+                        <div class="timer">
+                            <span id="recordingTime">00:00</span>
+                        </div>
+
+                        <div id="recordingVisualization" class="visualization">
+                            <div class="wave-container">
+                                <svg class="waveform" viewBox="0 0 300 60">
+                                    <polyline id="waveform" points="0,30" stroke="#8B6F47" stroke-width="2" fill="none"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- File Upload Section -->
+            <section id="upload-section" class="mode-section">
+                <div class="card">
+                    <h2>Upload your Flute Performance</h2>
+                    <p class="description">Share your flute recording to analyze the musical scales. We accept audio and video files of any duration.</p>
+                    
+                    <div class="file-guidelines">
+                        <div class="guideline-item">
+                            <span class="guideline-icon">🎵</span>
+                            <div>
+                                <strong>Accepted Audio Formats:</strong>
+                                <p>WAV, MP3, M4A, FLAC, OGG</p>
+                            </div>
+                        </div>
+                        <div class="guideline-item">
+                            <span class="guideline-icon">🎬</span>
+                            <div>
+                                <strong>Accepted Video Formats:</strong>
+                                <p>MP4, MOV, AVI, WebM</p>
+                            </div>
+                        </div>
+                        <div class="guideline-item">
+                            <span class="guideline-icon">📦</span>
+                            <div>
+                                <strong>File Size:</strong>
+                                <p>Up to 100MB per file</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="upload-container">
+                        <div class="file-input-wrapper">
+                            <input type="file" id="fileInput" accept="audio/*,video/*" class="file-input">
+                            <label for="fileInput" class="file-label">
+                                <div class="upload-icon">📤</div>
+                                <div class="upload-text">
+                                    <p class="upload-main">Click to upload or drag and drop your file here</p>
+                                    <p class="upload-sub">Choose any audio or video file of your flute performance</p>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div id="fileInfo" class="file-info" style="display: none;">
+                            <p>Selected file: <strong id="fileName"></strong></p>
+                            <button id="uploadBtn" class="btn btn-primary">
+                                <span class="icon">⬆️</span> Analyze File
+                            </button>
+                            <button id="clearFileBtn" class="btn btn-secondary">
+                                <span class="icon">🗑️</span> Clear
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section id="results-section" class="mode-section" style="display: none;">
+                <div class="card results-card">
+                    <h2>🎯 Detection Results</h2>
+                    
+                    <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+                        <div class="spinner"></div>
+                        <p>Analyzing audio...</p>
+                    </div>
+
+                    <div id="resultsContent" style="display: none;">
+                        <!-- Primary Result -->
+                        <div class="result-main">
+                            <div class="scale-display">
+                                <p class="result-label">Primary Scale Detected</p>
+                                <p class="scale-name" id="detectedScale">-</p>
+                            </div>
+                            <div class="confidence-display">
+                                <p class="result-label">Confidence Score</p>
+                                <div class="confidence-bar">
+                                    <div class="confidence-fill" id="confidenceFill"></div>
+                                </div>
+                                <p class="confidence-value" id="confidenceValue">0%</p>
+                            </div>
+                        </div>
+
+                        <!-- Frequency Spectrum Visualization -->
+                        <div class="spectrum-section" style="margin: 30px 0;">
+                            <h3>Frequency Analysis</h3>
+                            <div class="spectrum-container">
+                                <canvas id="spectrumCanvas" class="spectrum-canvas"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Top 3 Candidates -->
+                        <div class="candidates-section">
+                            <h3>🏆 Top 3 Most Likely Scales</h3>
+                            <div class="top-candidates">
+                                <div class="candidate-card" id="candidate1">
+                                    <div class="rank-badge">🥇</div>
+                                    <div class="candidate-info">
+                                        <p class="candidate-name">-</p>
+                                        <p class="candidate-confidence">-</p>
+                                    </div>
+                                </div>
+                                <div class="candidate-card" id="candidate2">
+                                    <div class="rank-badge">🥈</div>
+                                    <div class="candidate-info">
+                                        <p class="candidate-name">-</p>
+                                        <p class="candidate-confidence">-</p>
+                                    </div>
+                                </div>
+                                <div class="candidate-card" id="candidate3">
+                                    <div class="rank-badge">🥉</div>
+                                    <div class="candidate-info">
+                                        <p class="candidate-name">-</p>
+                                        <p class="candidate-confidence">-</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Metadata -->
+                        <div class="metadata">
+                            <p id="metadataText"></p>
+                        </div>
+
+                        <!-- Export Section -->
+                        <div class="export-section">
+                            <h3>📥 Export Results</h3>
+                            <div class="export-buttons">
+                                <button id="exportJsonBtn" class="btn btn-secondary" title="Download as JSON">
+                                    📋 JSON
+                                </button>
+                                <button id="exportCsvBtn" class="btn btn-secondary" title="Download as CSV">
+                                    📊 CSV
+                                </button>
+                                <button id="saveToDashboardBtn" class="btn btn-primary" title="Save to your dashboard">
+                                    💾 Save to Dashboard
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="action-buttons">
+                            <button id="backBtn" class="btn btn-secondary">
+                                <span class="icon">⬅️</span> Back
+                            </button>
+                            <button id="detectAgainBtn" class="btn btn-primary">
+                                <span class="icon">🎤</span> Detect Again
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Error Section -->
+            <section id="error-section" class="mode-section" style="display: none;">
+                <div class="card error-card">
+                    <h2>Error</h2>
+                    <p id="errorMessage"></p>
+                    <button id="errorBackBtn" class="btn btn-secondary">
+                        <span class="icon">⬅️</span> Back
+                    </button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2026 Sonora | Discover the scale in every note</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "flute-scale-detector"
+version = "0.1.0"
+description = "An application to identify the scale being played on a flute using audio and video input."
+authors = ["Your Name <your.email@example.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+flask = "^2.0"
+numpy = "^1.21"
+scipy = "^1.7"
+librosa = "^0.8"
+opencv-python = "^4.5"
+tensorflow = "^2.6"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

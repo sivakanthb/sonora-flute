@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Sonora</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .faq-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .faq-header p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        .faq-section {
+            margin-bottom: 50px;
+        }
+
+        .faq-section-title {
+            color: var(--primary);
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .faq-item {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 4px 15px rgba(107, 182, 214, 0.15);
+            border-color: var(--primary);
+        }
+
+        .faq-question {
+            background: linear-gradient(135deg, rgba(107, 182, 214, 0.05), rgba(168, 230, 207, 0.05));
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--primary);
+        }
+
+        .faq-question:hover {
+            background: linear-gradient(135deg, rgba(107, 182, 214, 0.1), rgba(168, 230, 207, 0.1));
+        }
+
+        .faq-question-text {
+            color: var(--primary-dark);
+            font-weight: bold;
+            font-size: 1.05rem;
+            margin: 0;
+            flex: 1;
+        }
+
+        .faq-toggle {
+            color: var(--primary);
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+            margin-left: 20px;
+            flex-shrink: 0;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-answer-text {
+            padding: 25px;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.8;
+            background: white;
+            border-top: 1px solid var(--border);
+        }
+
+        .faq-answer-text strong {
+            color: var(--primary);
+        }
+
+        .faq-answer-text ul {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+
+        .faq-answer-text li {
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+        }
+
+        .contact-cta {
+            background: linear-gradient(135deg, rgba(107, 182, 214, 0.1), rgba(168, 230, 207, 0.1));
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .contact-cta h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .contact-cta p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 12px 30px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(107, 182, 214, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .faq-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .faq-question {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .faq-question-text {
+                margin-bottom: 10px;
+            }
+
+            .faq-toggle {
+                margin-left: 0;
+            }
+
+            .faq-answer {
+                max-height: none;
+                overflow: visible;
+            }
+
+            .faq-item.active .faq-answer {
+                max-height: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">🎵 Sonora</a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/learn/scales">Learn</a>
+                <a href="/detector">Scale Analyzer</a>
+                <a href="/profile">Profile</a>
+                <a href="/about">About</a>
+                <a href="/contact" class="active">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="faq-container">
+        <div class="faq-header">
+            <h1>❓ Frequently Asked Questions</h1>
+            <p>Find answers to common questions about Sonora and scale detection</p>
+        </div>
+
+        <!-- Getting Started -->
+        <div class="faq-section">
+            <h2 class="faq-section-title">🎯 Getting Started</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <p class="faq-question-text">What is Sonora?</p>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-text">
+                        Sonora is an AI-powered scale detection platform that helps musicians identify the scales they play on the Bansuri (Indian flute). Using advanced audio analysis and machine learning, Sonora recognizes musical scales in real-time and provides detailed insights about your performance.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <p class="faq-question-text">How do I start using Sonora?</p>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-text">
+                        Getting started is simple:
+                        <ul>
+                            <li>Visit the <strong>Detector</strong> page</li>
+                            <li>Choose either <strong>Live Recording</strong> or <strong>Upload a File</strong></li>
+                            <li>Play your flute or select your audio file</li>
+                            <li>Sonora will analyze and show you the detected scale with confidence score</li>
+                            <li>Your detection is automatically saved to your profile</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <p class="faq-question-text">Is Sonora free to use?</p>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-text">
+                        Yes! Sonora is completely free to use. All scale detection, learning resources, and profile features are available at no cost. We believe music education should be accessible to everyone.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detection & Accuracy -->
+        <div class="faq-section">
+            <h2 class="faq-section-title">🎤 Detection & Accuracy</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <p class="faq-question-text">What instruments does Sonora support?</p>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-text">
+                        Currently, Sonora is optimized for the <strong>Bansuri</strong> (Indian bamboo flute) and detects scales from the 10 classical Indian Thaats. We're working on expanding support for other instruments and musical traditions in future versions.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <p class="faq-question-text">How accurate is the scale detection?</p>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-text">
+                        Sonora achieves <strong>99% accuracy</strong> under ideal conditions. Accuracy can vary based on:
+                        <ul>
+                            <li><strong>Audio Quality:</strong> Cleaner recordings produce better results</li>
+                            <li><strong>Background Noise:</strong> Quiet environments improve accuracy</li>
+                            <li><strong>Playing Clarity:</strong> Clear, distinct notes are easier to identify</li>
+                            <li><strong>Scale Complexity:</strong> Some scales are easier to detect than others</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <p class="faq-question-text">Why did Sonora not detect my scale correctly?</p>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-text">
+                        This can happen for several reasons:
+                        <ul>
+                            <li>Too much background noise during recording</li>
+                            <li>Rapid scale transitions that confuse the algorithm</li>
+                            <li>Playing unclear or wavering notes</li>
+                            <li>Very short recordings (try recording for at least 10 seconds)</li>
+                        </ul>
+                        <strong>Tip:</strong> Try recording in a quiet room with clear note separation.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <p class="faq-question-text">What do the confidence scores mean?</p>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-text">
+                        The confidence score (0-100%) indicates how certain Sonora is about the detected scale:
+                        <ul>
+                            <li><strong>90-100%:</strong> Very confident - clear scale identification</li>
+                            <li><strong>70-89%:</strong> Confident - good identification with minor ambiguity</li>
+                            <li><strong>50-69%:</strong> Moderate - scale uncertain, consider the alternatives</li>
+                            <li><strong>Below 50%:</strong> Low confidence - try recording again</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Learning Features -->
+        <div class="faq-section">
+            <h2 class="faq-section-title">📚 Learning & Resources</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <p class="faq-question-text">Where can I learn about scales?</p>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-text">
+                        Sonora offers comprehensive learning resources:
+                        <ul>
+                            <li><strong>Scales Library:</strong> Detailed information about all 10 Thaats</li>
+                            <li><strong>Fingering Guide:</strong> Step-by-step instructions for playing each note</li>
+                            <li><strong>Tutorial Videos:</strong> From beginner to advanced levels</li>
+                            <li><strong>Audio Examples:</strong> Reference recordings for ear training</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <p class="faq-question-text">How long will it take to master the scales?</p>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-text">
+                        This varies by individual dedication and prior experience. Generally:
+                        <ul>
+                            <li><strong>Basic proficiency:</strong> 2-3 months with regular practice</li>
+                            <li><strong>Intermediate level:</strong> 6-12 months</li>
+                            <li><strong>Advanced mastery:</strong> 2-3 years of consistent practice</li>
+                        </ul>
+                        Sonora helps accelerate your learning by providing instant feedback and structured resources.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Security & Privacy -->
+        <div class="faq-section">
+            <h2 class="faq-section-title">🔒 Privacy & Security</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <p class="faq-question-text">Is my data secure?</p>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-text">
+                        Yes! We take security very seriously:
+                        <ul>
+                            <li>All audio files are processed securely</li>
+                            <li>Your detection history is stored privately</li>
+                            <li>We never share your data with third parties</li>
+                            <li>Your profile and settings are protected</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <p class="faq-question-text">Will my recordings be stored?</p>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-text">
+                        Audio files are processed for analysis but <strong>not permanently stored</strong>. Only the detection results (scale, confidence, timestamp) are saved to your profile. You can delete your history anytime.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <p class="faq-question-text">Do I need an account?</p>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-text">
+                        No account is required! You can start detecting scales immediately. Your profile is automatically created, and your detection history is saved. If you want to save your progress across devices, please create an account for better experience.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Can't Find Answer? -->
+        <div class="contact-cta">
+            <h3>Still have questions?</h3>
+            <p>We're here to help! Reach out to our support team.</p>
+            <a href="/contact" class="contact-btn">📧 Contact Us</a>
+        </div>
+    </div>
+
+    <footer style="text-align: center; padding: 20px; color: var(--text-secondary); margin-top: 60px; border-top: 1px solid rgba(107, 182, 214, 0.2);">
+        <p>🎵 Questions? We've got answers! 🎵</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.faq-item').forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
