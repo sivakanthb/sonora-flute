@@ -140,3 +140,4 @@ Thumbs.db
 *.avi
 temp/
 uploads/
+.vercel
