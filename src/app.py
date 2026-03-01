@@ -9,11 +9,17 @@ from api.routes import api
 # Add parent directory to path to enable src imports
 sys.path.insert(0, str(Path(__file__).parent))
 
-# Initialize Flask app with proper paths
+# Get absolute paths for templates and static
+PROJECT_ROOT = Path(__file__).parent.parent
+TEMPLATE_DIR = PROJECT_ROOT / 'src' / 'templates'
+STATIC_DIR = PROJECT_ROOT / 'src' / 'static'
+
+# Initialize Flask app with absolute paths
 app = Flask(
     __name__,
-    template_folder=str(Path(__file__).parent / 'templates'),
-    static_folder=str(Path(__file__).parent / 'static')
+    template_folder=str(TEMPLATE_DIR),
+    static_folder=str(STATIC_DIR),
+    static_url_path='/static'
 )
 
 # Set a secret key for sessions (use environment variable in production)
@@ -24,7 +30,12 @@ app.config['ENV'] = os.environ.get('FLASK_ENV', 'development')
 app.config['DEBUG'] = os.environ.get('FLASK_ENV', 'development') == 'development'
 
 # Data file for storing user history
-DATA_DIR = Path(__file__).parent / 'data'
+# On serverless platforms, use /tmp for ephemeral storage
+if os.environ.get('VERCEL'):
+    DATA_DIR = Path('/tmp/flute_data')
+else:
+    DATA_DIR = Path(__file__).parent / 'data'
+
 DATA_DIR.mkdir(exist_ok=True)
 HISTORY_FILE = DATA_DIR / 'detection_history.json'
 USERS_FILE = DATA_DIR / 'users.json'

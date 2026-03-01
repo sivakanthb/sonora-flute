@@ -1,21 +1,12 @@
-from flask import Flask
+import sys
+from pathlib import Path
 
-app = Flask(__name__)
+# Add src to path so we can import the Flask app
+sys.path.insert(0, str(Path(__file__).parent.parent / 'src'))
 
-@app.route('/')
-@app.route('/api')
-def home():
-    return '''
-<!DOCTYPE html>
-<html>
-<head><title>Flute Scale Detector</title></head>
-<body>
-<h1>🎉 FLUTE SCALE DETECTOR IS LIVE!</h1>
-<p style="font-size: 18px; color: green;">If you see this message, Flask is working on Vercel!</p>
-<p>Your deployment was successful!</p>
-</body>
-</html>
-    '''
+from app import app
+
+# Vercel expects the app to be exported as 'app'
 
 
 
