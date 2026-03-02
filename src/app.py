@@ -12,9 +12,9 @@ sys.path.insert(0, str(Path(__file__).parent))
 from api.routes import api
 
 # Get absolute paths for templates and static
-PROJECT_ROOT = Path(__file__).parent.parent
-TEMPLATE_DIR = PROJECT_ROOT / 'src' / 'templates'
-STATIC_DIR = PROJECT_ROOT / 'src' / 'static'
+PROJECT_ROOT = Path(__file__).parent
+TEMPLATE_DIR = PROJECT_ROOT / 'templates'
+STATIC_DIR = PROJECT_ROOT / 'static'
 
 # Initialize Flask app with absolute paths
 app = Flask(
