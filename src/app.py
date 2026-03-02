@@ -4,10 +4,12 @@ import json
 import os
 
 from flask import Flask, render_template, session, request, jsonify
-from api.routes import api
 
 # Add parent directory to path to enable src imports
 sys.path.insert(0, str(Path(__file__).parent))
+
+# Import routes after adding to path
+from api.routes import api
 
 # Get absolute paths for templates and static
 PROJECT_ROOT = Path(__file__).parent.parent
@@ -148,6 +150,24 @@ def learn_audio():
     return render_template('learn/audio.html')
 
 
+@app.get("/learn/indian-scales")
+def learn_indian_scales():
+    """Serve the Indian classical scales page."""
+    return render_template('learn/indian_scales.html')
+
+
+@app.get("/learn/western-scales")
+def learn_western_scales():
+    """Serve the Western classical scales page."""
+    return render_template('learn/western_scales.html')
+
+
+@app.get("/learn/upskill")
+def learn_upskill():
+    """Serve the Upskill learning resources page."""
+    return render_template('learn/upskill.html')
+
+
 @app.get("/profile")
 def profile():
     """Serve the user profile page."""
@@ -211,6 +231,12 @@ def leaderboard():
 def about():
     """Serve the about page."""
     return render_template('pages/about.html')
+
+
+@app.get("/about/types-of-flutes")
+def about_types_of_flutes():
+    """Serve the types of flutes page."""
+    return render_template('about/types_of_flutes.html')
 
 
 @app.get("/faq")

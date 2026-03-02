@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Sonora Flute{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="container">
+        <!-- Header with Navigation - Standard across all pages -->
+        <header class="header">
+            <div class="header-content">
+                <div class="nav-container">
+                    <div class="brand-section">
+                        <h1 class="title">🎵 Sonora</h1>
+                        <p class="tagline">Discover Your Musical Voice</p>
+                    </div>
+                    <nav class="nav-menu">
+                        <a href="{{ url_for('index') }}" class="nav-link {% if request.endpoint == 'index' %}active{% endif %}">Home</a>
+                        <div class="dropdown">
+                            <button class="nav-link dropdown-toggle">About ▼</button>
+                            <div class="dropdown-menu">
+                                <a href="{{ url_for('about') }}" class="dropdown-item">About Sonora</a>
+                                <a href="{{ url_for('about_types_of_flutes') }}" class="dropdown-item">Types of Flutes</a>
+                            </div>
+                        </div>
+                        <div class="dropdown">
+                            <button class="nav-link dropdown-toggle">Learn ▼</button>
+                            <div class="dropdown-menu">
+                                <a href="{{ url_for('learn_upskill') }}" class="dropdown-item">📚 Upskill</a>
+                                <hr class="dropdown-divider">
+                                <a href="{{ url_for('learn_indian_scales') }}" class="dropdown-item">Indian Classical Scales</a>
+                                <a href="{{ url_for('learn_western_scales') }}" class="dropdown-item">Western Classical Scales</a>
+                                <hr class="dropdown-divider">
+                                <a href="{{ url_for('learn_scales') }}" class="dropdown-item">All Scales Library</a>
+                                <a href="{{ url_for('learn_fingering') }}" class="dropdown-item">Fingering Guide</a>
+                                <a href="{{ url_for('learn_videos') }}" class="dropdown-item">Tutorial Videos</a>
+                                <a href="{{ url_for('learn_audio') }}" class="dropdown-item">Audio Examples</a>
+                            </div>
+                        </div>
+                        <a href="{{ url_for('detector') }}" class="nav-link {% if request.endpoint == 'detector' %}active{% endif %}">Scale Analyzer</a>
+                        <a href="{{ url_for('contact') }}" class="nav-link {% if request.endpoint == 'contact' %}active{% endif %}">Contact</a>
+                        <a href="{{ url_for('profile') }}" class="nav-link {% if request.endpoint == 'profile' %}active{% endif %}">Profile</a>
+                        <button class="music-toggle" title="Toggle background music" aria-label="Play background music">🎧</button>
+                        <button class="theme-toggle" title="Toggle dark mode" aria-label="Toggle theme">🌙</button>
+                    </nav>
+                </div>
+                <p class="subtitle">{% block subtitle %}Your gateway to discovering the perfect scale in every note{% endblock %}</p>
+            </div>
+        </header>
+
+        <!-- Main Content Block - Content varies per page -->
+        <main class="main-content">
+            {% block content %}
+            <!-- Content inserted by child templates -->
+            {% endblock %}
+        </main>
+
+        <!-- Footer - Standard across all pages -->
+        <footer class="footer">
+            <p>&copy; 2026 Sonora | Your Musical Journey Starts Here</p>
+        </footer>
+    </div>
+
+    <!-- Standard Scripts -->
+    <script src="{{ url_for('static', filename='js/interactive.js') }}"></script>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

@@ -1,36 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sonora - Scale Detector</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
-    <div class="container">
-        <!-- Header with Navigation -->
-        <header class="header">
-            <div class="header-content">
-                <div class="nav-container">
-                    <div class="brand-section">
-                        <h1 class="title">🎵 Sonora</h1>
-                        <p class="tagline">Discover Your Musical Voice</p>
-                    </div>
-                    <nav class="nav-menu">
-                        <a href="{{ url_for('index') }}" class="nav-link">Home</a>
-                        <a href="{{ url_for('learn_scales') }}" class="nav-link">Learn</a>
-                        <a href="{{ url_for('detector') }}" class="nav-link active">Scale Analyzer</a>
-                        <a href="{{ url_for('profile') }}" class="nav-link">Profile</a>
-                        <a href="{{ url_for('about') }}" class="nav-link">About</a>
-                        <a href="{{ url_for('contact') }}" class="nav-link">Contact</a>
-                    </nav>
-                </div>
-                <p class="subtitle">Identify musical scales with perfect clarity</p>
-            </div>
-        </header>
+{% extends "base.html" %}
 
-        <!-- Main Content -->
-        <main class="main-content">
+{% block title %}Sonora - Scale Detector{% endblock %}
+
+{% block subtitle %}Identify musical scales with perfect clarity{% endblock %}
+
+{% block content %}
             <!-- Mode Selection -->
             <section class="mode-selector">
                 <div class="mode-buttons">
@@ -242,14 +216,8 @@
                     </button>
                 </div>
             </section>
-        </main>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <p>&copy; 2026 Sonora | Discover the scale in every note</p>
-        </footer>
-    </div>
-
-    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
-</body>
-</html>
+        {% endblock %}
+        
+        {% block extra_scripts %}
+            <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+        {% endblock %}

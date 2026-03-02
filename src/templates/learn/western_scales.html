@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Western Classical Scales - Sonora</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .western-scales-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .western-scales-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .western-scales-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .western-scales-header p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .scales-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .scale-card {
+            background: linear-gradient(135deg, rgba(232, 149, 110, 0.1), rgba(244, 184, 148, 0.1));
+            border: 2px solid var(--secondary);
+            border-radius: 15px;
+            padding: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .scale-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(232, 149, 110, 0.3);
+            background: linear-gradient(135deg, rgba(232, 149, 110, 0.2), rgba(244, 184, 148, 0.2));
+        }
+
+        .scale-card h3 {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .scale-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .notes-display {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            color: var(--secondary);
+            font-weight: bold;
+            text-align: center;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(232, 149, 110, 0.3);
+        }
+
+        .scale-info-grid {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            padding: 15px;
+            background: rgba(232, 149, 110, 0.05);
+            border-radius: 8px;
+        }
+
+        .scale-info-grid div {
+            margin: 8px 0;
+        }
+
+        .scale-info-grid strong {
+            color: var(--secondary);
+            display: inline-block;
+            min-width: 120px;
+        }
+
+        .listen-button {
+            background: linear-gradient(135deg, var(--secondary), var(--secondary-light));
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .listen-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(232, 149, 110, 0.4);
+        }
+
+        .scale-icon {
+            font-size: 1.5rem;
+            margin-right: 8px;
+        }
+
+        .intro-section {
+            background: linear-gradient(135deg, rgba(232, 149, 110, 0.1), rgba(244, 184, 148, 0.1));
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid var(--secondary);
+            margin-bottom: 50px;
+        }
+
+        .intro-section h2 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+
+        .intro-section p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .western-scales-header h1 {
+                font-size: 2rem;
+            }
+
+            .scales-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .notes-display {
+                font-size: 0.9rem;
+                letter-spacing: 1px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">🎵 Sonora</a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/learn/scales" class="active">Learn</a>
+                <a href="/detector">Scale Analyzer</a>
+                <a href="/profile">Profile</a>
+                <a href="/about">About</a>
+                <a href="/contact">Contact</a>
+                <button class="music-toggle" title="Toggle background music" aria-label="Play background music">🎧</button>
+                <button class="theme-toggle" title="Toggle dark mode" aria-label="Toggle theme">🌙</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="western-scales-container">
+        <div class="western-scales-header">
+            <h1>Western Classical Scales</h1>
+            <p>Master the foundations of Western music theory. These scales form the basis for melody, harmony, and composition in Western classical, jazz, and contemporary music traditions.</p>
+        </div>
+
+        <div class="intro-section">
+            <h2>Understanding Western Scales</h2>
+            <p>Western music theory is built upon a 12-note equal temperament system. Scales are organized patterns of intervals that create distinct musical characters. The most fundamental scale is the Major scale, from which many others are derived through alteration of specific degrees.</p>
+            <p><strong>Key Features:</strong> Western scales have fixed, definite pitches with equal semitone spacing, making them ideal for polyphonic instruments and ensemble playing. They form the foundation of classical composition and serve as the basis for chord construction.</p>
+        </div>
+
+        <div class="scales-grid">
+            <!-- Major Scale -->
+            <div class="scale-card">
+                <h3><span class="scale-icon">🎼</span>Major Scale</h3>
+                <p class="scale-description">The fundamental Western scale, characterized by a bright, major chord quality. The basis of most Western music.</p>
+                <div class="notes-display">W-W-H-W-W-W-H</div>
+                <div class="scale-info-grid">
+                    <div><strong>Interval Pattern:</strong> W-W-H-W-W-W-H</div>
+                    <div><strong>Example (C Major):</strong> C-D-E-F-G-A-B-C</div>
+                    <div><strong>Character:</strong> Bright, Happy, Resolute</div>
+                </div>
+                <button class="listen-button">▶ Listen to Major Scale</button>
+            </div>
+
+            <!-- Natural Minor Scale -->
+            <div class="scale-card">
+                <h3><span class="scale-icon">🌑</span>Natural Minor Scale</h3>
+                <p class="scale-description">A darker version of the major scale with a minor chord quality. Essential for melancholy and introspective music.</p>
+                <div class="notes-display">W-H-W-W-H-W-W</div>
+                <div class="scale-info-grid">
+                    <div><strong>Interval Pattern:</strong> W-H-W-W-H-W-W</div>
+                    <div><strong>Example (A Minor):</strong> A-B-C-D-E-F-G-A</div>
+                    <div><strong>Character:</strong> Dark, Melancholic, Somber</div>
+                </div>
+                <button class="listen-button">▶ Listen to Natural Minor</button>
+            </div>
+
+            <!-- Harmonic Minor Scale -->
+            <div class="scale-card">
+                <h3><span class="scale-icon">⚡</span>Harmonic Minor Scale</h3>
+                <p class="scale-description">Natural minor with a raised 7th degree, creating a strong leading tone and exotic character.</p>
+                <div class="notes-display">W-H-W-W-H-W+H-H</div>
+                <div class="scale-info-grid">
+                    <div><strong>Interval Pattern:</strong> W-H-W-W-H-W+H-H</div>
+                    <div><strong>Example (A Harmonic Minor):</strong> A-B-C-D-E-F-G#-A</div>
+                    <div><strong>Character:</strong> Exotic, Dramatic, Oriental</div>
+                </div>
+                <button class="listen-button">▶ Listen to Harmonic Minor</button>
+            </div>
+
+            <!-- Melodic Minor Scale -->
+            <div class="scale-card">
+                <h3><span class="scale-icon">🎵</span>Melodic Minor Scale</h3>
+                <p class="scale-description">Natural minor with raised 6th and 7th degrees ascending, creating a smoother melodic line.</p>
+                <div class="notes-display">W-H-W-W-W-W-H (Asc.)</div>
+                <div class="scale-info-grid">
+                    <div><strong>Character:</strong> Smooth, Elegant, Lyrical</div>
+                    <div><strong>Example (A Melodic Minor):</strong> A-B-C-D-E-F#-G#-A</div>
+                    <div><strong>Usage:</strong> Primary ascending, natural minor descending</div>
+                </div>
+                <button class="listen-button">▶ Listen to Melodic Minor</button>
+            </div>
+
+            <!-- Dorian Mode -->
+            <div class="scale-card">
+                <h3><span class="scale-icon">🎶</span>Dorian Mode</h3>
+                <p class="scale-description">The second mode of the major scale, with a minor quality but brighter than natural minor. Popular in jazz.</p>
+                <div class="notes-display">W-H-W-W-W-H-W</div>
+                <div class="scale-info-grid">
+                    <div><strong>Interval Pattern:</strong> W-H-W-W-W-H-W</div>
+                    <div><strong>Example (D Dorian):</strong> D-E-F-G-A-B-C-D</div>
+                    <div><strong>Character:</strong> Jazzy, Funky, Minor with lift</div>
+                </div>
+                <button class="listen-button">▶ Listen to Dorian</button>
+            </div>
+
+            <!-- Phrygian Mode -->
+            <div class="scale-card">
+                <h3><span class="scale-icon">🌍</span>Phrygian Mode</h3>
+                <p class="scale-description">The third mode of the major scale with a Spanish or Moorish flavor. Dark and exotic sound.</p>
+                <div class="notes-display">H-W-W-W-H-W-W</div>
+                <div class="scale-info-grid">
+                    <div><strong>Interval Pattern:</strong> H-W-W-W-H-W-W</div>
+                    <div><strong>Example (E Phrygian):</strong> E-F-G-A-B-C-D-E</div>
+                    <div><strong>Character:</strong> Spanish, Dark, Flamenco-like</div>
+                </div>
+                <button class="listen-button">▶ Listen to Phrygian</button>
+            </div>
+
+            <!-- Lydian Mode -->
+            <div class="scale-card">
+                <h3><span class="scale-icon">✨</span>Lydian Mode</h3>
+                <p class="scale-description">The fourth mode of the major scale with a raised 4th degree, creating a bright, ethereal quality.</p>
+                <div class="notes-display">W-W-W-H-W-W-H</div>
+                <div class="scale-info-grid">
+                    <div><strong>Interval Pattern:</strong> W-W-W-H-W-W-H</div>
+                    <div><strong>Example (F Lydian):</strong> F-G-A-B-C-D-E-F</div>
+                    <div><strong>Character:</strong> Bright, Ethereal, Whimsical</div>
+                </div>
+                <button class="listen-button">▶ Listen to Lydian</button>
+            </div>
+
+            <!-- Mixolydian Mode -->
+            <div class="scale-card">
+                <h3><span class="scale-icon">🎸</span>Mixolydian Mode</h3>
+                <p class="scale-description">The fifth mode of the major scale with a minor 7th, creating a blues-like and dominant quality.</p>
+                <div class="notes-display">W-W-H-W-W-H-W</div>
+                <div class="scale-info-grid">
+                    <div><strong>Interval Pattern:</strong> W-W-H-W-W-H-W</div>
+                    <div><strong>Example (G Mixolydian):</strong> G-A-B-C-D-E-F-G</div>
+                    <div><strong>Character:</strong> Blues, Dominant, Funky</div>
+                </div>
+                <button class="listen-button">▶ Listen to Mixolydian</button>
+            </div>
+
+            <!-- Pentatonic Major Scale -->
+            <div class="scale-card">
+                <h3><span class="scale-icon">🎹</span>Pentatonic Major</h3>
+                <p class="scale-description">A five-note major scale without the 4th and 7th degrees. Simple, accessible, and universally appealing.</p>
+                <div class="notes-display">C-D-E-G-A-C</div>
+                <div class="scale-info-grid">
+                    <div><strong>Notes (C Major):</strong> C-D-E-G-A</div>
+                    <div><strong>Usage:</strong> Folk music, world music, improvisation</div>
+                    <div><strong>Character:</strong> Simple, Happy, Universal</div>
+                </div>
+                <button class="listen-button">▶ Listen to Pentatonic Major</button>
+            </div>
+
+            <!-- Pentatonic Minor Scale -->
+            <div class="scale-card">
+                <h3><span class="scale-icon">🎺</span>Pentatonic Minor</h3>
+                <p class="scale-description">A five-note minor scale widely used in blues, rock, and world music traditions.</p>
+                <div class="notes-display">A-C-D-E-G-A</div>
+                <div class="scale-info-grid">
+                    <div><strong>Notes (A Minor):</strong> A-C-D-E-G</div>
+                    <div><strong>Usage:</strong> Blues, Rock, Country, Jazz</div>
+                    <div><strong>Character:</strong> Bluesy, Soulful, Accessible</div>
+                </div>
+                <button class="listen-button">▶ Listen to Pentatonic Minor</button>
+            </div>
+
+            <!-- Blues Scale -->
+            <div class="scale-card">
+                <h3><span class="scale-icon">🎷</span>Blues Scale</h3>
+                <p class="scale-description">The pentatonic minor scale with an added flat 5th (blue note), creating the characteristic blues sound.</p>
+                <div class="notes-display">A-C-D-Eb-E-G-A</div>
+                <div class="scale-info-grid">
+                    <div><strong>Notes (A Blues):</strong> A-C-D-Eb-E-G</div>
+                    <div><strong>Special Note:</strong> Flat 5 (blue note) creates the blues bend</div>
+                    <div><strong>Character:</strong> Soulful, Expressive, Bluesy</div>
+                </div>
+                <button class="listen-button">▶ Listen to Blues Scale</button>
+            </div>
+
+            <!-- Whole Tone Scale -->
+            <div class="scale-card">
+                <h3><span class="scale-icon">🌀</span>Whole Tone Scale</h3>
+                <p class="scale-description">All intervals are whole steps, creating an unusual, unsettled, and impressionistic sound.</p>
+                <div class="notes-display">W-W-W-W-W-W</div>
+                <div class="scale-info-grid">
+                    <div><strong>Interval Pattern:</strong> All whole steps (6 notes)</div>
+                    <div><strong>Example (C):</strong> C-D-E-F#-G#-A#-C</div>
+                    <div><strong>Character:</strong> Impressionistic, Dissonant, Unusual</div>
+                </div>
+                <button class="listen-button">▶ Listen to Whole Tone</button>
+            </div>
+        </div>
+
+        <div style="margin-top: 60px; padding: 30px; background: linear-gradient(135deg, rgba(232, 149, 110, 0.1), rgba(244, 184, 148, 0.1)); border-radius: 15px;">
+            <h2 style="color: var(--secondary); margin-bottom: 20px;">About Western Classical Music</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8;">
+                Western classical music has developed over more than a thousand years, with its theoretical foundations solidly established by the Renaissance period. The systematic study of scales, intervals, and harmony has created a comprehensive musical language that allows composers to communicate precise musical ideas to performers.
+            </p>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-top: 15px;">
+                The flute holds a special place in Western orchestral and chamber music, valued for its clarity, agility, and lyrical quality. From Bach and Mozart to contemporary composers, the flute continues to be celebrated for its expressive capacity and technical possibilities.
+            </p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/interactive.js') }}"></script>
+    <script>
+        // Load theme and music preferences
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeManager = window.ThemeManager;
+            if (themeManager) {
+                themeManager.init();
+            }
+            
+            const musicManager = window.MusicManager;
+            if (musicManager) {
+                musicManager.init();
+            }
+        });
+    </script>
+</body>
+</html>
