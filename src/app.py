@@ -164,7 +164,7 @@ def learn_western_scales():
 
 @app.get("/learn/upskill")
 def learn_upskill():
-    """Serve the Upskill learning resources page."""
+    """Serve the Upskill learning resources page with comprehensive learning resources."""
     return render_template('learn/upskill.html')
 
 
