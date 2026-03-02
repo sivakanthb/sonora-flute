@@ -36,20 +36,6 @@ def _guess_suffix(filename: str, default_suffix: str) -> str:
     return ext if ext else default_suffix
 
 
-
-def _save_uploaded_file(uploaded_file, suffix: str) -> str:
-    fd, path = tempfile.mkstemp(suffix=suffix)
-    os.close(fd)
-    uploaded_file.save(path)
-    return path
-
-
-def _guess_suffix(filename: str, default_suffix: str) -> str:
-    if not filename:
-        return default_suffix
-    _, ext = os.path.splitext(filename)
-    return ext if ext else default_suffix
-
 @api.route('/detect/audio', methods=['POST'])
 def detect_audio_scale():
     audio_file = request.files.get('file')
