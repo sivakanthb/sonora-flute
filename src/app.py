@@ -162,6 +162,12 @@ def learn_western_scales():
     return render_template('learn/western_scales.html')
 
 
+@app.get("/test-upskill")
+def test_upskill():
+    """Test route for upskill page."""
+    return render_template('learn/upskill.html')
+
+
 @app.get("/learn/upskill")
 def learn_upskill():
     """Serve the Upskill learning resources page with comprehensive learning resources."""
