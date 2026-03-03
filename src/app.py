@@ -168,12 +168,6 @@ def learn_western_scales():
     return render_template('learn/western_scales.html')
 
 
-@app.get("/learn/get-skilled")
-def learn_get_skilled():
-    """Serve the Get Skilled learning resources page with comprehensive learning resources."""
-    return render_template('learn/get_skilled.html')
-
-
 @app.get("/profile")
 def profile():
     """Serve the user profile page."""
