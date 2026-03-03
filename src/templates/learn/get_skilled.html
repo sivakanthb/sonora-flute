@@ -1,0 +1,343 @@
+{% extends "base.html" %}
+
+{% block title %}Get Skilled - Master Your Flute with Sonora{% endblock %}
+
+{% block content %}
+            <!-- Get Skilled Header -->
+            <section class="get-skilled-header card" style="text-align: center; margin-bottom: 50px; padding: 40px 20px; background: linear-gradient(135deg, rgba(107, 182, 214, 0.1), rgba(168, 230, 207, 0.1));">
+                <h2 style="font-size: 2.5rem; color: var(--primary); margin-bottom: 15px;">💪 Get Skilled - Master Your Flute</h2>
+                <p style="font-size: 1.1rem; color: var(--text-secondary); max-width: 800px; margin: 0 auto; line-height: 1.8;">
+                    Comprehensive learning resources to help you understand scales, perfect your fingering, train your ear, and grow as a musician. 
+                    Explore tutorials, connect with communities, and accelerate your flute journey.
+                </p>
+            </section>
+
+            <!-- Learning Resources Grid -->
+            <section class="learning-section card" style="margin-bottom: 50px;">
+                <h3 style="text-align: center; font-size: 1.8rem; margin-bottom: 40px; color: var(--primary);">🎯 Core Learning Areas</h3>
+                
+                <div class="learning-grid">
+                    <div class="learning-card">
+                        <div class="learning-icon">🎶</div>
+                        <h3><a href="{{ url_for('learn_scales') }}" style="color: var(--primary); text-decoration: none;">Classical Scales</a></h3>
+                        <p>
+                            Explore the 10 Thaats - the foundational framework of Indian classical music. 
+                            Understand each scale's unique character, mood, and best raags.
+                        </p>
+                        <a href="{{ url_for('learn_scales') }}" class="learn-btn">Explore Scales →</a>
+                    </div>
+
+                    <div class="learning-card">
+                        <div class="learning-icon">🖐️</div>
+                        <h3><a href="{{ url_for('learn_fingering') }}" style="color: var(--primary); text-decoration: none;">Fingering Guide</a></h3>
+                        <p>
+                            Master proper hand position, how to play the seven notes, and classical ornaments 
+                            like Meend, Gamak, and Andolan with detailed instructions.
+                        </p>
+                        <a href="{{ url_for('learn_fingering') }}" class="learn-btn">Learn Fingering →</a>
+                    </div>
+
+                    <div class="learning-card">
+                        <div class="learning-icon">🎬</div>
+                        <h3><a href="{{ url_for('learn_videos') }}" style="color: var(--primary); text-decoration: none;">Tutorial Videos</a></h3>
+                        <p>
+                            Watch comprehensive tutorials from beginner to advanced levels. Learn from master musicians 
+                            and improve your technique, theory, and performance skills.
+                        </p>
+                        <a href="{{ url_for('learn_videos') }}" class="learn-btn">Watch Videos →</a>
+                    </div>
+
+                    <div class="learning-card">
+                        <div class="learning-icon">🎵</div>
+                        <h3><a href="{{ url_for('learn_audio') }}" style="color: var(--primary); text-decoration: none;">Audio Examples</a></h3>
+                        <p>
+                            Train your ear with authentic Bansuri recordings. Listen to reference performances 
+                            of scales, raags, and classical pieces to develop your musical sensibility.
+                        </p>
+                        <a href="{{ url_for('learn_audio') }}" class="learn-btn">Listen Examples →</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resources & External Learning Section -->
+            <section class="resources-section card" style="margin-bottom: 50px;">
+                <h3 style="text-align: center; font-size: 1.8rem; margin-bottom: 40px; color: var(--primary);">💡 Extended Learning Resources</h3>
+
+                <div class="tabs-container">
+                    <!-- Courses Tab -->
+                    <div class="tab-content">
+                        <h3 class="tab-title">🏫 Online Courses & Tutorials</h3>
+                        <div class="resources-grid">
+                            <a href="https://www.udemy.com/courses/search/?q=flute" target="_blank" rel="noopener noreferrer" class="resource-card">
+                                <div class="resource-header">
+                                    <span class="resource-icon">📺</span>
+                                    <h4>Udemy</h4>
+                                </div>
+                                <p>
+                                    Comprehensive flute courses from beginner to advanced levels. 
+                                    Affordable courses with lifetime access and instructor support.
+                                </p>
+                                <span class="resource-badge">Video Courses</span>
+                            </a>
+
+                            <a href="https://www.masterclass.com/" target="_blank" rel="noopener noreferrer" class="resource-card">
+                                <div class="resource-header">
+                                    <span class="resource-icon">⭐</span>
+                                    <h4>MasterClass</h4>
+                                </div>
+                                <p>
+                                    Learn from world-class musicians. Premium flute instruction 
+                                    covering technique, interpretation, and performance.
+                                </p>
+                                <span class="resource-badge">Premium</span>
+                            </a>
+
+                            <a href="https://www.youtube.com/@BrooklynFlute" target="_blank" rel="noopener noreferrer" class="resource-card">
+                                <div class="resource-header">
+                                    <span class="resource-icon">🎬</span>
+                                    <h4>YouTube - Flute Experts</h4>
+                                </div>
+                                <p>
+                                    Free video tutorials covering fundamentals, technique, 
+                                    songs, and everything a flute player needs to know.
+                                </p>
+                                <span class="resource-badge">Free</span>
+                            </a>
+
+                            <a href="https://www.coursera.org/search?query=flute" target="_blank" rel="noopener noreferrer" class="resource-card">
+                                <div class="resource-header">
+                                    <span class="resource-icon">🎓</span>
+                                    <h4>Coursera</h4>
+                                </div>
+                                <p>
+                                    University-level music courses including flute instruction 
+                                    from accredited institutions worldwide.
+                                </p>
+                                <span class="resource-badge">Academic</span>
+                            </a>
+
+                            <a href="https://www.skillshare.com/search?query=flute" target="_blank" rel="noopener noreferrer" class="resource-card">
+                                <div class="resource-header">
+                                    <span class="resource-icon">🎨</span>
+                                    <h4>Skillshare</h4>
+                                </div>
+                                <p>
+                                    Creative-focused flute classes including improvisation, 
+                                    jazz, and contemporary techniques.
+                                </p>
+                                <span class="resource-badge">Creative</span>
+                            </a>
+
+                            <a href="https://musictheory.net/" target="_blank" rel="noopener noreferrer" class="resource-card">
+                                <div class="resource-header">
+                                    <span class="resource-icon">🎵</span>
+                                    <h4>Music Theory.net</h4>
+                                </div>
+                                <p>
+                                    Free interactive music theory lessons essential for 
+                                    understanding flute music and improving your musicianship.
+                                </p>
+                                <span class="resource-badge">Theory</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Apps Tab -->
+                    <div class="tab-content">
+                        <h3 class="tab-title">📱 Learning Apps & Tools</h3>
+                        <div class="resources-grid">
+                            <a href="https://www.flowkey.com/" target="_blank" rel="noopener noreferrer" class="resource-card">
+                                <div class="resource-header">
+                                    <span class="resource-icon">🎹</span>
+                                    <h4>Flowkey</h4>
+                                </div>
+                                <p>
+                                    While primarily for piano, offers excellent music reading and 
+                                    technique fundamentals applicable to flute playing.
+                                </p>
+                                <span class="resource-badge">Interactive</span>
+                            </a>
+
+                            <a href="https://www.tonegym.co/" target="_blank" rel="noopener noreferrer" class="resource-card">
+                                <div class="resource-header">
+                                    <span class="resource-icon">👂</span>
+                                    <h4>ToneGym</h4>
+                                </div>
+                                <p>
+                                    Ear training app that improves pitch recognition and aural skills, 
+                                    crucial for flute playing and scale detection.
+                                </p>
+                                <span class="resource-badge">Ear Training</span>
+                            </a>
+
+                            <a href="https://www.musicca.com/" target="_blank" rel="noopener noreferrer" class="resource-card">
+                                <div class="resource-header">
+                                    <span class="resource-icon">🎼</span>
+                                    <h4>Musicca</h4>
+                                </div>
+                                <p>
+                                    Free music tools including staff notation, metronome, 
+                                    and chord finder perfect for practice sessions.
+                                </p>
+                                <span class="resource-badge">Toolkit</span>
+                            </a>
+
+                            <a href="https://www.splice.com/" target="_blank" rel="noopener noreferrer" class="resource-card">
+                                <div class="resource-header">
+                                    <span class="resource-icon">🎯</span>
+                                    <h4>Practice Planner</h4>
+                                </div>
+                                <p>
+                                    Structured practice tracking and music collaboration tools to help you organize 
+                                    your practice goals and monitor progress over time.
+                                </p>
+                                <span class="resource-badge">Practice</span>
+                            </a>
+
+                            <a href="https://www.soundgym.co/" target="_blank" rel="noopener noreferrer" class="resource-card">
+                                <div class="resource-header">
+                                    <span class="resource-icon">📊</span>
+                                    <h4>SoundGym - Ear Training</h4>
+                                </div>
+                                <p>
+                                    Visual pitch detection and ear training to see the frequencies you're producing, 
+                                    helping with intonation and tuning practice.
+                                </p>
+                                <span class="resource-badge">Analysis</span>
+                            </a>
+
+                            <a href="https://www.soundcorset.com/" target="_blank" rel="noopener noreferrer" class="resource-card">
+                                <div class="resource-header">
+                                    <span class="resource-icon">🎚️</span>
+                                    <h4>Sound Corset</h4>
+                                </div>
+                                <p>
+                                    Intonation training app specifically designed for wind instruments 
+                                    like the flute, improving your tone quality and pitch accuracy.
+                                </p>
+                                <span class="resource-badge">Intonation</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Communities Tab -->
+                    <div class="tab-content">
+                        <h3 class="tab-title">🌐 Communities & Forums</h3>
+                        <div class="resources-grid">
+                            <a href="https://www.reddit.com/r/flute/" target="_blank" rel="noopener noreferrer" class="resource-card">
+                                <div class="resource-header">
+                                    <span class="resource-icon">💬</span>
+                                    <h4>r/Flute on Reddit</h4>
+                                </div>
+                                <p>
+                                    Active community of flute enthusiasts sharing tips, advice, 
+                                    recordings, and supporting each other in their flute journey.
+                                </p>
+                                <span class="resource-badge">Community</span>
+                            </a>
+
+                            <a href="https://www.nfaonline.org/" target="_blank" rel="noopener noreferrer" class="resource-card">
+                                <div class="resource-header">
+                                    <span class="resource-icon">🤝</span>
+                                    <h4>National Flute Association</h4>
+                                </div>
+                                <p>
+                                    Connect with flute players worldwide through the NFA community, share performances, 
+                                    ask questions, and learn from experienced musicians.
+                                </p>
+                                <span class="resource-badge">Global</span>
+                            </a>
+
+                            <a href="http://flutopedia.com/" target="_blank" rel="noopener noreferrer" class="resource-card">
+                                <div class="resource-header">
+                                    <span class="resource-icon">📖</span>
+                                    <h4>Fluteopedia</h4>
+                                </div>
+                                <p>
+                                    Comprehensive resource with forums, articles, and resources 
+                                    for flute players of all skill levels.
+                                </p>
+                                <span class="resource-badge">Resource</span>
+                            </a>
+
+                            <a href="http://flutopedia.com/" target="_blank" rel="noopener noreferrer" class="resource-card">
+                                <div class="resource-header">
+                                    <span class="resource-icon">📚</span>
+                                    <h4>Fluteopedia Encyclopedia</h4>
+                                </div>
+                                <p>
+                                    Detailed encyclopedia of flutes from around the world, 
+                                    including history, technique, and cultural significance.
+                                </p>
+                                <span class="resource-badge">Encyclopedia</span>
+                            </a>
+
+                            <a href="https://www.youtube.com/@classicalmusiccomposer" target="_blank" rel="noopener noreferrer" class="resource-card">
+                                <div class="resource-header">
+                                    <span class="resource-icon">🎥</span>
+                                    <h4>Flute Communities on YouTube</h4>
+                                </div>
+                                <p>
+                                    Follow talented flute players, watch performances, 
+                                    and learn from demonstrations of technique and interpretation.
+                                </p>
+                                <span class="resource-badge">Video</span>
+                            </a>
+
+                            <a href="https://www.instagram.com/explore/tags/flutemusic/" target="_blank" rel="noopener noreferrer" class="resource-card">
+                                <div class="resource-header">
+                                    <span class="resource-icon">📸</span>
+                                    <h4>Flute Community on Instagram</h4>
+                                </div>
+                                <p>
+                                    Share your performances, follow other flute musicians, 
+                                    and get inspired by the global flute community every day.
+                                </p>
+                                <span class="resource-badge">Social</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Call to Action -->
+            <section class="cta-section card">
+                <h2>Ready to Accelerate Your Learning?</h2>
+                <p>
+                    Start by exploring the core learning areas, dive into external resources, 
+                    and join our vibrant flute community to enhance your musical journey.
+                </p>
+                <a href="{{ url_for('detector') }}" class="btn btn-primary large-btn">
+                    <span class="icon">🎵</span> Try Scale Analyzer
+                </a>
+            </section>
+{% endblock %}
+
+{% block extra_scripts %}
+    <script>
+        // Tab switching functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabContents = document.querySelectorAll('.tab-content');
+            const tabButtons = document.querySelectorAll('.tab-title');
+            
+            // Show only the first tab initially
+            let currentTab = 0;
+            function showTab(index) {
+                tabContents.forEach((content, i) => {
+                    content.style.display = i === index ? 'block' : 'none';
+                });
+            }
+            
+            showTab(currentTab);
+            
+            // Add click handlers for tab titles to allow switching
+            tabButtons.forEach((button, index) => {
+                button.style.cursor = 'pointer';
+                button.addEventListener('click', () => {
+                    currentTab = index;
+                    showTab(currentTab);
+                });
+            });
+        });
+    </script>
+{% endblock %}

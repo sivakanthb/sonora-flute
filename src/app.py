@@ -114,8 +114,14 @@ def get_leaderboard(limit=20):
 app.register_blueprint(api)
 
 
+@app.get("/health")
+def health():
+    """Health check endpoint."""
+    return {'status': 'ok', 'message': 'Flask app is working'}
+
+
 @app.get("/")
-def index():
+def home():
     """Serve the Sonora home page with introduction to flutes."""
     return render_template('home.html')
 
@@ -162,16 +168,10 @@ def learn_western_scales():
     return render_template('learn/western_scales.html')
 
 
-@app.get("/test-upskill")
-def test_upskill():
-    """Test route for upskill page."""
-    return render_template('learn/upskill.html')
-
-
-@app.get("/learn/upskill")
-def learn_upskill():
-    """Serve the Upskill learning resources page with comprehensive learning resources."""
-    return render_template('learn/upskill.html')
+@app.get("/learn/get-skilled")
+def learn_get_skilled():
+    """Serve the Get Skilled learning resources page with comprehensive learning resources."""
+    return render_template('learn/get_skilled.html')
 
 
 @app.get("/profile")
@@ -291,13 +291,7 @@ def export_detection():
     return jsonify(export_data)
 
 
-@app.get("/health")
-def health_check():
-    """Health check endpoint."""
-    return {
-        "message": "Sonora API is running - Your gateway to perfect scale detection",
-        "endpoints": ["/", "/detector", "/detect/audio", "/detect/video"],
-    }
+
 
 if __name__ == "__main__":
     is_production = os.environ.get('FLASK_ENV') == 'production'
