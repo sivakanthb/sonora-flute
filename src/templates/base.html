@@ -18,7 +18,7 @@
                         <p class="tagline">Discover Your Musical Voice</p>
                     </div>
                     <nav class="nav-menu">
-                        <a href="{{ url_for('index') }}" class="nav-link {% if request.endpoint == 'index' %}active{% endif %}">Home</a>
+                        <a href="{{ url_for('home') }}" class="nav-link {% if request.endpoint == 'home' %}active{% endif %}">Home</a>
                         <div class="dropdown">
                             <button class="nav-link dropdown-toggle">About ▼</button>
                             <div class="dropdown-menu">
