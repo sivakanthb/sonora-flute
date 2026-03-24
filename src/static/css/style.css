@@ -1107,10 +1107,14 @@ a:hover { color: var(--gold-light); }
 .feature-icon { font-size: 1.5rem; margin-bottom: 10px; display: block; }
 .feature-title { color: var(--gold); font-weight: 700; font-size: 0.95rem; margin-bottom: 6px; }
 .feature-desc { color: var(--text2); font-size: 0.85rem; line-height: 1.6; }
+.how-it-works-list { margin-left: 20px; }
+.how-it-works-list li { margin-left: 20px; margin-bottom: 15px; }
+.how-it-works-list li:last-child { margin-bottom: 0; }
 .team-section {
   background: var(--bg-glass); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; margin: 24px 0;
 }
 .team-section h3 { font-family: var(--font-display); color: var(--gold); text-align: center; font-size: 1.1rem; margin-bottom: 20px; }
+.team-description { text-align: center; color: var(--text2); line-height: 1.8; }
 .stats-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; margin: 20px 0; }
 .stat { background: var(--bg-glass); border: 1px solid var(--border); padding: 20px; border-radius: var(--radius); text-align: center; }
 .stat-number { font-family: var(--font-display); font-size: 1.2rem; color: var(--gold); font-weight: 700; }
