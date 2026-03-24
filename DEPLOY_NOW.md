@@ -1,4 +1,4 @@
-# 🚀 SONORA DEPLOYMENT - FINAL STEPS FOR badis_pega
+# 🚀 SONORA DEPLOYMENT - FINAL STEPS FOR sivakanthb
 
 ## ✨ Everything is Ready!
 
@@ -16,7 +16,7 @@ Choose the easiest option for you:
 1. Download: https://github.com/apps/desktop
 2. Install and open it
 3. File → Clone Repository
-4. Find: `flute-scale-detector`
+4. Find: `sonora-flute`
 5. Click Clone
 6. Type in Summary: `Ready for production deployment`
 7. Click **Commit to main**
@@ -46,7 +46,7 @@ git push origin main
 2. Click **New +**
 3. Click **Web Service**
 4. Click **Connect a repository**
-5. Select: `badis_pega/flute-scale-detector`
+5. Select: `sivakanthb/sonora-flute`
 6. Click **Connect**
 7. Fill in the form:
    - **Name:** `sonora`
@@ -82,7 +82,7 @@ After deployment works once, set up auto-deploy:
 1. In Render dashboard, go to your service
 2. Find **Deploy Hook** section
 3. Copy the hook URL
-4. Go to GitHub: https://github.com/badis_pega/flute-scale-detector/settings/secrets/actions
+4. Go to GitHub: https://github.com/sivakanthb/sonora-flute/settings/secrets/actions
 5. Click **New repository secret**
 6. Name: `RENDER_DEPLOY_HOOK`
 7. Value: Paste the Render hook

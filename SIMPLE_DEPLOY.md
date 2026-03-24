@@ -5,7 +5,7 @@
 Copy and paste this into your Render dashboard to deploy instantly:
 
 ```
-https://render.com/deploy?repo=github.com/badis_pega/flute-scale-detector
+https://render.com/deploy?repo=github.com/sivakanthb/sonora-flute
 ```
 
 ---
@@ -20,7 +20,7 @@ You need to push your code once. Choose ONE option below:
 2. Install it (click Next → Finish)
 3. Open GitHub Desktop
 4. Click **File** → **Clone Repository**  
-5. Search: `flute-scale-detector`
+5. Search: `sonora-flute`
 6. Click it → **Clone**
 7. In the "Summary" box, type: `Initial deployment setup`
 8. Click **Commit to main**
@@ -29,7 +29,7 @@ You need to push your code once. Choose ONE option below:
 
 **Option B: Command Line**
 ```bash
-cd "path/to/flute-scale-detector"
+cd "path/to/sonora-flute"
 git add .
 git commit -m "Initial deployment setup"
 git push origin main
@@ -50,7 +50,7 @@ git push origin main
 1. Go to: https://dashboard.render.com
 2. Click **New +** → **Web Service**
 3. Click **Deploy existing repo**
-4. Find `flute-scale-detector` and click **Connect**
+4. Find `sonora-flute` and click **Connect**
 5. Fill in the form with these values:
 
 ```
@@ -87,7 +87,7 @@ Once your app is deployed on Render:
 1. Go to your Render service settings
 2. Find **Deploy Hook** section
 3. Copy the deploy hook URL
-4. Go to GitHub: https://github.com/badis_pega/flute-scale-detector
+4. Go to GitHub: https://github.com/sivakanthb/sonora-flute
 5. Click **Settings** → **Secrets and variables** → **Actions**
 6. Click **New repository secret**
 7. Name: `RENDER_DEPLOY_HOOK`

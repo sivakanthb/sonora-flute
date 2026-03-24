@@ -19,7 +19,7 @@ A beautiful, interactive web application that identifies the musical scale being
 ## 📋 Project Structure
 
 ```
-flute-scale-detector
+sonora-flute
 ├── src
 │   ├── app.py                      # Main Flask application with dual-page routing
 │   ├── templates
@@ -64,7 +64,7 @@ flute-scale-detector
 
 1. Clone or navigate to the repository:
    ```bash
-   cd flute-scale-detector
+   cd sonora-flute
    ```
 
 2. Install dependencies:

@@ -10,7 +10,7 @@ Your Flute Scale Detector (Sonora) application is **ready for production deploym
 
 ### **Step 2: Import Repository**
 1. Click **Import Git Repository**
-2. Paste or search: `badis_pega/flute-scale-detector`
+2. Paste or search: `sivakanthb/sonora-flute`
 3. Select your repository
 4. Click **Import**
 
@@ -52,7 +52,7 @@ Your Sonora application includes:
 If deployment fails:
 
 1. **Check GitHub Connection**
-   - Verify your repo shows on https://github.com/badis_pega/flute-scale-detector
+   - Verify your repo shows on https://github.com/sivakanthb/sonora-flute
 
 2. **View Build Logs**
    - After clicking Deploy, Vercel shows real-time build logs

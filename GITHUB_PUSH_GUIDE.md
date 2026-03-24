@@ -10,7 +10,7 @@
 ### Then run these commands:
 
 ```powershell
-cd "C:\Users\badis\OneDrive - Pegasystems Inc\Desktop\My Apps\flute-scale-detector"
+cd "C:\Users\badis\OneDrive - Pegasystems Inc\Desktop\My Apps\sonora-flute"
 
 # Configure Git (one-time setup)
 git config --global user.name "Your Name"

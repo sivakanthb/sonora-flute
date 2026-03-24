@@ -21,7 +21,7 @@ This guide walks you through deploying Sonora to **Render.com** - a free, reliab
 ### Step 2: Create a New Web Service
 1. On Render dashboard, click **New +** → **Web Service**
 2. Click **Connect a repository**
-3. Find and select your `flute-scale-detector` repository
+3. Find and select your `sonora-flute` repository
 4. Click **Connect**
 
 ### Step 3: Configure Your Service

@@ -48,7 +48,7 @@ The interface uses a **classic, traditional, and ambient** design theme:
 ### Running the Application
 
 ```bash
-cd flute-scale-detector
+cd sonora-flute
 python src/app.py
 ```
 

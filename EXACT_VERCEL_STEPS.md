@@ -4,7 +4,7 @@
 **Copy and paste this exact URL in your browser:**
 
 ```
-https://vercel.com/new/clone?repository-url=https://github.com/badis_pega/flute-scale-detector&project-name=sonora&repo-name=flute-scale-detector
+https://vercel.com/new/clone?repository-url=https://github.com/sivakanthb/sonora-flute&project-name=sonora&repo-name=sonora-flute
 ```
 
 ---
@@ -26,7 +26,7 @@ The import page will appear. You'll see these fields:
 - ✅ Leave as is
 
 ### **Repository Name:**
-- Already filled: `flute-scale-detector`
+- Already filled: `sonora-flute`
 - ✅ Leave as is
 
 ### **Root Directory:**
@@ -141,5 +141,5 @@ In Vercel dashboard:
 **Ready? Copy the deploy link and go!** 👇
 
 ```
-https://vercel.com/new/clone?repository-url=https://github.com/badis_pega/flute-scale-detector&project-name=sonora&repo-name=flute-scale-detector
+https://vercel.com/new/clone?repository-url=https://github.com/sivakanthb/sonora-flute&project-name=sonora&repo-name=sonora-flute
 ```
