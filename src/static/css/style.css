@@ -5,7 +5,7 @@
    ============================================================ */
 
 /* ---------- Fonts ---------- */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 /* ---------- Reset ---------- */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -37,7 +37,7 @@
   --success:    #16a34a;
   --error:      #dc2626;
 
-  --font-display: 'Playfair Display', Georgia, serif;
+  --font-display: 'Inter', system-ui, -apple-system, sans-serif;
   --font-body:    'Inter', system-ui, -apple-system, sans-serif;
 
   --radius:     10px;
@@ -305,10 +305,10 @@ a:hover { color: var(--gold-light); }
 .hero-section { padding: 12px 0 32px; }
 
 .hero-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
 .hero-title {
@@ -319,7 +319,7 @@ a:hover { color: var(--gold-light); }
   letter-spacing: -0.02em;
   color: var(--text);
   margin-bottom: 14px;
-  text-align: left;
+  text-align: center;
 }
 .hero-title em, .hero-title i { color: var(--gold); font-style: italic; }
 
@@ -328,7 +328,8 @@ a:hover { color: var(--gold-light); }
   color: var(--text2);
   line-height: 1.7;
   margin-bottom: 12px;
-  max-width: 520px;
+  max-width: 600px;
+  text-align: center;
 }
 
 .hero-btn {
@@ -371,12 +372,12 @@ a:hover { color: var(--gold-light); }
 
 .bansuri-illustration {
   width: 100%;
+  max-width: 480px;
   border-radius: var(--radius-lg);
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
-  transition: transform var(--transition);
+  margin-top: 16px;
 }
-.bansuri-illustration:hover { transform: scale(1.02); }
 
 @keyframes floatSoft {
   0%, 100% { transform: translateY(0) rotate(0deg); }
@@ -1277,11 +1278,8 @@ a:hover { color: var(--gold-light); }
   .nav-container { flex-wrap: wrap; height: auto; padding: 12px 0; gap: 8px; }
   .nav-menu { width: 100%; flex-wrap: wrap; gap: 4px; justify-content: center; border-top: 1px solid var(--border); padding-top: 8px; }
   .nav-link { font-size: 0.75rem; padding: 6px 10px; }
-  .hero-content { grid-template-columns: 1fr; gap: 32px; text-align: center; }
   .hero-title { font-size: 1.6rem; }
-  .hero-description { margin: 0 auto 16px; }
-  .hero-visual { order: -1; }
-  .flute-watermark-container { max-width: 280px; }
+  .bansuri-illustration { max-width: 320px; }
   .about-grid, .scale-grid, .scales-grid, .video-grid, .audio-grid, .fingering-grid, .flutes-grid, .feature-grid, .features-grid { grid-template-columns: 1fr; }
   .steps-grid, .how-it-works { grid-template-columns: repeat(2, 1fr); }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
