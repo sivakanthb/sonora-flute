@@ -1,300 +1,282 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Indian Classical Scales - Sonora</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <style>
-        .Indian-scales-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
+{% extends 'base.html' %}
+{% block title %}Indian Classical Scales - Sonora{% endblock %}
 
-        .Indian-scales-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
+{% block extra_css %}
+<style>
+    .Indian-scales-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
 
+    .Indian-scales-header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .Indian-scales-header h1 {
+        font-size: 1.7rem;
+        color: var(--gold);
+        margin-bottom: 10px;
+    }
+
+    .Indian-scales-header p {
+        font-size: 1.1rem;
+        color: var(--text2);
+        max-width: 800px;
+        margin: 0 auto;
+        line-height: 1.8;
+    }
+
+    .scales-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 30px;
+        margin: 40px 0;
+    }
+
+    .scale-card {
+        background: linear-gradient(135deg, rgba(107, 182, 214, 0.1), rgba(168, 230, 207, 0.1));
+        border: 2px solid var(--gold);
+        border-radius: var(--radius);
+        padding: 30px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: var(--shadow);
+    }
+
+    .scale-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 25px rgba(107, 182, 214, 0.3);
+        background: linear-gradient(135deg, rgba(107, 182, 214, 0.2), rgba(168, 230, 207, 0.2));
+    }
+
+    .scale-card h3 {
+        color: var(--gold);
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+
+    .scale-description {
+        color: var(--text2);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 15px;
+    }
+
+    .notes-display {
+        background: var(--bg-card);
+        padding: 15px;
+        border-radius: 10px;
+        font-family: 'Courier New', monospace;
+        color: var(--gold);
+        font-weight: bold;
+        text-align: center;
+        font-size: 1rem;
+        letter-spacing: 2px;
+        margin-bottom: 15px;
+        border: 1px solid var(--border);
+    }
+
+    .scale-info-grid {
+        font-size: 0.9rem;
+        color: var(--text2);
+        margin-bottom: 15px;
+        padding: 15px;
+        background: rgba(107, 182, 214, 0.05);
+        border-radius: 8px;
+    }
+
+    .scale-info-grid div {
+        margin: 8px 0;
+    }
+
+    .scale-info-grid strong {
+        color: var(--primary-dark);
+        display: inline-block;
+        min-width: 100px;
+    }
+
+    .listen-button {
+        background: linear-gradient(135deg, var(--gold), var(--teal));
+        color: var(--bg-deep);
+        border: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.95rem;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .listen-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(107, 182, 214, 0.4);
+    }
+
+    .scale-icon {
+        font-size: 1.5rem;
+        margin-right: 8px;
+    }
+
+    .intro-section {
+        background: linear-gradient(135deg, rgba(107, 182, 214, 0.1), rgba(168, 230, 207, 0.1));
+        padding: 30px;
+        border-radius: var(--radius);
+        border-left: 5px solid var(--gold);
+        margin-bottom: 50px;
+    }
+
+    .intro-section h2 {
+        color: var(--gold);
+        margin-bottom: 15px;
+        font-size: 1.3rem;
+    }
+
+    .intro-section p {
+        color: var(--text2);
+        line-height: 1.8;
+        margin-bottom: 12px;
+    }
+
+    @media (max-width: 768px) {
         .Indian-scales-header h1 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-
-        .Indian-scales-header p {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.8;
+            font-size: 1.4rem;
         }
 
         .scales-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
-        }
-
-        .scale-card {
-            background: linear-gradient(135deg, rgba(107, 182, 214, 0.1), rgba(168, 230, 207, 0.1));
-            border: 2px solid var(--primary);
-            border-radius: 15px;
-            padding: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .scale-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 25px rgba(107, 182, 214, 0.3);
-            background: linear-gradient(135deg, rgba(107, 182, 214, 0.2), rgba(168, 230, 207, 0.2));
-        }
-
-        .scale-card h3 {
-            color: var(--primary);
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-
-        .scale-description {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 15px;
+            grid-template-columns: 1fr;
+            gap: 20px;
         }
 
         .notes-display {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            font-family: 'Courier New', monospace;
-            color: var(--primary);
-            font-weight: bold;
-            text-align: center;
-            font-size: 1rem;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-            border: 1px solid var(--border);
-        }
-
-        .scale-info-grid {
             font-size: 0.9rem;
-            color: var(--text-secondary);
-            margin-bottom: 15px;
-            padding: 15px;
-            background: rgba(107, 182, 214, 0.05);
-            border-radius: 8px;
+            letter-spacing: 1px;
         }
+    }
+</style>
+{% endblock %}
 
-        .scale-info-grid div {
-            margin: 8px 0;
-        }
+{% block content %}
+<div class="Indian-scales-container">
+    <div class="Indian-scales-header">
+        <h1>Indian Classical Scales</h1>
+        <p>Discover the foundations of Hindustani and Carnatic music traditions. The Thaat system provides the framework for Indian classical music, with each scale expressing unique emotional and spiritual dimensions.</p>
+    </div>
 
-        .scale-info-grid strong {
-            color: var(--primary-dark);
-            display: inline-block;
-            min-width: 100px;
-        }
+    <div class="intro-section">
+        <h2>Understanding the Thaat System</h2>
+        <p>The Thaat (also spelled That) is a framework of seven primary scales in Hindustani classical music. Each Thaat represents a unique tonal structure and serves as the foundation for multiple Ragas, which are specific melodic frameworks used in performance.</p>
+        <p><strong>Key Features:</strong> Indian classical scales are based on a 22-note octave (compared to Western 12-note), allowing for microtonal variations called "srutis" that create the distinctive character of Indian music.</p>
+    </div>
 
-        .listen-button {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.95rem;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            width: 100%;
-            margin-bottom: 15px;
-        }
-
-        .listen-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(107, 182, 214, 0.4);
-        }
-
-        .scale-icon {
-            font-size: 1.5rem;
-            margin-right: 8px;
-        }
-
-        .intro-section {
-            background: linear-gradient(135deg, rgba(107, 182, 214, 0.1), rgba(168, 230, 207, 0.1));
-            padding: 30px;
-            border-radius: 15px;
-            border-left: 5px solid var(--primary);
-            margin-bottom: 50px;
-        }
-
-        .intro-section h2 {
-            color: var(--primary);
-            margin-bottom: 15px;
-            font-size: 1.8rem;
-        }
-
-        .intro-section p {
-            color: var(--text-secondary);
-            line-height: 1.8;
-            margin-bottom: 12px;
-        }
-
-        @media (max-width: 768px) {
-            .Indian-scales-header h1 {
-                font-size: 2rem;
-            }
-
-            .scales-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .notes-display {
-                font-size: 0.9rem;
-                letter-spacing: 1px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="/" class="logo">🎵 Sonora</a>
-            <div class="nav-links">
-                <a href="/">Home</a>
-                <a href="/learn/scales" class="active">Learn</a>
-                <a href="/detector">Scale Analyzer</a>
-                <a href="/profile">Profile</a>
-                <a href="/about">About</a>
-                <a href="/contact">Contact</a>
-                <button class="music-toggle" title="Toggle background music" aria-label="Play background music">🎧</button>
-                <button class="theme-toggle" title="Toggle dark mode" aria-label="Toggle theme">🌙</button>
+    <div class="scales-grid">
+        <!-- Bhairav -->
+        <div class="scale-card">
+            <h3><span class="scale-icon">🥁</span>Bhairav</h3>
+            <p class="scale-description">The regal and solemn Thaat, characterized by its serious and devotional mood. Often used for morning performances.</p>
+            <div class="notes-display">Sa Re Ma Pa Dha</div>
+            <div class="scale-info-grid">
+                <div><strong>Time:</strong> Early Morning</div>
+                <div><strong>Mood:</strong> Serious, Devotional</div>
+                <div><strong>Famous Raga:</strong> Bhairav, Ahir Bhairav</div>
             </div>
-        </div>
-    </nav>
-
-    <div class="Indian-scales-container">
-        <div class="Indian-scales-header">
-            <h1>Indian Classical Scales</h1>
-            <p>Discover the foundations of Hindustani and Carnatic music traditions. The Thaat system provides the framework for Indian classical music, with each scale expressing unique emotional and spiritual dimensions.</p>
+            <button class="listen-button">▶ Listen to Bhairav</button>
         </div>
 
-        <div class="intro-section">
-            <h2>Understanding the Thaat System</h2>
-            <p>The Thaat (also spelled That) is a framework of seven primary scales in Hindustani classical music. Each Thaat represents a unique tonal structure and serves as the foundation for multiple Ragas, which are specific melodic frameworks used in performance.</p>
-            <p><strong>Key Features:</strong> Indian classical scales are based on a 22-note octave (compared to Western 12-note), allowing for microtonal variations called "srutis" that create the distinctive character of Indian music.</p>
+        <!-- Kalyan -->
+        <div class="scale-card">
+            <h3><span class="scale-icon">✨</span>Kalyan</h3>
+            <p class="scale-description">The auspicious and bright Thaat with a raised fourth note, creating an energetic and celebratory character.</p>
+            <div class="notes-display">Sa Re Ga Ma# Pa Dha Ni</div>
+            <div class="scale-info-grid">
+                <div><strong>Time:</strong> Evening</div>
+                <div><strong>Mood:</strong> Joyful, Auspicious</div>
+                <div><strong>Famous Raga:</strong> Yaman, Kamod</div>
+            </div>
+            <button class="listen-button">▶ Listen to Kalyan</button>
         </div>
 
-        <div class="scales-grid">
-            <!-- Bhairav -->
-            <div class="scale-card">
-                <h3><span class="scale-icon">🥁</span>Bhairav</h3>
-                <p class="scale-description">The regal and solemn Thaat, characterized by its serious and devotional mood. Often used for morning performances.</p>
-                <div class="notes-display">Sa Re Ma Pa Dha</div>
-                <div class="scale-info-grid">
-                    <div><strong>Time:</strong> Early Morning</div>
-                    <div><strong>Mood:</strong> Serious, Devotional</div>
-                    <div><strong>Famous Raga:</strong> Bhairav, Ahir Bhairav</div>
-                </div>
-                <button class="listen-button">▶ Listen to Bhairav</button>
+        <!-- Khamaj -->
+        <div class="scale-card">
+            <h3><span class="scale-icon">💫</span>Khamaj</h3>
+            <p class="scale-description">Known for its light and relaxed nature. Often used in folk-inspired classical music and popular ragas.</p>
+            <div class="notes-display">Sa Re Ga Ma Pa Dha Ni♭</div>
+            <div class="scale-info-grid">
+                <div><strong>Time:</strong> Afternoon/Evening</div>
+                <div><strong>Mood:</strong> Light, Relaxed</div>
+                <div><strong>Famous Raga:</strong> Khammaj, Sarang</div>
             </div>
-
-            <!-- Kalyan -->
-            <div class="scale-card">
-                <h3><span class="scale-icon">✨</span>Kalyan</h3>
-                <p class="scale-description">The auspicious and bright Thaat with a raised fourth note, creating an energetic and celebratory character.</p>
-                <div class="notes-display">Sa Re Ga Ma# Pa Dha Ni</div>
-                <div class="scale-info-grid">
-                    <div><strong>Time:</strong> Evening</div>
-                    <div><strong>Mood:</strong> Joyful, Auspicious</div>
-                    <div><strong>Famous Raga:</strong> Yaman, Kamod</div>
-                </div>
-                <button class="listen-button">▶ Listen to Kalyan</button>
-            </div>
-
-            <!-- Khamaj -->
-            <div class="scale-card">
-                <h3><span class="scale-icon">💫</span>Khamaj</h3>
-                <p class="scale-description">Known for its light and relaxed nature. Often used in folk-inspired classical music and popular ragas.</p>
-                <div class="notes-display">Sa Re Ga Ma Pa Dha Ni♭</div>
-                <div class="scale-info-grid">
-                    <div><strong>Time:</strong> Afternoon/Evening</div>
-                    <div><strong>Mood:</strong> Light, Relaxed</div>
-                    <div><strong>Famous Raga:</strong> Khammaj, Sarang</div>
-                </div>
-                <button class="listen-button">▶ Listen to Khamaj</button>
-            </div>
-
-            <!-- Bilaval -->
-            <div class="scale-card">
-                <h3><span class="scale-icon">🎼</span>Bilaval</h3>
-                <p class="scale-description">The natural major scale Thaat, which corresponds to the Western major scale. Pure and natural sounding.</p>
-                <div class="notes-display">Sa Re Ga Ma Pa Dha Ni</div>
-                <div class="scale-info-grid">
-                    <div><strong>Time:</strong> Midday</div>
-                    <div><strong>Mood:</strong> Pure, Natural</div>
-                    <div><strong>Famous Raga:</strong> Bilaval, Bhoop</div>
-                </div>
-                <button class="listen-button">▶ Listen to Bilaval</button>
-            </div>
-
-            <!-- Marwa -->
-            <div class="scale-card">
-                <h3><span class="scale-icon">🌙</span>Marwa</h3>
-                <p class="scale-description">A rare and mystical Thaat with unusual intervals, creating an ethereal and spiritual atmosphere.</p>
-                <div class="notes-display">Sa Re♭ Ga Ma# Pa Dha♭ Ni</div>
-                <div class="scale-info-grid">
-                    <div><strong>Time:</strong> Night</div>
-                    <div><strong>Mood:</strong> Mystical, Spiritual</div>
-                    <div><strong>Famous Raga:</strong> Marwa, Bhairav Marwa</div>
-                </div>
-                <button class="listen-button">▶ Listen to Marwa</button>
-            </div>
-
-            <!-- Purvi -->
-            <div class="scale-card">
-                <h3><span class="scale-icon">🎵</span>Purvi</h3>
-                <p class="scale-description">An elegant Thaat often associated with romantic and introspective moods. Frequently used in evening ragas.</p>
-                <div class="notes-display">Sa Re♭ Ga Ma# Pa Dha♭ Ni</div>
-                <div class="scale-info-grid">
-                    <div><strong>Time:</strong> Evening</div>
-                    <div><strong>Mood:</strong> Romantic, Introspective</div>
-                    <div><strong>Famous Raga:</strong> Puriya, Adana</div>
-                </div>
-                <button class="listen-button">▶ Listen to Purvi</button>
-            </div>
+            <button class="listen-button">▶ Listen to Khamaj</button>
         </div>
 
-        <div style="margin-top: 60px; padding: 30px; background: linear-gradient(135deg, rgba(107, 182, 214, 0.1), rgba(168, 230, 207, 0.1)); border-radius: 15px;">
-            <h2 style="color: var(--primary); margin-bottom: 20px;">About Hindustani Scales</h2>
-            <p style="color: var(--text-secondary); line-height: 1.8;">
-                Hindustani classical music has evolved over centuries in North India. The Thaat system provides a systematic way to understand and practice Indian classical music. Each Thaat is like a "parent scale" from which multiple Ragas can be derived. A Raga is a specific melodic framework that defines rules about which notes to use, how to approach them, and in what order they should appear.
-            </p>
-            <p style="color: var(--text-secondary); line-height: 1.8; margin-top: 15px;">
-                Master musicians often spend decades learning and performing a single Raga, exploring its infinite variations and emotional depths. The flute, particularly the bamboo Bansuri, is considered one of the most expressive instruments for Indian classical music.
-            </p>
+        <!-- Bilaval -->
+        <div class="scale-card">
+            <h3><span class="scale-icon">🎼</span>Bilaval</h3>
+            <p class="scale-description">The natural major scale Thaat, which corresponds to the Western major scale. Pure and natural sounding.</p>
+            <div class="notes-display">Sa Re Ga Ma Pa Dha Ni</div>
+            <div class="scale-info-grid">
+                <div><strong>Time:</strong> Midday</div>
+                <div><strong>Mood:</strong> Pure, Natural</div>
+                <div><strong>Famous Raga:</strong> Bilaval, Bhoop</div>
+            </div>
+            <button class="listen-button">▶ Listen to Bilaval</button>
+        </div>
+
+        <!-- Marwa -->
+        <div class="scale-card">
+            <h3><span class="scale-icon">🌙</span>Marwa</h3>
+            <p class="scale-description">A rare and mystical Thaat with unusual intervals, creating an ethereal and spiritual atmosphere.</p>
+            <div class="notes-display">Sa Re♭ Ga Ma# Pa Dha♭ Ni</div>
+            <div class="scale-info-grid">
+                <div><strong>Time:</strong> Night</div>
+                <div><strong>Mood:</strong> Mystical, Spiritual</div>
+                <div><strong>Famous Raga:</strong> Marwa, Bhairav Marwa</div>
+            </div>
+            <button class="listen-button">▶ Listen to Marwa</button>
+        </div>
+
+        <!-- Purvi -->
+        <div class="scale-card">
+            <h3><span class="scale-icon">🎵</span>Purvi</h3>
+            <p class="scale-description">An elegant Thaat often associated with romantic and introspective moods. Frequently used in evening ragas.</p>
+            <div class="notes-display">Sa Re♭ Ga Ma# Pa Dha♭ Ni</div>
+            <div class="scale-info-grid">
+                <div><strong>Time:</strong> Evening</div>
+                <div><strong>Mood:</strong> Romantic, Introspective</div>
+                <div><strong>Famous Raga:</strong> Puriya, Adana</div>
+            </div>
+            <button class="listen-button">▶ Listen to Purvi</button>
         </div>
     </div>
 
-    <script src="{{ url_for('static', filename='js/interactive.js') }}"></script>
-    <script>
-        // Load theme and music preferences
-        document.addEventListener('DOMContentLoaded', function() {
-            const themeManager = window.ThemeManager;
-            if (themeManager) {
-                themeManager.init();
-            }
-            
-            const musicManager = window.MusicManager;
-            if (musicManager) {
-                musicManager.init();
-            }
-        });
-    </script>
-</body>
-</html>
+    <div style="margin-top: 60px; padding: 30px; background: linear-gradient(135deg, rgba(107, 182, 214, 0.1), rgba(168, 230, 207, 0.1)); border-radius: var(--radius);">
+        <h2 style="color: var(--gold); margin-bottom: 20px;">About Hindustani Scales</h2>
+        <p style="color: var(--text2); line-height: 1.8;">
+            Hindustani classical music has evolved over centuries in North India. The Thaat system provides a systematic way to understand and practice Indian classical music. Each Thaat is like a "parent scale" from which multiple Ragas can be derived. A Raga is a specific melodic framework that defines rules about which notes to use, how to approach them, and in what order they should appear.
+        </p>
+        <p style="color: var(--text2); line-height: 1.8; margin-top: 15px;">
+            Master musicians often spend decades learning and performing a single Raga, exploring its infinite variations and emotional depths. The flute, particularly the bamboo Bansuri, is considered one of the most expressive instruments for Indian classical music.
+        </p>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    // Load theme and music preferences
+    document.addEventListener('DOMContentLoaded', function() {
+        const themeManager = window.ThemeManager;
+        if (themeManager) {
+            themeManager.init();
+        }
+
+        const musicManager = window.MusicManager;
+        if (musicManager) {
+            musicManager.init();
+        }
+    });
+</script>
+{% endblock %}

@@ -1,344 +1,322 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scales Library - Sonora</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <style>
-        .scales-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
+{% extends 'base.html' %}
+{% block title %}Scales Library - Sonora{% endblock %}
 
-        .scales-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
+{% block extra_css %}
+<style>
+    .scales-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
 
+    .scales-header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .scales-header h1 {
+        font-size: 1.7rem;
+        color: var(--gold);
+        margin-bottom: 10px;
+    }
+
+    .scales-header p {
+        font-size: 1.1rem;
+        color: var(--text2);
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .thaat-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-bottom: 60px;
+    }
+
+    .thaat-card {
+        background: linear-gradient(135deg, rgba(107, 182, 214, 0.1), rgba(168, 230, 207, 0.1));
+        border: 2px solid var(--gold);
+        border-radius: var(--radius);
+        padding: 30px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: var(--shadow);
+    }
+
+    .thaat-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 25px rgba(107, 182, 214, 0.3);
+        background: linear-gradient(135deg, rgba(107, 182, 214, 0.2), rgba(168, 230, 207, 0.2));
+    }
+
+    .thaat-card h3 {
+        color: var(--gold);
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+
+    .scale-info {
+        color: var(--text2);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 15px;
+    }
+
+    .notes-display {
+        background: var(--bg-card);
+        padding: 15px;
+        border-radius: 10px;
+        font-family: 'Courier New', monospace;
+        color: var(--gold);
+        font-weight: bold;
+        text-align: center;
+        font-size: 1.1rem;
+        letter-spacing: 2px;
+        margin-bottom: 15px;
+    }
+
+    .play-button {
+        background: linear-gradient(135deg, var(--gold), var(--teal));
+        color: var(--bg-deep);
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        width: 100%;
+    }
+
+    .play-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(107, 182, 214, 0.4);
+    }
+
+    .characteristics {
+        font-size: 0.85rem;
+        color: var(--rose);
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 1px solid rgba(107, 182, 214, 0.3);
+    }
+
+    .characteristics strong {
+        color: var(--teal);
+    }
+
+    @media (max-width: 768px) {
         .scales-header h1 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-
-        .scales-header p {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto;
+            font-size: 1.3rem;
         }
 
         .thaat-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
+            gap: 20px;
         }
 
         .thaat-card {
-            background: linear-gradient(135deg, rgba(107, 182, 214, 0.1), rgba(168, 230, 207, 0.1));
-            border: 2px solid var(--primary);
-            border-radius: 15px;
-            padding: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .thaat-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 25px rgba(107, 182, 214, 0.3);
-            background: linear-gradient(135deg, rgba(107, 182, 214, 0.2), rgba(168, 230, 207, 0.2));
-        }
-
-        .thaat-card h3 {
-            color: var(--primary);
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-
-        .scale-info {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 15px;
+            padding: 20px;
         }
 
         .notes-display {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            font-family: 'Courier New', monospace;
-            color: var(--primary);
-            font-weight: bold;
-            text-align: center;
-            font-size: 1.1rem;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-        }
-
-        .play-button {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
             font-size: 0.9rem;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            width: 100%;
+            letter-spacing: 1px;
         }
+    }
+</style>
+{% endblock %}
 
-        .play-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(107, 182, 214, 0.4);
-        }
+{% block content %}
+<div class="scales-container">
+    <div class="scales-header">
+        <h1>Indian Classical Scales</h1>
+        <p>Explore the 10 Thaats - the foundational framework of Indian classical music. Each Thaat contains multiple Ragas that express different emotions and moods.</p>
+    </div>
 
-        .characteristics {
-            font-size: 0.85rem;
-            color: var(--tertiary);
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid rgba(107, 182, 214, 0.3);
-        }
+    <!-- Search and Filter Section -->
+    <div class="scale-search">
+        <input type="text" id="scale-search" placeholder="🔍 Search scales by name or characteristic...">
+    </div>
 
-        .characteristics strong {
-            color: var(--secondary);
-        }
+    <div class="filter-tags">
+        <button class="filter-tag" data-difficulty="beginner">Beginner Friendly</button>
+        <button class="filter-tag" data-difficulty="intermediate">Intermediate</button>
+        <button class="filter-tag" data-difficulty="advanced">Advanced</button>
+    </div>
 
-        @media (max-width: 768px) {
-            .scales-header h1 {
-                font-size: 1.8rem;
-            }
-
-            .thaat-grid {
-                gap: 20px;
-            }
-
-            .thaat-card {
-                padding: 20px;
-            }
-
-            .notes-display {
-                font-size: 0.9rem;
-                letter-spacing: 1px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="/" class="logo">🎵 Sonora</a>
-            <div class="nav-links">
-                <a href="/">Home</a>
-                <a href="/learn/scales" class="active">Learn</a>
-                <a href="/detector">Scale Analyzer</a>
-                <a href="/profile">Profile</a>
-                <a href="/about">About</a>
-                <a href="/contact">Contact</a>
-                <button class="music-toggle" title="Toggle background music" aria-label="Play background music">🎧</button>
-                <button class="theme-toggle" title="Toggle dark mode" aria-label="Toggle theme">🌙</button>
-            </div>
-        </div>
-    </nav>
-
-    <div class="scales-container">
-        <div class="scales-header">
-            <h1>Indian Classical Scales</h1>
-            <p>Explore the 10 Thaats - the foundational framework of Indian classical music. Each Thaat contains multiple Ragas that express different emotions and moods.</p>
-        </div>
-
-        <!-- Search and Filter Section -->
-        <div class="scale-search">
-            <input type="text" id="scale-search" placeholder="🔍 Search scales by name or characteristic...">
-        </div>
-
-        <div class="filter-tags">
-            <button class="filter-tag" data-difficulty="beginner">Beginner Friendly</button>
-            <button class="filter-tag" data-difficulty="intermediate">Intermediate</button>
-            <button class="filter-tag" data-difficulty="advanced">Advanced</button>
-        </div>
-
-        <div class="thaat-grid">
-            <!-- Bhairav -->
-            <div class="thaat-card scale-card" data-difficulty="beginner">
-                <h3>🎶 Bhairav</h3>
-                <span class="difficulty-badge difficulty-beginner">Beginner Friendly</span>
-                <p class="scale-info">The regal Thaat, often associated with morning ragas. Characterized by a somber, serious mood.</p>
-                <div class="notes-display">Sa re Ma Pa Dha</div>
-                <button class="play-button">▶ Listen to Scale</button>
-                <div class="characteristics">
-                    <strong>Mood:</strong> Serious, Devotional<br>
-                    <strong>Best Ragas:</strong> Bhairav, Ahir Bhairav<br>
-                    <strong>Time:</strong> Early Morning
-                </div>
-            </div>
-
-            <!-- Kalyan -->
-            <div class="thaat-card scale-card" data-difficulty="beginner">
-                <h3>🌟 Kalyan</h3>
-                <span class="difficulty-badge difficulty-beginner">Beginner Friendly</span>
-                <p class="scale-info">The auspicious Thaat with a sharp fourth note, creating a bright and celebratory character.</p>
-                <div class="notes-display">Sa Re Ga Ma# Pa Dha Ni</div>
-                <button class="play-button">▶ Listen to Scale</button>
-                <div class="characteristics">
-                    <strong>Mood:</strong> Joyful, Auspicious<br>
-                    <strong>Best Ragas:</strong> Yaman, Kamod<br>
-                    <strong>Time:</strong> Evening
-                </div>
-            </div>
-
-            <!-- Khamaj -->
-            <div class="thaat-card scale-card" data-difficulty="intermediate">
-                <h3>💫 Khamaj</h3>
-                <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
-                <p class="scale-info">Known for its folk-like, relaxed nature. Often used in light classical and folk music.</p>
-                <div class="notes-display">Sa Re Ga Ma Pa Dha Ni♭</div>
-                <button class="play-button">▶ Listen to Scale</button>
-                <div class="characteristics">
-                    <strong>Mood:</strong> Relaxed, Folksy<br>
-                    <strong>Best Ragas:</strong> Jog, Bageshri<br>
-                    <strong>Time:</strong> Late Evening
-                </div>
-            </div>
-
-            <!-- Bhairav -->
-            <div class="thaat-card">
-                <h3>🌙 Asavari</h3>
-                <p class="scale-info">A minor-like scale with a melancholic and introspective quality. Often evokes sadness or longing.</p>
-                <div class="notes-display">Sa Re♭ Ga Ma Pa Dha♭ Ni♭</div>
-                <button class="play-button">▶ Listen to Scale</button>
-                <div class="characteristics">
-                    <strong>Mood:</strong> Sad, Introspective<br>
-                    <strong>Best Ragas:</strong> Asavari, Adana<br>
-                    <strong>Time:</strong> Late Night
-                </div>
-            </div>
-
-            <!-- Bilaval -->
-            <div class="thaat-card">
-                <h3>☀️ Bilaval</h3>
-                <p class="scale-info">The natural major scale without any sharp or flat notes. Bright and clear character.</p>
-                <div class="notes-display">Sa Re Ga Ma Pa Dha Ni</div>
-                <button class="play-button">▶ Listen to Scale</button>
-                <div class="characteristics">
-                    <strong>Mood:</strong> Pure, Natural<br>
-                    <strong>Best Ragas:</strong> Bhoop, Deshkar<br>
-                    <strong>Time:</strong> Daytime
-                </div>
-            </div>
-
-            <!-- Marva -->
-            <div class="thaat-card">
-                <h3>✨ Marva</h3>
-                <p class="scale-info">An exotic scale with no natural fourth and seventh notes. Often carries mystery and yearning.</p>
-                <div class="notes-display">Sa Re♭ Ga Ma# Pa Dha#</div>
-                <button class="play-button">▶ Listen to Scale</button>
-                <div class="characteristics">
-                    <strong>Mood:</strong> Mysterious, Yearning<br>
-                    <strong>Best Ragas:</strong> Marva, Marva Behag<br>
-                    <strong>Time:</strong> Night
-                </div>
-            </div>
-
-            <!-- Purvi -->
-            <div class="thaat-card">
-                <h3>🎭 Purvi</h3>
-                <p class="scale-info">Similar to Marva but with a different hierarchy. Known for passion and fury in classical contexts.</p>
-                <div class="notes-display">Sa Re♭ Ga Ma# Pa Dha Ni♭</div>
-                <button class="play-button">▶ Listen to Scale</button>
-                <div class="characteristics">
-                    <strong>Mood:</strong> Passionate, Energetic<br>
-                    <strong>Best Ragas:</strong> Purvi, Malkauns<br>
-                    <strong>Time:</strong> Late Night
-                </div>
-            </div>
-
-            <!-- Dheerashankar -->
-            <div class="thaat-card">
-                <h3>🔔 Dheerashankar</h3>
-                <p class="scale-info">A unique scale with distinct note patterns. Elegant and contemplative in character.</p>
-                <div class="notes-display">Sa Re♭ Ga Ma# Pa Dha# Ni♭</div>
-                <button class="play-button">▶ Listen to Scale</button>
-                <div class="characteristics">
-                    <strong>Mood:</strong> Elegant, Contemplative<br>
-                    <strong>Best Ragas:</strong> Malkauns, Rampak<br>
-                    <strong>Time:</strong> Late Night
-                </div>
-            </div>
-
-            <!-- Todi -->
-            <div class="thaat-card">
-                <h3>🌸 Todi</h3>
-                <p class="scale-info">A deeply devotional scale with a mournful quality. Often used in religious and spiritual contexts.</p>
-                <div class="notes-display">Sa Re♭ Ga Ma Pa Dha♭ Ni♭</div>
-                <button class="play-button">▶ Listen to Scale</button>
-                <div class="characteristics">
-                    <strong>Mood:</strong> Devotional, Mournful<br>
-                    <strong>Best Ragas:</strong> Todi, Bageshri<br>
-                    <strong>Time:</strong> Last quarter of night
-                </div>
-            </div>
-
-            <!-- Kafi -->
-            <div class="thaat-card">
-                <h3>🎨 Kafi</h3>
-                <p class="scale-info">A soft, tender scale. Often used for romantic and gentle ragas with a swaying quality.</p>
-                <div class="notes-display">Sa Re♭ Ga Ma Pa Dha♭ Ni</div>
-                <button class="play-button">▶ Listen to Scale</button>
-                <div class="characteristics">
-                    <strong>Mood:</strong> Tender, Romantic<br>
-                    <strong>Best Ragas:</strong> Bageshri, Patdeep<br>
-                    <strong>Time:</strong> Monsoon
-                </div>
+    <div class="thaat-grid">
+        <!-- Bhairav -->
+        <div class="thaat-card scale-card" data-difficulty="beginner">
+            <h3>🎶 Bhairav</h3>
+            <span class="difficulty-badge difficulty-beginner">Beginner Friendly</span>
+            <p class="scale-info">The regal Thaat, often associated with morning ragas. Characterized by a somber, serious mood.</p>
+            <div class="notes-display">Sa re Ma Pa Dha</div>
+            <button class="play-button">▶ Listen to Scale</button>
+            <div class="characteristics">
+                <strong>Mood:</strong> Serious, Devotional<br>
+                <strong>Best Ragas:</strong> Bhairav, Ahir Bhairav<br>
+                <strong>Time:</strong> Early Morning
             </div>
         </div>
 
-        <!-- Scale Learning Guide -->
-        <div style="background: linear-gradient(135deg, rgba(107, 182, 214, 0.1), rgba(168, 230, 207, 0.1)); padding: 30px; border-radius: 15px; margin-top: 50px;">
-            <h2 style="color: var(--primary); margin-bottom: 20px;">Understanding the Notes</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px;">
-                <div>
-                    <strong style="color: var(--primary);">Sa</strong> - Shuddh (Natural)<br>
-                    Root note
-                </div>
-                <div>
-                    <strong style="color: var(--primary);">Re</strong> - Komal (Flat) or Shuddh<br>
-                    2nd note
-                </div>
-                <div>
-                    <strong style="color: var(--primary);">Ga</strong> - Komal or Shuddh<br>
-                    3rd note
-                </div>
-                <div>
-                    <strong style="color: var(--primary);">Ma</strong> - Shuddh or Tivra (Sharp)<br>
-                    4th note
-                </div>
-                <div>
-                    <strong style="color: var(--primary);">Pa</strong> - Shuddh (Always natural)<br>
-                    5th note
-                </div>
-                <div>
-                    <strong style="color: var(--primary);">Dha</strong> - Komal or Shuddh<br>
-                    6th note
-                </div>
-                <div>
-                    <strong style="color: var(--primary);">Ni</strong> - Komal or Shuddh<br>
-                    7th note
-                </div>
+        <!-- Kalyan -->
+        <div class="thaat-card scale-card" data-difficulty="beginner">
+            <h3>🌟 Kalyan</h3>
+            <span class="difficulty-badge difficulty-beginner">Beginner Friendly</span>
+            <p class="scale-info">The auspicious Thaat with a sharp fourth note, creating a bright and celebratory character.</p>
+            <div class="notes-display">Sa Re Ga Ma# Pa Dha Ni</div>
+            <button class="play-button">▶ Listen to Scale</button>
+            <div class="characteristics">
+                <strong>Mood:</strong> Joyful, Auspicious<br>
+                <strong>Best Ragas:</strong> Yaman, Kamod<br>
+                <strong>Time:</strong> Evening
+            </div>
+        </div>
+
+        <!-- Khamaj -->
+        <div class="thaat-card scale-card" data-difficulty="intermediate">
+            <h3>💫 Khamaj</h3>
+            <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
+            <p class="scale-info">Known for its folk-like, relaxed nature. Often used in light classical and folk music.</p>
+            <div class="notes-display">Sa Re Ga Ma Pa Dha Ni♭</div>
+            <button class="play-button">▶ Listen to Scale</button>
+            <div class="characteristics">
+                <strong>Mood:</strong> Relaxed, Folksy<br>
+                <strong>Best Ragas:</strong> Jog, Bageshri<br>
+                <strong>Time:</strong> Late Evening
+            </div>
+        </div>
+
+        <!-- Asavari -->
+        <div class="thaat-card">
+            <h3>🌙 Asavari</h3>
+            <p class="scale-info">A minor-like scale with a melancholic and introspective quality. Often evokes sadness or longing.</p>
+            <div class="notes-display">Sa Re♭ Ga Ma Pa Dha♭ Ni♭</div>
+            <button class="play-button">▶ Listen to Scale</button>
+            <div class="characteristics">
+                <strong>Mood:</strong> Sad, Introspective<br>
+                <strong>Best Ragas:</strong> Asavari, Adana<br>
+                <strong>Time:</strong> Late Night
+            </div>
+        </div>
+
+        <!-- Bilaval -->
+        <div class="thaat-card">
+            <h3>☀️ Bilaval</h3>
+            <p class="scale-info">The natural major scale without any sharp or flat notes. Bright and clear character.</p>
+            <div class="notes-display">Sa Re Ga Ma Pa Dha Ni</div>
+            <button class="play-button">▶ Listen to Scale</button>
+            <div class="characteristics">
+                <strong>Mood:</strong> Pure, Natural<br>
+                <strong>Best Ragas:</strong> Bhoop, Deshkar<br>
+                <strong>Time:</strong> Daytime
+            </div>
+        </div>
+
+        <!-- Marva -->
+        <div class="thaat-card">
+            <h3>✨ Marva</h3>
+            <p class="scale-info">An exotic scale with no natural fourth and seventh notes. Often carries mystery and yearning.</p>
+            <div class="notes-display">Sa Re♭ Ga Ma# Pa Dha#</div>
+            <button class="play-button">▶ Listen to Scale</button>
+            <div class="characteristics">
+                <strong>Mood:</strong> Mysterious, Yearning<br>
+                <strong>Best Ragas:</strong> Marva, Marva Behag<br>
+                <strong>Time:</strong> Night
+            </div>
+        </div>
+
+        <!-- Purvi -->
+        <div class="thaat-card">
+            <h3>🎭 Purvi</h3>
+            <p class="scale-info">Similar to Marva but with a different hierarchy. Known for passion and fury in classical contexts.</p>
+            <div class="notes-display">Sa Re♭ Ga Ma# Pa Dha Ni♭</div>
+            <button class="play-button">▶ Listen to Scale</button>
+            <div class="characteristics">
+                <strong>Mood:</strong> Passionate, Energetic<br>
+                <strong>Best Ragas:</strong> Purvi, Malkauns<br>
+                <strong>Time:</strong> Late Night
+            </div>
+        </div>
+
+        <!-- Dheerashankar -->
+        <div class="thaat-card">
+            <h3>🔔 Dheerashankar</h3>
+            <p class="scale-info">A unique scale with distinct note patterns. Elegant and contemplative in character.</p>
+            <div class="notes-display">Sa Re♭ Ga Ma# Pa Dha# Ni♭</div>
+            <button class="play-button">▶ Listen to Scale</button>
+            <div class="characteristics">
+                <strong>Mood:</strong> Elegant, Contemplative<br>
+                <strong>Best Ragas:</strong> Malkauns, Rampak<br>
+                <strong>Time:</strong> Late Night
+            </div>
+        </div>
+
+        <!-- Todi -->
+        <div class="thaat-card">
+            <h3>🌸 Todi</h3>
+            <p class="scale-info">A deeply devotional scale with a mournful quality. Often used in religious and spiritual contexts.</p>
+            <div class="notes-display">Sa Re♭ Ga Ma Pa Dha♭ Ni♭</div>
+            <button class="play-button">▶ Listen to Scale</button>
+            <div class="characteristics">
+                <strong>Mood:</strong> Devotional, Mournful<br>
+                <strong>Best Ragas:</strong> Todi, Bageshri<br>
+                <strong>Time:</strong> Last quarter of night
+            </div>
+        </div>
+
+        <!-- Kafi -->
+        <div class="thaat-card">
+            <h3>🎨 Kafi</h3>
+            <p class="scale-info">A soft, tender scale. Often used for romantic and gentle ragas with a swaying quality.</p>
+            <div class="notes-display">Sa Re♭ Ga Ma Pa Dha♭ Ni</div>
+            <button class="play-button">▶ Listen to Scale</button>
+            <div class="characteristics">
+                <strong>Mood:</strong> Tender, Romantic<br>
+                <strong>Best Ragas:</strong> Bageshri, Patdeep<br>
+                <strong>Time:</strong> Monsoon
             </div>
         </div>
     </div>
 
-    <footer style="text-align: center; padding: 20px; color: var(--text-secondary); margin-top: 60px; border-top: 1px solid rgba(107, 182, 214, 0.2);">
-        <p>🎵 Learn the scales, master the craft! 🎵</p>
-        <p style="margin-top:8px;font-size:0.82rem">&copy; 2026 Sonora | Built by <a href="https://sivakanth.vercel.app" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline">Sivakanth Badigenchala</a></p>
-    </footer>
+    <!-- Scale Learning Guide -->
+    <div style="background: linear-gradient(135deg, rgba(107, 182, 214, 0.1), rgba(168, 230, 207, 0.1)); padding: 30px; border-radius: var(--radius); margin-top: 50px;">
+        <h2 style="color: var(--gold); margin-bottom: 20px;">Understanding the Notes</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px;">
+            <div>
+                <strong style="color: var(--gold);">Sa</strong> - Shuddh (Natural)<br>
+                Root note
+            </div>
+            <div>
+                <strong style="color: var(--gold);">Re</strong> - Komal (Flat) or Shuddh<br>
+                2nd note
+            </div>
+            <div>
+                <strong style="color: var(--gold);">Ga</strong> - Komal or Shuddh<br>
+                3rd note
+            </div>
+            <div>
+                <strong style="color: var(--gold);">Ma</strong> - Shuddh or Tivra (Sharp)<br>
+                4th note
+            </div>
+            <div>
+                <strong style="color: var(--gold);">Pa</strong> - Shuddh (Always natural)<br>
+                5th note
+            </div>
+            <div>
+                <strong style="color: var(--gold);">Dha</strong> - Komal or Shuddh<br>
+                6th note
+            </div>
+            <div>
+                <strong style="color: var(--gold);">Ni</strong> - Komal or Shuddh<br>
+                7th note
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
 
-    <script src="{{ url_for('static', filename='js/interactive.js') }}"></script>
-</body>
-</html>
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/interactive.js') }}"></script>
+{% endblock %}

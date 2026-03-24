@@ -1,183 +1,165 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Western Classical Scales - Sonora</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <style>
-        .western-scales-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
+{% extends 'base.html' %}
+{% block title %}Western Classical Scales - Sonora{% endblock %}
 
-        .western-scales-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
+{% block extra_css %}
+<style>
+    .western-scales-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
 
+    .western-scales-header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .western-scales-header h1 {
+        font-size: 1.7rem;
+        color: var(--gold);
+        margin-bottom: 10px;
+    }
+
+    .western-scales-header p {
+        font-size: 1.1rem;
+        color: var(--text2);
+        max-width: 800px;
+        margin: 0 auto;
+        line-height: 1.8;
+    }
+
+    .scales-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 30px;
+        margin: 40px 0;
+    }
+
+    .scale-card {
+        background: linear-gradient(135deg, rgba(232, 149, 110, 0.1), rgba(244, 184, 148, 0.1));
+        border: 2px solid var(--teal);
+        border-radius: var(--radius);
+        padding: 30px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: var(--shadow);
+    }
+
+    .scale-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 25px rgba(232, 149, 110, 0.3);
+        background: linear-gradient(135deg, rgba(232, 149, 110, 0.2), rgba(244, 184, 148, 0.2));
+    }
+
+    .scale-card h3 {
+        color: var(--teal);
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+
+    .scale-description {
+        color: var(--text2);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 15px;
+    }
+
+    .notes-display {
+        background: var(--bg-card);
+        padding: 15px;
+        border-radius: 10px;
+        font-family: 'Courier New', monospace;
+        color: var(--teal);
+        font-weight: bold;
+        text-align: center;
+        font-size: 1rem;
+        letter-spacing: 2px;
+        margin-bottom: 15px;
+        border: 1px solid rgba(232, 149, 110, 0.3);
+    }
+
+    .scale-info-grid {
+        font-size: 0.9rem;
+        color: var(--text2);
+        margin-bottom: 15px;
+        padding: 15px;
+        background: rgba(232, 149, 110, 0.05);
+        border-radius: 8px;
+    }
+
+    .scale-info-grid div {
+        margin: 8px 0;
+    }
+
+    .scale-info-grid strong {
+        color: var(--teal);
+        display: inline-block;
+        min-width: 120px;
+    }
+
+    .listen-button {
+        background: linear-gradient(135deg, var(--teal), var(--secondary-light));
+        color: var(--bg-deep);
+        border: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.95rem;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .listen-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(232, 149, 110, 0.4);
+    }
+
+    .scale-icon {
+        font-size: 1.5rem;
+        margin-right: 8px;
+    }
+
+    .intro-section {
+        background: linear-gradient(135deg, rgba(232, 149, 110, 0.1), rgba(244, 184, 148, 0.1));
+        padding: 30px;
+        border-radius: var(--radius);
+        border-left: 5px solid var(--teal);
+        margin-bottom: 50px;
+    }
+
+    .intro-section h2 {
+        color: var(--teal);
+        margin-bottom: 15px;
+        font-size: 1.3rem;
+    }
+
+    .intro-section p {
+        color: var(--text2);
+        line-height: 1.8;
+        margin-bottom: 12px;
+    }
+
+    @media (max-width: 768px) {
         .western-scales-header h1 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-
-        .western-scales-header p {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.8;
+            font-size: 1.4rem;
         }
 
         .scales-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
-        }
-
-        .scale-card {
-            background: linear-gradient(135deg, rgba(232, 149, 110, 0.1), rgba(244, 184, 148, 0.1));
-            border: 2px solid var(--secondary);
-            border-radius: 15px;
-            padding: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .scale-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 25px rgba(232, 149, 110, 0.3);
-            background: linear-gradient(135deg, rgba(232, 149, 110, 0.2), rgba(244, 184, 148, 0.2));
-        }
-
-        .scale-card h3 {
-            color: var(--secondary);
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-
-        .scale-description {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 15px;
+            grid-template-columns: 1fr;
+            gap: 20px;
         }
 
         .notes-display {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            font-family: 'Courier New', monospace;
-            color: var(--secondary);
-            font-weight: bold;
-            text-align: center;
-            font-size: 1rem;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-            border: 1px solid rgba(232, 149, 110, 0.3);
-        }
-
-        .scale-info-grid {
             font-size: 0.9rem;
-            color: var(--text-secondary);
-            margin-bottom: 15px;
-            padding: 15px;
-            background: rgba(232, 149, 110, 0.05);
-            border-radius: 8px;
+            letter-spacing: 1px;
         }
+    }
+</style>
+{% endblock %}
 
-        .scale-info-grid div {
-            margin: 8px 0;
-        }
-
-        .scale-info-grid strong {
-            color: var(--secondary);
-            display: inline-block;
-            min-width: 120px;
-        }
-
-        .listen-button {
-            background: linear-gradient(135deg, var(--secondary), var(--secondary-light));
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.95rem;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            width: 100%;
-            margin-bottom: 15px;
-        }
-
-        .listen-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(232, 149, 110, 0.4);
-        }
-
-        .scale-icon {
-            font-size: 1.5rem;
-            margin-right: 8px;
-        }
-
-        .intro-section {
-            background: linear-gradient(135deg, rgba(232, 149, 110, 0.1), rgba(244, 184, 148, 0.1));
-            padding: 30px;
-            border-radius: 15px;
-            border-left: 5px solid var(--secondary);
-            margin-bottom: 50px;
-        }
-
-        .intro-section h2 {
-            color: var(--secondary);
-            margin-bottom: 15px;
-            font-size: 1.8rem;
-        }
-
-        .intro-section p {
-            color: var(--text-secondary);
-            line-height: 1.8;
-            margin-bottom: 12px;
-        }
-
-        @media (max-width: 768px) {
-            .western-scales-header h1 {
-                font-size: 2rem;
-            }
-
-            .scales-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .notes-display {
-                font-size: 0.9rem;
-                letter-spacing: 1px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="/" class="logo">🎵 Sonora</a>
-            <div class="nav-links">
-                <a href="/">Home</a>
-                <a href="/learn/scales" class="active">Learn</a>
-                <a href="/detector">Scale Analyzer</a>
-                <a href="/profile">Profile</a>
-                <a href="/about">About</a>
-                <a href="/contact">Contact</a>
-                <button class="music-toggle" title="Toggle background music" aria-label="Play background music">🎧</button>
-                <button class="theme-toggle" title="Toggle dark mode" aria-label="Toggle theme">🌙</button>
-            </div>
-        </div>
-    </nav>
-
+{% block content %}
     <div class="western-scales-container">
         <div class="western-scales-header">
             <h1>Western Classical Scales</h1>
@@ -348,31 +330,31 @@
             </div>
         </div>
 
-        <div style="margin-top: 60px; padding: 30px; background: linear-gradient(135deg, rgba(232, 149, 110, 0.1), rgba(244, 184, 148, 0.1)); border-radius: 15px;">
-            <h2 style="color: var(--secondary); margin-bottom: 20px;">About Western Classical Music</h2>
-            <p style="color: var(--text-secondary); line-height: 1.8;">
+        <div style="margin-top: 60px; padding: 30px; background: linear-gradient(135deg, rgba(232, 149, 110, 0.1), rgba(244, 184, 148, 0.1)); border-radius: var(--radius);">
+            <h2 style="color: var(--teal); margin-bottom: 20px;">About Western Classical Music</h2>
+            <p style="color: var(--text2); line-height: 1.8;">
                 Western classical music has developed over more than a thousand years, with its theoretical foundations solidly established by the Renaissance period. The systematic study of scales, intervals, and harmony has created a comprehensive musical language that allows composers to communicate precise musical ideas to performers.
             </p>
-            <p style="color: var(--text-secondary); line-height: 1.8; margin-top: 15px;">
+            <p style="color: var(--text2); line-height: 1.8; margin-top: 15px;">
                 The flute holds a special place in Western orchestral and chamber music, valued for its clarity, agility, and lyrical quality. From Bach and Mozart to contemporary composers, the flute continues to be celebrated for its expressive capacity and technical possibilities.
             </p>
         </div>
     </div>
+{% endblock %}
 
-    <script src="{{ url_for('static', filename='js/interactive.js') }}"></script>
-    <script>
-        // Load theme and music preferences
-        document.addEventListener('DOMContentLoaded', function() {
-            const themeManager = window.ThemeManager;
-            if (themeManager) {
-                themeManager.init();
-            }
-            
-            const musicManager = window.MusicManager;
-            if (musicManager) {
-                musicManager.init();
-            }
-        });
-    </script>
-</body>
-</html>
+{% block extra_scripts %}
+<script>
+    // Load theme and music preferences
+    document.addEventListener('DOMContentLoaded', function() {
+        const themeManager = window.ThemeManager;
+        if (themeManager) {
+            themeManager.init();
+        }
+        
+        const musicManager = window.MusicManager;
+        if (musicManager) {
+            musicManager.init();
+        }
+    });
+</script>
+{% endblock %}

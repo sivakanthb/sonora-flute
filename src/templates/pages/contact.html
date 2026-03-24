@@ -1,403 +1,383 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - Sonora</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <style>
-        .contact-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
+{% extends 'base.html' %}
+{% block title %}Contact - Sonora{% endblock %}
 
-        .contact-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
+{% block extra_css %}
+<style>
+    .contact-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
 
+    .contact-header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .contact-header h1 {
+        font-size: 1.7rem;
+        color: var(--gold);
+        margin-bottom: 15px;
+    }
+
+    .contact-header p {
+        font-size: 1.1rem;
+        color: var(--text2);
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .contact-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        margin-bottom: 40px;
+    }
+
+    .contact-info {
+        background: var(--bg-card);
+        border-radius: var(--radius);
+        padding: 40px;
+        box-shadow: var(--shadow);
+    }
+
+    .contact-info h2 {
+        color: var(--gold);
+        font-size: 1.5rem;
+        margin-bottom: 30px;
+    }
+
+    .contact-method {
+        margin-bottom: 30px;
+        padding-bottom: 25px;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .contact-method:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .method-icon {
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+        display: block;
+    }
+
+    .method-title {
+        color: var(--primary-dark);
+        font-weight: bold;
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+
+    .method-detail {
+        color: var(--text2);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 10px;
+    }
+
+    .method-link {
+        color: var(--gold);
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .method-link:hover {
+        text-decoration: underline;
+    }
+
+    .contact-form {
+        background: var(--bg-card);
+        border-radius: var(--radius);
+        padding: 40px;
+        box-shadow: var(--shadow);
+    }
+
+    .contact-form h2 {
+        color: var(--gold);
+        font-size: 1.5rem;
+        margin-bottom: 30px;
+    }
+
+    .form-group {
+        margin-bottom: 25px;
+    }
+
+    .form-group label {
+        display: block;
+        color: var(--primary-dark);
+        font-weight: bold;
+        margin-bottom: 10px;
+        font-size: 0.95rem;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid var(--border);
+        border-radius: 8px;
+        font-size: 0.95rem;
+        font-family: inherit;
+        color: var(--text-primary);
+        transition: all 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+        outline: none;
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px rgba(107, 182, 214, 0.1);
+    }
+
+    .form-group textarea {
+        resize: vertical;
+        min-height: 150px;
+    }
+
+    .submit-btn {
+        background: linear-gradient(135deg, var(--gold), var(--accent));
+        color: var(--bg-deep);
+        padding: 14px 40px;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+    }
+
+    .submit-btn:hover {
+        transform: scale(1.02);
+        box-shadow: 0 6px 20px rgba(107, 182, 214, 0.3);
+    }
+
+    .submit-btn:active {
+        transform: scale(0.98);
+    }
+
+    .response-message {
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: 8px;
+        text-align: center;
+        display: none;
+    }
+
+    .response-message.success {
+        background: rgba(168, 230, 207, 0.2);
+        border: 2px solid var(--accent);
+        color: #2d5a4a;
+    }
+
+    .response-message.error {
+        background: rgba(217, 136, 123, 0.2);
+        border: 2px solid #D9887B;
+        color: #6b3d28;
+    }
+
+    .social-links {
+        background: linear-gradient(135deg, rgba(107, 182, 214, 0.1), rgba(168, 230, 207, 0.1));
+        border: 2px solid var(--gold);
+        border-radius: var(--radius);
+        padding: 30px;
+        text-align: center;
+        margin: 40px 0;
+    }
+
+    .social-links h3 {
+        color: var(--gold);
+        margin-bottom: 20px;
+        font-size: 1.3rem;
+    }
+
+    .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .social-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        background: var(--bg-card);
+        border: 2px solid var(--gold);
+        border-radius: 50%;
+        font-size: 1.5rem;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .social-icon:hover {
+        background: var(--gold);
+        color: var(--bg-deep);
+        transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
         .contact-header h1 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-
-        .contact-header p {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .contact-info {
-            background: white;
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .contact-info h2 {
-            color: var(--primary);
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-        }
-
-        .contact-method {
-            margin-bottom: 30px;
-            padding-bottom: 25px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .contact-method:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .method-icon {
-            font-size: 2rem;
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .method-title {
-            color: var(--primary-dark);
-            font-weight: bold;
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-        }
-
-        .method-detail {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 10px;
-        }
-
-        .method-link {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-
-        .method-link:hover {
-            text-decoration: underline;
-        }
-
-        .contact-form {
-            background: white;
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .contact-form h2 {
-            color: var(--primary);
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .form-group label {
-            display: block;
-            color: var(--primary-dark);
-            font-weight: bold;
-            margin-bottom: 10px;
-            font-size: 0.95rem;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            font-size: 0.95rem;
-            font-family: inherit;
-            color: var(--text-primary);
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(107, 182, 214, 0.1);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 150px;
-        }
-
-        .submit-btn {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            color: white;
-            padding: 14px 40px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-
-        .submit-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 6px 20px rgba(107, 182, 214, 0.3);
-        }
-
-        .submit-btn:active {
-            transform: scale(0.98);
-        }
-
-        .response-message {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            display: none;
-        }
-
-        .response-message.success {
-            background: rgba(168, 230, 207, 0.2);
-            border: 2px solid var(--accent);
-            color: #2d5a4a;
-        }
-
-        .response-message.error {
-            background: rgba(217, 136, 123, 0.2);
-            border: 2px solid #D9887B;
-            color: #6b3d28;
-        }
-
-        .social-links {
-            background: linear-gradient(135deg, rgba(107, 182, 214, 0.1), rgba(168, 230, 207, 0.1));
-            border: 2px solid var(--primary);
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center;
-            margin: 40px 0;
-        }
-
-        .social-links h3 {
-            color: var(--primary);
-            margin-bottom: 20px;
             font-size: 1.3rem;
         }
 
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
+        .contact-content {
+            grid-template-columns: 1fr;
+            gap: 30px;
         }
 
-        .social-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            background: white;
-            border: 2px solid var(--primary);
-            border-radius: 50%;
-            font-size: 1.5rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
+        .contact-info,
+        .contact-form {
+            padding: 25px;
         }
+    }
+</style>
+{% endblock %}
 
-        .social-icon:hover {
-            background: var(--primary);
-            color: white;
-            transform: scale(1.1);
-        }
+{% block content %}
+<div class="contact-container">
+    <div class="contact-header">
+        <h1>📧 Get in Touch</h1>
+        <p>We'd love to hear from you! Have questions, feedback, or want to collaborate? Reach out to the Sonora team.</p>
+    </div>
 
-        @media (max-width: 768px) {
-            .contact-header h1 {
-                font-size: 1.8rem;
-            }
+    <div class="contact-content">
+        <!-- Contact Information -->
+        <div class="contact-info">
+            <h2>Contact Information</h2>
 
-            .contact-content {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .contact-info,
-            .contact-form {
-                padding: 25px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="/" class="logo">🎵 Sonora</a>
-            <div class="nav-links">
-                <a href="/">Home</a>
-                <a href="/learn/scales">Learn</a>
-                <a href="/detector">Scale Analyzer</a>
-                <a href="/profile">Profile</a>
-                <a href="/about">About</a>
-                <a href="/contact" class="active">Contact</a>
-            </div>
-        </div>
-    </nav>
-
-    <div class="contact-container">
-        <div class="contact-header">
-            <h1>📧 Get in Touch</h1>
-            <p>We'd love to hear from you! Have questions, feedback, or want to collaborate? Reach out to the Sonora team.</p>
-        </div>
-
-        <div class="contact-content">
-            <!-- Contact Information -->
-            <div class="contact-info">
-                <h2>Contact Information</h2>
-
-                <div class="contact-method">
-                    <span class="method-icon">📧</span>
-                    <div class="method-title">Email</div>
-                    <p class="method-detail">For general inquiries and feedback:</p>
-                    <a href="mailto:hello@sonora-music.com" class="method-link">hello@sonora-music.com</a>
-                </div>
-
-                <div class="contact-method">
-                    <span class="method-icon">🐛</span>
-                    <div class="method-title">Bug Reports</div>
-                    <p class="method-detail">Found a bug? Let us know immediately:</p>
-                    <a href="mailto:bugs@sonora-music.com" class="method-link">bugs@sonora-music.com</a>
-                </div>
-
-                <div class="contact-method">
-                    <span class="method-icon">💼</span>
-                    <div class="method-title">Business Inquiries</div>
-                    <p class="method-detail">Partnerships and collaborations:</p>
-                    <a href="mailto:business@sonora-music.com" class="method-link">business@sonora-music.com</a>
-                </div>
-
-                <div class="contact-method">
-                    <span class="method-icon">⏱️</span>
-                    <div class="method-title">Response Time</div>
-                    <p class="method-detail">We typically respond within 24-48 hours. Your feedback is important to us!</p>
-                </div>
-
-                <div class="contact-method">
-                    <span class="method-icon">🌍</span>
-                    <div class="method-title">Location</div>
-                    <p class="method-detail">Global Team · India-Based Operations</p>
-                </div>
+            <div class="contact-method">
+                <span class="method-icon">📧</span>
+                <div class="method-title">Email</div>
+                <p class="method-detail">For general inquiries and feedback:</p>
+                <a href="mailto:hello@sonora-music.com" class="method-link">hello@sonora-music.com</a>
             </div>
 
-            <!-- Contact Form -->
-            <div class="contact-form">
-                <h2>Send Us a Message</h2>
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label for="name">Your Name *</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
+            <div class="contact-method">
+                <span class="method-icon">🐛</span>
+                <div class="method-title">Bug Reports</div>
+                <p class="method-detail">Found a bug? Let us know immediately:</p>
+                <a href="mailto:bugs@sonora-music.com" class="method-link">bugs@sonora-music.com</a>
+            </div>
 
-                    <div class="form-group">
-                        <label for="email">Your Email *</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
+            <div class="contact-method">
+                <span class="method-icon">💼</span>
+                <div class="method-title">Business Inquiries</div>
+                <p class="method-detail">Partnerships and collaborations:</p>
+                <a href="mailto:business@sonora-music.com" class="method-link">business@sonora-music.com</a>
+            </div>
 
-                    <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <select id="subject" name="subject">
-                            <option value="">Select a topic...</option>
-                            <option value="feedback">Feedback</option>
-                            <option value="bug">Bug Report</option>
-                            <option value="feature">Feature Request</option>
-                            <option value="business">Business Inquiry</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
+            <div class="contact-method">
+                <span class="method-icon">⏱️</span>
+                <div class="method-title">Response Time</div>
+                <p class="method-detail">We typically respond within 24-48 hours. Your feedback is important to us!</p>
+            </div>
 
-                    <div class="form-group">
-                        <label for="message">Message *</label>
-                        <textarea id="message" name="message" required placeholder="Tell us what's on your mind..."></textarea>
-                    </div>
-
-                    <button type="submit" class="submit-btn">📤 Send Message</button>
-
-                    <div id="responseMessage" class="response-message"></div>
-                </form>
+            <div class="contact-method">
+                <span class="method-icon">🌍</span>
+                <div class="method-title">Location</div>
+                <p class="method-detail">Global Team · India-Based Operations</p>
             </div>
         </div>
 
-        <!-- Social Links -->
-        <div class="social-links">
-            <h3>Follow Sonora</h3>
-            <div class="social-icons">
-                <a href="#" class="social-icon" title="Facebook">f</a>
-                <a href="#" class="social-icon" title="Twitter">𝕏</a>
-                <a href="#" class="social-icon" title="Instagram">📷</a>
-                <a href="#" class="social-icon" title="YouTube">▶</a>
-                <a href="#" class="social-icon" title="Discord">💬</a>
-            </div>
+        <!-- Contact Form -->
+        <div class="contact-form">
+            <h2>Send Us a Message</h2>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">Your Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Your Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <select id="subject" name="subject">
+                        <option value="">Select a topic...</option>
+                        <option value="feedback">Feedback</option>
+                        <option value="bug">Bug Report</option>
+                        <option value="feature">Feature Request</option>
+                        <option value="business">Business Inquiry</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" required placeholder="Tell us what's on your mind..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">📤 Send Message</button>
+
+                <div id="responseMessage" class="response-message"></div>
+            </form>
         </div>
     </div>
 
-    <footer style="text-align: center; padding: 20px; color: var(--text-secondary); margin-top: 60px; border-top: 1px solid rgba(107, 182, 214, 0.2);">
-        <p>🎵 We'd love to hear from you! 🎵</p>
-        <p style="margin-top:8px;font-size:0.82rem">&copy; 2026 Sonora | Built by <a href="https://sivakanth.vercel.app" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline">Sivakanth Badigenchala</a></p>
-    </footer>
+    <!-- Social Links -->
+    <div class="social-links">
+        <h3>Follow Sonora</h3>
+        <div class="social-icons">
+            <a href="#" class="social-icon" title="Facebook">f</a>
+            <a href="#" class="social-icon" title="Twitter">𝕏</a>
+            <a href="#" class="social-icon" title="Instagram">📷</a>
+            <a href="#" class="social-icon" title="YouTube">▶</a>
+            <a href="#" class="social-icon" title="Discord">💬</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
 
-    <script>
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+{% block extra_scripts %}
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
 
-            // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
+        // Get form values
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const subject = document.getElementById('subject').value;
+        const message = document.getElementById('message').value;
 
-            // Simple validation
-            if (!name || !email || !message) {
-                showMessage('Please fill in all required fields.', 'error');
-                return;
-            }
-
-            // Simulate sending message (in production, send to server)
-            console.log('Form Data:', { name, email, subject, message });
-
-            // Show success message
-            showMessage('✓ Thank you for your message! We\'ll get back to you soon.', 'success');
-
-            // Reset form
-            this.reset();
-
-            // Hide message after 5 seconds
-            setTimeout(() => {
-                document.getElementById('responseMessage').style.display = 'none';
-            }, 5000);
-        });
-
-        function showMessage(text, type) {
-            const messageEl = document.getElementById('responseMessage');
-            messageEl.textContent = text;
-            messageEl.className = `response-message ${type}`;
-            messageEl.style.display = 'block';
+        // Simple validation
+        if (!name || !email || !message) {
+            showMessage('Please fill in all required fields.', 'error');
+            return;
         }
-    </script>
-</body>
-</html>
+
+        // Simulate sending message (in production, send to server)
+        console.log('Form Data:', { name, email, subject, message });
+
+        // Show success message
+        showMessage('✓ Thank you for your message! We\'ll get back to you soon.', 'success');
+
+        // Reset form
+        this.reset();
+
+        // Hide message after 5 seconds
+        setTimeout(() => {
+            document.getElementById('responseMessage').style.display = 'none';
+        }, 5000);
+    });
+
+    function showMessage(text, type) {
+        const messageEl = document.getElementById('responseMessage');
+        messageEl.textContent = text;
+        messageEl.className = `response-message ${type}`;
+        messageEl.style.display = 'block';
+    }
+</script>
+{% endblock %}

@@ -1,6 +1,7 @@
 /* ============================================================
-   Sonora — Ambient Twilight Theme
-   "As pleasing as listening to a beautiful flute melody"
+   Sonora — Ambient Breeze Theme
+   "The breezy feeling when you close your eyes
+    and listen to a soulful flute melody"
    ============================================================ */
 
 /* ---------- Fonts ---------- */
@@ -27,11 +28,11 @@
   --rose-glow:  rgba(163,88,142,0.08);
   --indigo:     #5b6abf;
 
-  --text:       #1e293b;
-  --text2:      #64748b;
-  --text3:      #94a3b8;
-  --border:     rgba(0,0,0,0.07);
-  --border-h:   rgba(163,133,42,0.25);
+  --text:       #2d3748;
+  --text2:      #718096;
+  --text3:      #a0aec0;
+  --border:     rgba(0,0,0,0.06);
+  --border-h:   rgba(163,133,42,0.20);
 
   --success:    #16a34a;
   --error:      #dc2626;
@@ -43,7 +44,7 @@
   --radius-lg:  16px;
   --shadow:     0 2px 12px rgba(0,0,0,0.06);
   --shadow-glow: 0 0 24px var(--gold-glow);
-  --transition: 0.25s ease;
+  --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   --max-w:      1200px;
 
   --spacing-sm: 0.5rem;
@@ -88,6 +89,7 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: var(--font-body);
+  font-size: 0.92rem;
   background: var(--bg-deep);
   color: var(--text);
   line-height: 1.7;
@@ -100,7 +102,10 @@ body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background: linear-gradient(180deg, #faf9f6 0%, #f5f3ee 50%, #faf9f6 100%);
+  background:
+    radial-gradient(ellipse 140% 60% at 30% 100%, rgba(210,190,140,0.10) 0%, transparent 70%),
+    radial-gradient(ellipse 100% 50% at 80% 0%, rgba(140,180,200,0.08) 0%, transparent 60%),
+    linear-gradient(175deg, #faf9f6 0%, #f5f1ea 35%, #f0ede6 65%, #faf8f4 100%);
   pointer-events: none;
   z-index: 0;
 }

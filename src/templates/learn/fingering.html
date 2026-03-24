@@ -1,203 +1,187 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fingering Guide - Sonora</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <style>
-        .fingering-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
+{% extends 'base.html' %}
+{% block title %}Fingering Guide - Sonora{% endblock %}
 
-        .fingering-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
+{% block extra_css %}
+<style>
+    .fingering-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
 
+    .fingering-header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .fingering-header h1 {
+        font-size: 1.7rem;
+        color: var(--gold);
+        margin-bottom: 10px;
+    }
+
+    .fingering-header p {
+        font-size: 1.1rem;
+        color: var(--text2);
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .fingering-section {
+        background: linear-gradient(135deg, rgba(107, 182, 214, 0.1), rgba(168, 230, 207, 0.1));
+        border: 2px solid var(--gold);
+        border-radius: var(--radius);
+        padding: 40px;
+        margin-bottom: 30px;
+    }
+
+    .fingering-section h2 {
+        color: var(--gold);
+        margin-bottom: 30px;
+        font-size: 1.3rem;
+    }
+
+    .bansuri-diagram {
+        background: var(--bg-card);
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 30px;
+        text-align: center;
+        box-shadow: var(--shadow);
+    }
+
+    .note-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+        margin-top: 30px;
+    }
+
+    .note-card {
+        background: var(--bg-card);
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: var(--shadow);
+        transition: all 0.3s ease;
+    }
+
+    .note-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(107, 182, 214, 0.3);
+    }
+
+    .note-name {
+        font-size: 1.5rem;
+        color: var(--gold);
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    .hole-positions {
+        background: linear-gradient(135deg, #f0f8ff, #f0fff4);
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+        font-family: 'Courier New', monospace;
+        font-size: 0.9rem;
+        line-height: 1.8;
+    }
+
+    .hole-positions code {
+        color: var(--rose);
+        font-weight: bold;
+    }
+
+    .technique-tips {
+        background: #fff9f0;
+        border-left: 4px solid var(--teal);
+        padding: 15px;
+        border-radius: 5px;
+        font-size: 0.9rem;
+        color: var(--text2);
+    }
+
+    .ornament-section {
+        background: var(--bg-card);
+        border-radius: 10px;
+        padding: 25px;
+        margin-top: 30px;
+        box-shadow: var(--shadow);
+    }
+
+    .ornament-item {
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgba(107, 182, 214, 0.2);
+    }
+
+    .ornament-item:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .ornament-name {
+        color: var(--gold);
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+
+    .ornament-description {
+        color: var(--text2);
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .tips-box {
+        background: linear-gradient(135deg, #fff9f0, #f0fff4);
+        border: 2px solid var(--teal);
+        border-radius: 10px;
+        padding: 25px;
+        margin-top: 30px;
+    }
+
+    .tips-box h3 {
+        color: var(--teal);
+        margin-bottom: 15px;
+    }
+
+    .tips-box ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .tips-box li {
+        color: var(--text2);
+        margin-bottom: 10px;
+        padding-left: 25px;
+        position: relative;
+    }
+
+    .tips-box li:before {
+        content: "🎵";
+        position: absolute;
+        left: 0;
+    }
+
+    @media (max-width: 768px) {
         .fingering-header h1 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-
-        .fingering-header p {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto;
+            font-size: 1.3rem;
         }
 
         .fingering-section {
-            background: linear-gradient(135deg, rgba(107, 182, 214, 0.1), rgba(168, 230, 207, 0.1));
-            border: 2px solid var(--primary);
-            border-radius: 15px;
-            padding: 40px;
-            margin-bottom: 30px;
-        }
-
-        .fingering-section h2 {
-            color: var(--primary);
-            margin-bottom: 30px;
-            font-size: 1.8rem;
-        }
-
-        .bansuri-diagram {
-            background: white;
-            border-radius: 10px;
             padding: 20px;
-            margin-bottom: 30px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
         .note-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
+            grid-template-columns: 1fr;
         }
+    }
+</style>
+{% endblock %}
 
-        .note-card {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .note-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(107, 182, 214, 0.3);
-        }
-
-        .note-name {
-            font-size: 1.5rem;
-            color: var(--primary);
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .hole-positions {
-            background: linear-gradient(135deg, #f0f8ff, #f0fff4);
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            line-height: 1.8;
-        }
-
-        .hole-positions code {
-            color: var(--tertiary);
-            font-weight: bold;
-        }
-
-        .technique-tips {
-            background: #fff9f0;
-            border-left: 4px solid var(--secondary);
-            padding: 15px;
-            border-radius: 5px;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
-        .ornament-section {
-            background: white;
-            border-radius: 10px;
-            padding: 25px;
-            margin-top: 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .ornament-item {
-            margin-bottom: 20px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(107, 182, 214, 0.2);
-        }
-
-        .ornament-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .ornament-name {
-            color: var(--primary);
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-
-        .ornament-description {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        .tips-box {
-            background: linear-gradient(135deg, #fff9f0, #f0fff4);
-            border: 2px solid var(--secondary);
-            border-radius: 10px;
-            padding: 25px;
-            margin-top: 30px;
-        }
-
-        .tips-box h3 {
-            color: var(--secondary);
-            margin-bottom: 15px;
-        }
-
-        .tips-box ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .tips-box li {
-            color: var(--text-secondary);
-            margin-bottom: 10px;
-            padding-left: 25px;
-            position: relative;
-        }
-
-        .tips-box li:before {
-            content: "🎵";
-            position: absolute;
-            left: 0;
-        }
-
-        @media (max-width: 768px) {
-            .fingering-header h1 {
-                font-size: 1.8rem;
-            }
-
-            .fingering-section {
-                padding: 20px;
-            }
-
-            .note-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-</head>
-<body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="/" class="logo">🎵 Sonora</a>
-            <div class="nav-links">
-                <a href="/">Home</a>
-                <a href="/learn/scales">Learn</a>
-                <a href="/detector">Scale Analyzer</a>
-                <a href="/profile">Profile</a>
-                <a href="/about">About</a>
-                <a href="/contact">Contact</a>
-            </div>
-        </div>
-    </nav>
-
+{% block content %}
     <div class="fingering-container">
         <div class="fingering-header">
             <h1>Bansuri Fingering Guide</h1>
@@ -209,9 +193,9 @@
             <h2>Hand Position & Grip</h2>
             
             <div class="bansuri-diagram">
-                <h3 style="color: var(--primary); margin-bottom: 15px;">Proper Bansuri Holding Technique</h3>
+                <h3 style="color: var(--gold); margin-bottom: 15px;">Proper Bansuri Holding Technique</h3>
                 <div style="font-size: 4rem; margin: 20px 0;">🎵</div>
-                <p style="color: var(--text-secondary); margin-bottom: 15px; font-size: 0.95rem;">Bansuri should be held at approximately 45° angle from horizontal</p>
+                <p style="color: var(--text2); margin-bottom: 15px; font-size: 0.95rem;">Bansuri should be held at approximately 45° angle from horizontal</p>
             </div>
 
             <div class="note-grid">
@@ -423,10 +407,4 @@
             </ul>
         </div>
     </div>
-
-    <footer style="text-align: center; padding: 20px; color: var(--text-secondary); margin-top: 60px; border-top: 1px solid rgba(107, 182, 214, 0.2);">
-        <p>🎵 Patience, Practice, Perfection! 🎵</p>
-        <p style="margin-top:8px;font-size:0.82rem">&copy; 2026 Sonora | Built by <a href="https://sivakanth.vercel.app" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline">Sivakanth Badigenchala</a></p>
-    </footer>
-</body>
-</html>
+{% endblock %}
