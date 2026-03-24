@@ -71,8 +71,8 @@
       } else {
         // Soft orb — gentle glow
         var colors = isDark()
-          ? ['201,168,76', '90,179,160', '160,140,200']
-          : ['163,133,42', '61,139,122', '140,120,170'];
+          ? ['212,152,94', '90,176,216', '140,170,210']
+          : ['200,136,92', '74,144,184', '100,150,200'];
         particles.push({
           t: 'o',
           x: Math.random() * w,
@@ -114,15 +114,15 @@
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillStyle = dark
-          ? 'rgba(201,168,76,' + p.a + ')'
-          : 'rgba(140,120,80,' + p.a + ')';
+          ? 'rgba(212,180,130,' + p.a + ')'
+          : 'rgba(120,150,180,' + p.a + ')';
         ctx.fillText(p.ch, 0, 0);
         ctx.restore();
       } else if (p.t === 'm') {
         // Mist wisp
         p.ph += p.ps;
         var ma = p.a * (0.6 + 0.4 * Math.sin(p.ph));
-        var mc = dark ? '180,195,210' : '170,175,185';
+        var mc = dark ? '140,180,220' : '130,170,210';
         var g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
         g.addColorStop(0, 'rgba(' + mc + ',' + ma + ')');
         g.addColorStop(1, 'rgba(' + mc + ',0)');

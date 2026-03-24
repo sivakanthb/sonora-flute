@@ -5,7 +5,7 @@
 {% block extra_css %}
 <style>
     .audio-container {
-        max-width: 1200px;
+        max-width: 1000px;
         margin: 0 auto;
         padding: 40px 20px;
     }
@@ -15,158 +15,89 @@
         margin-bottom: 50px;
     }
 
-    .audio-header h1 {
-        font-size: 1.7rem;
-        color: var(--gold);
-        margin-bottom: 10px;
-    }
+    .audio-header h1 { margin-bottom: 10px; }
 
     .audio-header p {
-        font-size: 1.1rem;
-        color: var(--text2);
-        max-width: 600px;
+        max-width: 650px;
         margin: 0 auto;
+        color: var(--text2);
     }
 
     .section-title {
-        color: var(--gold);
-        font-size: 1.3rem;
+        margin-top: 50px;
         margin-bottom: 25px;
         padding-bottom: 15px;
         border-bottom: 2px solid var(--gold);
-        margin-top: 40px;
     }
 
-    .audio-grid {
+    .video-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 24px;
+        margin-bottom: 30px;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .video-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 25px rgba(107, 182, 214, 0.25);
+    }
+
+    .video-card h3 { margin-bottom: 8px; }
+
+    .video-card .card-desc {
+        color: var(--text2);
+        line-height: 1.6;
+        margin-bottom: 16px;
+    }
+
+    .video-card iframe {
+        border-radius: 8px;
+    }
+
+    .video-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 25px;
+        gap: 24px;
         margin-bottom: 40px;
     }
 
-    .audio-card {
-        background: var(--bg-card);
-        border-radius: var(--radius);
-        padding: 25px;
-        box-shadow: var(--shadow);
-        transition: all 0.3s ease;
-    }
+    .video-grid .video-card { margin-bottom: 0; }
 
-    .audio-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 25px rgba(107, 182, 214, 0.3);
-    }
-
-    .audio-card h3 {
-        color: var(--gold);
-        font-size: 1.3rem;
-        margin-bottom: 10px;
-    }
-
-    .audio-description {
-        color: var(--text2);
-        font-size: 0.9rem;
-        line-height: 1.6;
-        margin-bottom: 20px;
-    }
-
-    .audio-player {
-        background: linear-gradient(135deg, rgba(107, 182, 214, 0.1), rgba(168, 230, 207, 0.1));
-        border: 2px solid var(--gold);
-        border-radius: 10px;
-        padding: 15px;
-        margin-bottom: 15px;
-    }
-
-    .audio-player audio {
-        width: 100%;
-        height: 40px;
-    }
-
-    .audio-meta {
+    .note-list {
         display: flex;
-        justify-content: space-between;
-        font-size: 0.85rem;
-        color: var(--tertiary);
-        padding-top: 15px;
-        border-top: 1px solid rgba(107, 182, 214, 0.2);
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 18px;
     }
 
-    .tempo-badge {
+    .note-list span {
         display: inline-block;
-        padding: 4px 12px;
+        padding: 6px 16px;
         border-radius: 20px;
-        font-size: 0.8rem;
-        font-weight: bold;
-        background: #A8E6CF;
-        color: #2d5a4a;
-    }
-
-    .reference-box {
-        background: linear-gradient(135deg, rgba(107, 182, 214, 0.1), rgba(168, 230, 207, 0.1));
-        border: 2px solid var(--gold);
-        border-radius: var(--radius);
-        padding: 30px;
-        margin: 40px 0;
-    }
-
-    .reference-box h3 {
-        color: var(--gold);
-        margin-bottom: 20px;
-        font-size: 1.4rem;
-    }
-
-    .reference-item {
-        background: var(--bg-card);
-        padding: 20px;
-        border-radius: 10px;
-        margin-bottom: 20px;
-    }
-
-    .reference-item:last-child {
-        margin-bottom: 0;
-    }
-
-    .reference-name {
-        color: var(--gold);
-        font-size: 1.1rem;
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
-
-    .reference-description {
-        color: var(--text2);
-        font-size: 0.9rem;
-        line-height: 1.6;
-    }
-
-    .scale-reference-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 20px;
+        background: rgba(107, 182, 214, 0.15);
+        border: 1px solid var(--teal);
+        font-weight: 600;
     }
 
     .tips-section {
         background: var(--bg-card);
         border-radius: var(--radius);
         padding: 30px;
-        margin-top: 40px;
+        margin-top: 50px;
         border: 2px solid var(--secondary);
     }
 
     .tips-section h3 {
         color: var(--secondary);
         margin-bottom: 20px;
-        font-size: 1.4rem;
     }
 
-    .tips-section ul {
-        list-style: none;
-        padding: 0;
-    }
+    .tips-section ul { list-style: none; padding: 0; }
 
     .tips-section li {
-        color: var(--text2);
         margin-bottom: 15px;
         padding-left: 30px;
         position: relative;
@@ -179,31 +110,8 @@
         left: 0;
     }
 
-    .difficulty-label {
-        display: inline-block;
-        padding: 3px 8px;
-        border-radius: 5px;
-        font-size: 0.75rem;
-        font-weight: bold;
-        margin-left: 10px;
-    }
-
-    .easy { background: #A8E6CF; color: #2d5a4a; }
-    .medium { background: #E8956E; color: #6b3d28; }
-    .hard { background: #6BB6D6; color: #2d4a5a; }
-
     @media (max-width: 768px) {
-        .audio-header h1 {
-            font-size: 1.3rem;
-        }
-
-        .audio-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .scale-reference-grid {
-            grid-template-columns: 1fr;
-        }
+        .video-grid { grid-template-columns: 1fr; }
     }
 </style>
 {% endblock %}
@@ -211,272 +119,55 @@
 {% block content %}
     <div class="audio-container">
         <div class="audio-header">
-            <h1>Audio Examples & References</h1>
-            <p>Train your ear with authentic Bansuri recordings. Listen to reference performances of each scale and raag to develop your musical sensibility.</p>
+            <h1>Bansuri Listening Room</h1>
+            <p>A curated collection of Bansuri flute performances from YouTube. Immerse yourself in authentic Indian classical flute music — from foundational notes to full raag renditions by legendary artists.</p>
         </div>
 
-        <!-- Basic Scales Section -->
-        <h2 class="section-title">The Seven Notes (Saptasuvar)</h2>
-        <div class="audio-grid">
-            <div class="audio-card">
-                <h3>Sa (Shadaj)</h3>
-                <p class="audio-description">The root note - the foundation of all Indian music. Listen to its pure, resonant quality.</p>
-                <div class="audio-player">
-                    <audio controls>
-                        <source src="{{ url_for('static', filename='audio/sa.mp3') }}" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                </div>
-                <div class="audio-meta">
-                    <span class="tempo-badge">Pure</span>
-                    <span>🎯 1.5 sec</span>
-                </div>
+        <!-- The Seven Notes -->
+        <h2 class="section-title">The Seven Notes (Saptaswara)</h2>
+        <div class="video-card">
+            <h3>Sa Re Ga Ma Pa Dha Ni — The Foundation</h3>
+            <p class="card-desc">Indian classical music is built on seven fundamental notes called <em>Saptaswara</em>. Each note carries a distinct emotional quality and together they form the octave that underpins every raag and melody.</p>
+            <div class="note-list">
+                <span>Sa (Shadaj)</span>
+                <span>Re (Rishabh)</span>
+                <span>Ga (Gandhar)</span>
+                <span>Ma (Madhyam)</span>
+                <span>Pa (Pancham)</span>
+                <span>Dha (Dhaivat)</span>
+                <span>Ni (Nishad)</span>
             </div>
-
-            <div class="audio-card">
-                <h3>Re (Rishabh)</h3>
-                <p class="audio-description">The second note - a bright and natural progression from Sa.</p>
-                <div class="audio-player">
-                    <audio controls>
-                        <source src="{{ url_for('static', filename='audio/re.mp3') }}" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                </div>
-                <div class="audio-meta">
-                    <span class="tempo-badge">Natural</span>
-                    <span>🎯 1.5 sec</span>
-                </div>
-            </div>
-
-            <div class="audio-card">
-                <h3>Ga (Gandhar)</h3>
-                <p class="audio-description">The third note - adds character and warmth to musical phrases.</p>
-                <div class="audio-player">
-                    <audio controls>
-                        <source src="{{ url_for('static', filename='audio/ga.mp3') }}" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                </div>
-                <div class="audio-meta">
-                    <span class="tempo-badge">Warm</span>
-                    <span>🎯 1.5 sec</span>
-                </div>
-            </div>
-
-            <div class="audio-card">
-                <h3>Ma (Madhyam)</h3>
-                <p class="audio-description">The fourth note - the middle pivot that divides the octave symmetrically.</p>
-                <div class="audio-player">
-                    <audio controls>
-                        <source src="{{ url_for('static', filename='audio/ma.mp3') }}" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                </div>
-                <div class="audio-meta">
-                    <span class="tempo-badge">Pivot</span>
-                    <span>🎯 1.5 sec</span>
-                </div>
-            </div>
-
-            <div class="audio-card">
-                <h3>Pa (Pancham)</h3>
-                <p class="audio-description">The fifth note - the perfect consonant note that appears in most raags.</p>
-                <div class="audio-player">
-                    <audio controls>
-                        <source src="{{ url_for('static', filename='audio/pa.mp3') }}" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                </div>
-                <div class="audio-meta">
-                    <span class="tempo-badge">Consonant</span>
-                    <span>🎯 1.5 sec</span>
-                </div>
-            </div>
-
-            <div class="audio-card">
-                <h3>Dha (Dhaivat)</h3>
-                <p class="audio-description">The sixth note - adds expressiveness to ascending phrases.</p>
-                <div class="audio-player">
-                    <audio controls>
-                        <source src="{{ url_for('static', filename='audio/dha.mp3') }}" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                </div>
-                <div class="audio-meta">
-                    <span class="tempo-badge">Expressive</span>
-                    <span>🎯 1.5 sec</span>
-                </div>
-            </div>
-
-            <div class="audio-card">
-                <h3>Ni (Nishad)</h3>
-                <p class="audio-description">The seventh note - the highest in the octave, often used as a leading tone.</p>
-                <div class="audio-player">
-                    <audio controls>
-                        <source src="{{ url_for('static', filename='audio/ni.mp3') }}" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                </div>
-                <div class="audio-meta">
-                    <span class="tempo-badge">High</span>
-                    <span>🎯 1.5 sec</span>
-                </div>
-            </div>
+            <iframe width="100%" height="220" src="https://www.youtube.com/embed/oBN_jVFo8hY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
         </div>
 
-        <!-- Scale Sequences -->
-        <h2 class="section-title">Complete Scale Sequences (Sargam)</h2>
-        <div class="reference-box">
-            <h3>Practice These Ascending & Descending Scales</h3>
-            <div class="scale-reference-grid">
-                <div class="reference-item">
-                    <div class="reference-name">Major Scale (Bilaval) <span class="difficulty-label easy">Easy</span></div>
-                    <div class="audio-player">
-                        <audio controls>
-                            <source src="{{ url_for('static', filename='audio/scales/bilaval.mp3') }}" type="audio/mpeg">
-                        </audio>
-                    </div>
-                    <p class="reference-description">Sa Re Ga Ma Pa Dha Ni Sa (ascending) then reverse (descending). The natural major scale.</p>
-                </div>
-
-                <div class="reference-item">
-                    <div class="reference-name">Minor Scale (Asavari) <span class="difficulty-label easy">Easy</span></div>
-                    <div class="audio-player">
-                        <audio controls>
-                            <source src="{{ url_for('static', filename='audio/scales/asavari.mp3') }}" type="audio/mpeg">
-                        </audio>
-                    </div>
-                    <p class="reference-description">Sa Re♭ Ga Ma Pa Dha♭ Ni♭ Sa. The minor-like scale with melancholic quality.</p>
-                </div>
-
-                <div class="reference-item">
-                    <div class="reference-name">Kalyan Scale <span class="difficulty-label medium">Medium</span></div>
-                    <div class="audio-player">
-                        <audio controls>
-                            <source src="{{ url_for('static', filename='audio/scales/kalyan.mp3') }}" type="audio/mpeg">
-                        </audio>
-                    </div>
-                    <p class="reference-description">Sa Re Ga Ma♯ Pa Dha Ni Sa. Known for brightness and auspicious qualities.</p>
-                </div>
-
-                <div class="reference-item">
-                    <div class="reference-name">Khamaj Scale <span class="difficulty-label medium">Medium</span></div>
-                    <div class="audio-player">
-                        <audio controls>
-                            <source src="{{ url_for('static', filename='audio/scales/khamaj.mp3') }}" type="audio/mpeg">
-                        </audio>
-                    </div>
-                    <p class="reference-description">Sa Re Ga Ma Pa Dha Ni♭ Sa. Folk-like and relaxed in character.</p>
-                </div>
-
-                <div class="reference-item">
-                    <div class="reference-name">Bhairav Scale <span class="difficulty-label medium">Medium</span></div>
-                    <div class="audio-player">
-                        <audio controls>
-                            <source src="{{ url_for('static', filename='audio/scales/bhairav.mp3') }}" type="audio/mpeg">
-                        </audio>
-                    </div>
-                    <p class="reference-description">Sa Re♭ Ga Ma Pa Dha Ni♭ Sa. Regal and serious in mood.</p>
-                </div>
-
-                <div class="reference-item">
-                    <div class="reference-name">Marva Scale <span class="difficulty-label hard">Hard</span></div>
-                    <div class="audio-player">
-                        <audio controls>
-                            <source src="{{ url_for('static', filename='audio/scales/marva.mp3') }}" type="audio/mpeg">
-                        </audio>
-                    </div>
-                    <p class="reference-description">Sa Re♭ Ga Ma♯ Pa Dha♯ Ni♭ Sa. Exotic scale with mysterious character.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Classical Raags -->
+        <!-- Classical Raag Performances -->
         <h2 class="section-title">Classical Raag Performances</h2>
-        <div class="audio-grid">
-            <div class="audio-card">
-                <h3>Raag Yaman <span class="difficulty-label easy">Easy</span></h3>
-                <p class="audio-description">The most popular and aesthetic raag of classical music. Morning raag with joyful character.</p>
-                <div class="audio-player">
-                    <audio controls>
-                        <source src="{{ url_for('static', filename='audio/raags/yaman.mp3') }}" type="audio/mpeg">
-                    </audio>
-                </div>
-                <div class="audio-meta">
-                    <span>⏱️ 3:45 min</span>
-                    <span>🎵 Master Hariprasad Chaurasia</span>
-                </div>
+        <div class="video-grid">
+            <div class="video-card">
+                <h3>Raag Yaman</h3>
+                <p class="card-desc">An evening raag of serenity and beauty — one of the most beloved raags in Hindustani music. Performed by the legendary Pt. Hariprasad Chaurasia.</p>
+                <iframe width="100%" height="220" src="https://www.youtube.com/embed/TJ6W_yLmIgo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
             </div>
 
-            <div class="audio-card">
-                <h3>Raag Bhairav <span class="difficulty-label easy">Easy</span></h3>
-                <p class="audio-description">Early morning raag. Serious and devotional with profound spiritual quality.</p>
-                <div class="audio-player">
-                    <audio controls>
-                        <source src="{{ url_for('static', filename='audio/raags/bhairav.mp3') }}" type="audio/mpeg">
-                    </audio>
-                </div>
-                <div class="audio-meta">
-                    <span>⏱️ 4:20 min</span>
-                    <span>🎵 Master Pandit Ravi Shankar</span>
-                </div>
+            <div class="video-card">
+                <h3>Raag Bhairav</h3>
+                <p class="card-desc">A deeply devotional early-morning raag with a serious, contemplative mood. Its unique use of komal Re and komal Dha creates a distinctive tension.</p>
+                <iframe width="100%" height="220" src="https://www.youtube.com/embed/m7MrXfd-AqE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
             </div>
 
-            <div class="audio-card">
-                <h3>Raag Jog <span class="difficulty-label medium">Medium</span></h3>
-                <p class="audio-description">Evening raag with relaxed folk-like character. Often played in light classical contexts.</p>
-                <div class="audio-player">
-                    <audio controls>
-                        <source src="{{ url_for('static', filename='audio/raags/jog.mp3') }}" type="audio/mpeg">
-                    </audio>
-                </div>
-                <div class="audio-meta">
-                    <span>⏱️ 3:30 min</span>
-                    <span>🎵 Master Garipur Singh Bhat</span>
-                </div>
+            <div class="video-card">
+                <h3>Raag Desh</h3>
+                <p class="card-desc">A romantic monsoon raag evoking the beauty of rain and longing. Its light, folk-like character makes it accessible and emotionally rich.</p>
+                <iframe width="100%" height="220" src="https://www.youtube.com/embed/2crY8WH0SBA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
             </div>
+        </div>
 
-            <div class="audio-card">
-                <h3>Raag Bageshri <span class="difficulty-label medium">Medium</span></h3>
-                <p class="audio-description">Night raag. Tender and romantic with a melancholic undertone expressing longing.</p>
-                <div class="audio-player">
-                    <audio controls>
-                        <source src="{{ url_for('static', filename='audio/raags/bageshri.mp3') }}" type="audio/mpeg">
-                    </audio>
-                </div>
-                <div class="audio-meta">
-                    <span>⏱️ 4:10 min</span>
-                    <span>🎵 Master Vishwa Mohan Bhatt</span>
-                </div>
-            </div>
-
-            <div class="audio-card">
-                <h3>Raag Todi <span class="difficulty-label hard">Hard</span></h3>
-                <p class="audio-description">Late night raag. Deeply devotional and mournful with intense spiritual expression.</p>
-                <div class="audio-player">
-                    <audio controls>
-                        <source src="{{ url_for('static', filename='audio/raags/todi.mp3') }}" type="audio/mpeg">
-                    </audio>
-                </div>
-                <div class="audio-meta">
-                    <span>⏱️ 5:00 min</span>
-                    <span>🎵 Master Nayan Ghosh</span>
-                </div>
-            </div>
-
-            <div class="audio-card">
-                <h3>Raag Marva <span class="difficulty-label hard">Hard</span></h3>
-                <p class="audio-description">Night raag. Mysterious and exotic with unique character. Challenges the listener's perception.</p>
-                <div class="audio-player">
-                    <audio controls>
-                        <source src="{{ url_for('static', filename='audio/raags/marva.mp3') }}" type="audio/mpeg">
-                    </audio>
-                </div>
-                <div class="audio-meta">
-                    <span>⏱️ 4:45 min</span>
-                    <span>🎵 Master Deepak Choudhury</span>
-                </div>
-            </div>
+        <!-- Scale Practice -->
+        <h2 class="section-title">Scale Practice</h2>
+        <div class="video-card">
+            <h3>Sargam Practice Session</h3>
+            <p class="card-desc">Practice ascending and descending scales (aaroh-avroh) with this guided Bansuri session. Regular sargam practice builds pitch accuracy, breath control, and finger muscle memory.</p>
+            <iframe width="100%" height="220" src="https://www.youtube.com/embed/6Vfk9lZkjBY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
         </div>
 
         <!-- Ear Training Tips -->
