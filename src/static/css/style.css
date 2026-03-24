@@ -1110,6 +1110,18 @@ a:hover { color: var(--gold-light); }
 .how-it-works-list { margin-left: 20px; }
 .how-it-works-list li { margin-left: 20px; margin-bottom: 15px; }
 .how-it-works-list li:last-child { margin-bottom: 0; }
+.flute-traits { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.flute-traits .trait {
+  background: var(--bg-glass); border: 1px solid var(--border); border-radius: 20px;
+  padding: 4px 14px; font-size: 0.78rem; color: var(--text2);
+}
+.comparison-table { overflow-x: auto; margin: 16px 0; }
+.comparison-table table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.comparison-table th, .comparison-table td {
+  padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border);
+}
+.comparison-table th { color: var(--gold); font-weight: 600; background: var(--bg-glass); }
+.comparison-table td { color: var(--text2); }
 .team-section {
   background: var(--bg-glass); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; margin: 24px 0;
 }

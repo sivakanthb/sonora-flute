@@ -1,21 +1,27 @@
 {% extends 'base.html' %}
-
-{% block title %}Audio Examples - Sonora{% endblock %}
+{% block title %}How Different Flutes Sound - Sonora{% endblock %}
 
 
 
 {% block content %}
     <div class="audio-container">
         <div class="audio-header">
-            <h1>Bansuri Listening Room</h1>
-            <p>A curated collection of authentic Bansuri and Indian flute recordings from public domain and Creative Commons sources — Wikimedia Commons and the Internet Archive.</p>
+            <h1>How Different Flutes Sound</h1>
+            <p>The flute exists in every musical culture — but each tradition shapes a unique voice. Listen to how the same family of instruments sounds completely different across Indian classical, Carnatic, and folk traditions.</p>
         </div>
 
-        <!-- Bansuri Bass — Bhairav Alap -->
-        <h2 class="section-title">Bansuri — Bhairav Alap</h2>
+        <!-- Hindustani Bansuri -->
+        <h2 class="section-title">🪈 Hindustani Bansuri — North India</h2>
         <div class="video-card">
             <h3>Bass Bansuri in E — Raag Bhairav</h3>
-            <p class="card-desc">A meditative alap on a bass bansuri tuned to E. Raag Bhairav is a deeply devotional early-morning raag with contemplative character. Recorded by Prithwin and released into the public domain.</p>
+            <p class="card-desc">The Bansuri is a bamboo transverse flute with no keys or mechanical parts — just breath, fingers, and bamboo. The bass bansuri produces deep, meditative tones. Notice the <strong>meend</strong> (smooth gliding between notes) and <strong>andolan</strong> (gentle oscillation) — signatures of the Hindustani style.</p>
+            <div class="flute-traits">
+                <span class="trait">Bamboo</span>
+                <span class="trait">6-7 holes</span>
+                <span class="trait">No keys</span>
+                <span class="trait">Breathy tone</span>
+                <span class="trait">Microtonal bends</span>
+            </div>
             <audio controls preload="none">
                 <source src="https://upload.wikimedia.org/wikipedia/commons/transcoded/8/8e/Bansuri_sample_E_bass.ogg/Bansuri_sample_E_bass.ogg.mp3" type="audio/mpeg">
                 <source src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Bansuri_sample_E_bass.ogg" type="audio/ogg">
@@ -25,10 +31,17 @@
         </div>
 
         <!-- Carnatic Flute -->
-        <h2 class="section-title">Carnatic Flute — Raga Mayamalavagowla</h2>
+        <h2 class="section-title">🎶 Carnatic Flute — South India</h2>
         <div class="video-card">
-            <h3>8-Hole Carnatic Flute</h3>
-            <p class="card-desc">A demonstration of Raga Mayamalavagowla on an 8-hole Carnatic flute. This raga (equivalent of Thaat Bhairav in Hindustani) is the foundation scale taught to every Carnatic music student. Recorded by Bansuri Arvind.</p>
+            <h3>8-Hole Carnatic Flute — Raga Mayamalavagowla</h3>
+            <p class="card-desc">The Carnatic flute (Venu) is also bamboo — but has 8 holes and a brighter, more precise tone. Where the Bansuri glides slowly, the Carnatic flute uses rapid <strong>gamakas</strong> (oscillations) and crisp note articulation. Raga Mayamalavagowla here is the Carnatic equivalent of Thaat Bhairav — listen and compare both clips.</p>
+            <div class="flute-traits">
+                <span class="trait">Bamboo</span>
+                <span class="trait">8 holes</span>
+                <span class="trait">Brighter tone</span>
+                <span class="trait">Rapid gamakas</span>
+                <span class="trait">Precise articulation</span>
+            </div>
             <audio controls preload="none">
                 <source src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Carnatic_flute.ogg" type="audio/ogg">
                 Your browser does not support the audio element.
@@ -36,11 +49,18 @@
             <p class="audio-credit">Source: <a href="https://commons.wikimedia.org/wiki/File:Carnatic_flute.ogg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a> · CC BY-SA 3.0</p>
         </div>
 
-        <!-- Indian Folk Classical -->
-        <h2 class="section-title">Indian Folk Classical Flute</h2>
+        <!-- Folk Bansuri -->
+        <h2 class="section-title">🌿 Folk Bansuri — Rural India</h2>
         <div class="video-card">
             <h3>Folk Classical Bansuri</h3>
-            <p class="card-desc">A soulful bansuri performance rooted in the folk and classical heritage of India. The bamboo flute's soft, melodic tones evoke deep emotions — connecting the listener with nature, spirituality, and Indian tradition. Recorded by MayankSingh33.</p>
+            <p class="card-desc">Folk bansuri playing is simpler and more melodic than classical — meant for open fields, not concert halls. The ornamentations are gentler, the phrases shorter. This style connects the flute to nature, pastoral life, and devotional traditions across rural India.</p>
+            <div class="flute-traits">
+                <span class="trait">Bamboo</span>
+                <span class="trait">Simple melodies</span>
+                <span class="trait">Gentle ornaments</span>
+                <span class="trait">Pastoral feel</span>
+                <span class="trait">Devotional</span>
+            </div>
             <audio controls preload="none">
                 <source src="https://upload.wikimedia.org/wikipedia/commons/1/1d/Indian_Folk_Classical_Flute_Music_%281%29.wav" type="audio/wav">
                 Your browser does not support the audio element.
@@ -48,92 +68,69 @@
             <p class="audio-credit">Source: <a href="https://commons.wikimedia.org/wiki/File:Indian_Folk_Classical_Flute_Music_(1).wav" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a> · CC BY-SA 4.0</p>
         </div>
 
-        <!-- Internet Archive: Hariprasad Chaurasia -->
-        <h2 class="section-title">Pt. Hariprasad Chaurasia — Live Recital</h2>
-        <div class="video-card">
-            <h3>Flute Recital by Pandit Hariprasad Chaurasia</h3>
-            <p class="card-desc">A live flute recital by the legendary Pandit Hariprasad Chaurasia, one of the greatest Bansuri maestros of all time. From the Indian cultural archives.</p>
-            <iframe src="https://archive.org/embed/dni.ncaa.IGRMS-A_184-AC" width="100%" height="60" frameborder="0" allowfullscreen loading="lazy"></iframe>
-            <p class="audio-credit">Source: <a href="https://archive.org/details/dni.ncaa.IGRMS-A_184-AC" target="_blank" rel="noopener noreferrer">Internet Archive — Cultural Resources of India</a></p>
-        </div>
-
-        <!-- Internet Archive: Flute Music from Northern India -->
-        <h2 class="section-title">Flute Music from Northern India</h2>
-        <div class="video-card">
-            <h3>Historical Recording — North Indian Flute</h3>
-            <p class="card-desc">A historical recording of flute music from Northern India, capturing the traditional playing style and melodic sensibility of the region.</p>
-            <iframe src="https://archive.org/embed/C_1969_XX_XX_02" width="100%" height="60" frameborder="0" allowfullscreen loading="lazy"></iframe>
-            <p class="audio-credit">Source: <a href="https://archive.org/details/C_1969_XX_XX_02" target="_blank" rel="noopener noreferrer">Internet Archive</a></p>
-        </div>
-
-        <!-- Internet Archive: Flute and Santoor -->
-        <h2 class="section-title">Flute & Santoor Recital</h2>
-        <div class="video-card">
-            <h3>Jugalbandi — Flute and Santoor</h3>
-            <p class="card-desc">A beautiful jugalbandi (duet) between flute and santoor. Two instruments weaving melodies together in the Indian classical tradition — showcasing the interplay of the breathy flute with the resonant hammered strings of the santoor.</p>
-            <iframe src="https://archive.org/embed/dni.ncaa.ICCR-1839-AC" width="100%" height="60" frameborder="0" allowfullscreen loading="lazy"></iframe>
-            <p class="audio-credit">Source: <a href="https://archive.org/details/dni.ncaa.ICCR-1839-AC" target="_blank" rel="noopener noreferrer">Internet Archive — Cultural Resources of India</a></p>
-        </div>
-
-        <!-- The Seven Notes — Educational -->
-        <h2 class="section-title">The Seven Notes (Saptaswara)</h2>
-        <div class="video-card">
-            <h3>Sa Re Ga Ma Pa Dha Ni — The Foundation</h3>
-            <p class="card-desc">Indian classical music is built on seven fundamental notes called <em>Saptaswara</em>. Each note carries a distinct emotional quality and together they form the octave that underpins every raag and melody.</p>
-            <div class="note-list">
-                <span>Sa (Shadaj)</span>
-                <span>Re (Rishabh)</span>
-                <span>Ga (Gandhar)</span>
-                <span>Ma (Madhyam)</span>
-                <span>Pa (Pancham)</span>
-                <span>Dha (Dhaivat)</span>
-                <span>Ni (Nishad)</span>
-            </div>
-            <p class="card-desc">Listen to the recordings above to hear how these notes come alive on the bansuri. The bass bansuri clip demonstrates a slow alap where individual notes are explored with meend (gliding) and andolan (gentle oscillation).</p>
-        </div>
-
-        <!-- Recommended Learning Path -->
-        <div class="playlist-section">
-            <h3>Recommended Learning Path</h3>
-            
-            <div class="recommended-box">
-                <h4>Month 1: Foundation</h4>
-                <ul>
-                    <li>Listen to the Bansuri Bass Bhairav alap above — focus on how individual notes are explored</li>
-                    <li>Compare the Carnatic flute recording with the Hindustani style — notice the differences in ornamentation</li>
-                    <li>Explore the 1969 historical recording — observe how the traditional style laid groundwork for today's artists</li>
-                </ul>
-            </div>
-
-            <div class="recommended-box">
-                <h4>Month 2-3: Deeper Listening</h4>
-                <ul>
-                    <li>Study Pt. Hariprasad Chaurasia's recital — pay attention to his meend (glides) and breath control</li>
-                    <li>Listen to the jugalbandi — notice how two instruments respond to each other</li>
-                    <li>Start identifying raags by their characteristic phrases (pakad)</li>
-                </ul>
-            </div>
-
-            <div class="recommended-box">
-                <h4>Month 4+: Active Practice</h4>
-                <ul>
-                    <li>Try to reproduce phrases you hear on your own bansuri</li>
-                    <li>Record yourself and compare with the masters</li>
-                    <li>Explore more recordings on <a href="https://archive.org/search?query=bansuri+flute&and%5B%5D=mediatype%3A%22audio%22" target="_blank" rel="noopener noreferrer">Internet Archive</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Ear Training Tips -->
+        <!-- Comparison Table -->
         <div class="tips-section">
-            <h3>Tips for Ear Training</h3>
+            <h3>Side-by-Side Comparison</h3>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Hindustani Bansuri</th>
+                            <th>Carnatic Flute</th>
+                            <th>Folk Bansuri</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Material</strong></td>
+                            <td>Bamboo</td>
+                            <td>Bamboo</td>
+                            <td>Bamboo</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Holes</strong></td>
+                            <td>6-7</td>
+                            <td>8</td>
+                            <td>6</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tone</strong></td>
+                            <td>Deep, breathy</td>
+                            <td>Bright, clear</td>
+                            <td>Soft, warm</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ornamentation</strong></td>
+                            <td>Meend, andolan</td>
+                            <td>Gamakas, sharp turns</td>
+                            <td>Gentle bends</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tradition</strong></td>
+                            <td>North Indian classical</td>
+                            <td>South Indian classical</td>
+                            <td>Rural devotional</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Scale System</strong></td>
+                            <td>Thaat / Raag</td>
+                            <td>Melakarta / Ragam</td>
+                            <td>Folk modes</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- What to Listen For -->
+        <div class="tips-section">
+            <h3>What to Listen For</h3>
             <ul>
-                <li><strong>Start with single notes:</strong> Listen to each note multiple times to internalize its unique quality and pitch</li>
-                <li><strong>Compare traditions:</strong> Notice how the same raag framework sounds different on Hindustani bansuri vs Carnatic flute</li>
-                <li><strong>Identify moods:</strong> Try to feel and describe the emotional essence of each raag before reading about it</li>
-                <li><strong>Regular practice:</strong> Listen to these examples daily for at least 15-20 minutes for effective learning</li>
-                <li><strong>Active listening:</strong> Close your eyes and focus entirely on the music — don't multitask while listening</li>
-                <li><strong>Sing along:</strong> After listening, try to hum or sing the phrases to reinforce your learning</li>
+                <li><strong>Bansuri vs Carnatic:</strong> Both play raga Bhairav / Mayamalavagowla (same notes). Notice how the Bansuri glides slowly while the Carnatic flute oscillates rapidly on the same phrases</li>
+                <li><strong>Breath vs articulation:</strong> The Bansuri uses breath to shape notes — the Carnatic flute emphasizes finger technique</li>
+                <li><strong>Folk simplicity:</strong> Compare the folk clip with both classical clips — the melodies are shorter, the pauses longer, the mood more pastoral</li>
+                <li><strong>Low vs high pitch:</strong> The bass Bansuri sits lower in pitch than the Carnatic flute — this affects emotional color (deep = meditative, bright = energetic)</li>
             </ul>
         </div>
     </div>
