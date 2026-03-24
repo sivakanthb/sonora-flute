@@ -15,27 +15,27 @@
     }
 
     .videos-header h1 {
-        font-size: 1.7rem;
+        font-size: 1.45rem;
         color: var(--gold);
         margin-bottom: 10px;
     }
 
     .videos-header p {
-        font-size: 1.1rem;
+        font-size: 0.9rem;
         color: var(--text2);
         max-width: 600px;
         margin: 0 auto;
     }
 
     .category-section {
-        margin-bottom: 50px;
+        margin-bottom: 40px;
     }
 
     .category-title {
         color: var(--gold);
-        font-size: 1.3rem;
-        margin-bottom: 25px;
-        padding-bottom: 15px;
+        font-size: 1.15rem;
+        margin-bottom: 20px;
+        padding-bottom: 12px;
         border-bottom: 2px solid var(--gold);
     }
 
@@ -52,37 +52,11 @@
         overflow: hidden;
         box-shadow: var(--shadow);
         transition: all 0.3s ease;
-        cursor: pointer;
     }
 
     .video-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 8px 25px rgba(107, 182, 214, 0.3);
-    }
-
-    .video-thumbnail {
-        background: linear-gradient(135deg, var(--gold), var(--teal));
-        height: 200px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 3rem;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .video-thumbnail::after {
-        content: "\25B6";
-        position: absolute;
-        font-size: 3rem;
-        color: var(--bg-deep);
-        opacity: 0.7;
-        transition: all 0.3s ease;
-    }
-
-    .video-card:hover .video-thumbnail::after {
-        opacity: 1;
-        transform: scale(1.1);
+        transform: translateY(-4px);
+        box-shadow: 0 8px 25px rgba(107, 182, 214, 0.2);
     }
 
     .video-content {
@@ -91,7 +65,7 @@
 
     .video-title {
         color: var(--gold);
-        font-size: 1.2rem;
+        font-size: 1.05rem;
         font-weight: bold;
         margin-bottom: 10px;
         line-height: 1.4;
@@ -99,42 +73,19 @@
 
     .video-description {
         color: var(--text2);
-        font-size: 0.9rem;
+        font-size: 0.88rem;
         line-height: 1.6;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
     }
 
-    .video-meta {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 0.85rem;
-        color: var(--rose);
-        padding-top: 15px;
-        border-top: 1px solid rgba(107, 182, 214, 0.2);
+    .source-credit {
+        font-size: 0.78rem;
+        color: var(--text3);
+        margin-top: 8px;
     }
 
-    .difficulty-badge {
-        display: inline-block;
-        padding: 4px 12px;
-        border-radius: 20px;
-        font-size: 0.8rem;
-        font-weight: bold;
-    }
-
-    .difficulty-beginner {
-        background: #A8E6CF;
-        color: #2d5a4a;
-    }
-
-    .difficulty-intermediate {
-        background: #E8956E;
-        color: #6b3d28;
-    }
-
-    .difficulty-advanced {
-        background: #6BB6D6;
-        color: #2d4a5a;
+    .source-credit a {
+        color: var(--teal);
     }
 
     .playlist-section {
@@ -202,230 +153,120 @@
 {% block content %}
 <div class="videos-container">
     <div class="videos-header">
-        <h1>Tutorial Videos</h1>
-        <p>Learn from master musicians and instructors. Watch comprehensive tutorials on Bansuri technique, scale training, and classical Indian music theory.</p>
+        <h1>Flute Performances & Recitals</h1>
+        <p>Authentic Indian classical flute recordings from the Internet Archive and public cultural archives. All content is freely available for listening and learning.</p>
     </div>
 
-    <!-- Beginner Level -->
+    <!-- Hariprasad Chaurasia -->
     <div class="category-section">
-        <div class="category-title">🌱 Beginner Level</div>
+        <div class="category-title">Pt. Hariprasad Chaurasia — Live Recital</div>
+        <div class="video-card">
+            <div class="video-content">
+                <div class="video-title">Flute Recital by Pandit Hariprasad Chaurasia</div>
+                <p class="video-description">A live flute recital by the legendary Pandit Hariprasad Chaurasia, widely regarded as the greatest living Bansuri maestro. His style blends classical precision with soulful expression. From India's national cultural archives.</p>
+                <iframe src="https://archive.org/embed/dni.ncaa.IGRMS-A_184-AC" width="100%" height="80" frameborder="0" allowfullscreen loading="lazy" style="border-radius:8px; margin-top:12px;"></iframe>
+                <p class="source-credit">Source: <a href="https://archive.org/details/dni.ncaa.IGRMS-A_184-AC" target="_blank" rel="noopener noreferrer">Internet Archive — Cultural Resources of India</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Flute Music from Northern India -->
+    <div class="category-section">
+        <div class="category-title">Historical Recordings</div>
+        <div class="video-card">
+            <div class="video-content">
+                <div class="video-title">Flute Music from Northern India (1969)</div>
+                <p class="video-description">A historical recording capturing the traditional North Indian flute playing style. This archival treasure gives a window into how the bansuri was performed half a century ago — before modern recording techniques.</p>
+                <iframe src="https://archive.org/embed/C_1969_XX_XX_02" width="100%" height="80" frameborder="0" allowfullscreen loading="lazy" style="border-radius:8px; margin-top:12px;"></iframe>
+                <p class="source-credit">Source: <a href="https://archive.org/details/C_1969_XX_XX_02" target="_blank" rel="noopener noreferrer">Internet Archive</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jugalbandi Series -->
+    <div class="category-section">
+        <div class="category-title">Jugalbandi — Flute Duets & Ensemble</div>
         
         <div class="video-grid">
             <div class="video-card">
-                <div class="video-thumbnail">🎵</div>
                 <div class="video-content">
-                    <div class="video-title">Bansuri Basics - Getting Started</div>
-                    <p class="video-description">Learn the fundamentals of holding the Bansuri, proper breathing technique, and how to produce your first clear notes.</p>
-                    <div class="video-meta">
-                        <span class="difficulty-badge difficulty-beginner">Beginner</span>
-                        <span>⏱️ 15 min</span>
-                    </div>
+                    <div class="video-title">Flute & Santoor Recital</div>
+                    <p class="video-description">A jugalbandi (duet) between flute and santoor — two instruments weaving melodies together in the Indian classical tradition.</p>
+                    <iframe src="https://archive.org/embed/dni.ncaa.ICCR-1839-AC" width="100%" height="60" frameborder="0" allowfullscreen loading="lazy" style="border-radius:8px; margin-top:12px;"></iframe>
+                    <p class="source-credit">Source: <a href="https://archive.org/details/dni.ncaa.ICCR-1839-AC" target="_blank" rel="noopener noreferrer">Internet Archive</a></p>
                 </div>
             </div>
 
             <div class="video-card">
-                <div class="video-thumbnail">🎶</div>
                 <div class="video-content">
-                    <div class="video-title">The Seven Notes - Sargam</div>
-                    <p class="video-description">Master playing all seven notes (Sa-Re-Ga-Ma-Pa-Dha-Ni) with clear, distinct tones. Essential foundation for all flute playing.</p>
-                    <div class="video-meta">
-                        <span class="difficulty-badge difficulty-beginner">Beginner</span>
-                        <span>⏱️ 20 min</span>
-                    </div>
+                    <div class="video-title">Poonam-11 — Jugalbandi Vol. I</div>
+                    <p class="video-description">Volume I of a jugalbandi performance between Vidushi Shanti Rao and Shri A.V. Prakash, showcasing the interplay of flute with other classical instruments.</p>
+                    <iframe src="https://archive.org/embed/dni.ncaa.IGRMS-A_568-AC" width="100%" height="60" frameborder="0" allowfullscreen loading="lazy" style="border-radius:8px; margin-top:12px;"></iframe>
+                    <p class="source-credit">Source: <a href="https://archive.org/details/dni.ncaa.IGRMS-A_568-AC" target="_blank" rel="noopener noreferrer">Internet Archive</a></p>
                 </div>
             </div>
 
             <div class="video-card">
-                <div class="video-thumbnail">💨</div>
                 <div class="video-content">
-                    <div class="video-title">Breath Control & Stamina</div>
-                    <p class="video-description">Develop diaphragmic breathing and learn to play longer phrases without losing tone quality. Build your musical endurance.</p>
-                    <div class="video-meta">
-                        <span class="difficulty-badge difficulty-beginner">Beginner</span>
-                        <span>⏱️ 18 min</span>
-                    </div>
+                    <div class="video-title">Poonam-11 — Jugalbandi Vol. II</div>
+                    <p class="video-description">Volume II continues the dynamic musical dialogue, as both artists explore deeper melodic and rhythmic territory together.</p>
+                    <iframe src="https://archive.org/embed/dni.ncaa.IGRMS-A_569-AC" width="100%" height="60" frameborder="0" allowfullscreen loading="lazy" style="border-radius:8px; margin-top:12px;"></iframe>
+                    <p class="source-credit">Source: <a href="https://archive.org/details/dni.ncaa.IGRMS-A_569-AC" target="_blank" rel="noopener noreferrer">Internet Archive</a></p>
                 </div>
             </div>
 
             <div class="video-card">
-                <div class="video-thumbnail">📖</div>
                 <div class="video-content">
-                    <div class="video-title">Understanding Indian Classical Music Basics</div>
-                    <p class="video-description">Introduction to Raag, Thaat, and the foundational concepts of Indian classical music. Essential theory for every musician.</p>
-                    <div class="video-meta">
-                        <span class="difficulty-badge difficulty-beginner">Beginner</span>
-                        <span>⏱️ 25 min</span>
-                    </div>
+                    <div class="video-title">Poonam-11 — Jugalbandi Vol. III</div>
+                    <p class="video-description">The culminating volume of this jugalbandi series, bringing the performance to an expressive and virtuosic conclusion.</p>
+                    <iframe src="https://archive.org/embed/dni.ncaa.IGRMS-A_570-AC" width="100%" height="60" frameborder="0" allowfullscreen loading="lazy" style="border-radius:8px; margin-top:12px;"></iframe>
+                    <p class="source-credit">Source: <a href="https://archive.org/details/dni.ncaa.IGRMS-A_570-AC" target="_blank" rel="noopener noreferrer">Internet Archive</a></p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Intermediate Level -->
+    <!-- IMC India Meets Classic -->
     <div class="category-section">
-        <div class="category-title">🌳 Intermediate Level</div>
-        
-        <div class="video-grid">
-            <div class="video-card">
-                <div class="video-thumbnail">🌊</div>
-                <div class="video-content">
-                    <div class="video-title">Meend - The Art of Gliding</div>
-                    <p class="video-description">Master the most characteristic ornament of Indian flute music. Learn smooth pitch transitions and control techniques.</p>
-                    <div class="video-meta">
-                        <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
-                        <span>⏱️ 22 min</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail">✨</div>
-                <div class="video-content">
-                    <div class="video-title">Gamak & Ornamentations</div>
-                    <p class="video-description">Explore rapid oscillations and embellishments to add character and emotion to your playing style.</p>
-                    <div class="video-meta">
-                        <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
-                        <span>⏱️ 20 min</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail">🎭</div>
-                <div class="video-content">
-                    <div class="video-title">Playing a Complete Raag - Bhairav</div>
-                    <p class="video-description">Learn the structure and progression of a complete Raag Bhairav with multiple phrases and variations.</p>
-                    <div class="video-meta">
-                        <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
-                        <span>⏱️ 30 min</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail">🥁</div>
-                <div class="video-content">
-                    <div class="video-title">Rhythm & Taal - Synchronizing with Tabla</div>
-                    <p class="video-description">Understand rhythmic cycles (Taals) and how to play in synchronization with percussion instruments.</p>
-                    <div class="video-meta">
-                        <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
-                        <span>⏱️ 28 min</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail">🌀</div>
-                <div class="video-content">
-                    <div class="video-title">Advanced Scale Jumping</div>
-                    <p class="video-description">Develop flexibility to jump between different scales and raags smoothly and accurately.</p>
-                    <div class="video-meta">
-                        <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
-                        <span>⏱️ 24 min</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail">🎵</div>
-                <div class="video-content">
-                    <div class="video-title">Ear Training for Raag Recognition</div>
-                    <p class="video-description">Train your ear to identify different raags and their characteristic phrases through active listening exercises.</p>
-                    <div class="video-meta">
-                        <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
-                        <span>⏱️ 26 min</span>
-                    </div>
-                </div>
+        <div class="category-title">India Meets Classic — Radio Program</div>
+        <div class="video-card">
+            <div class="video-content">
+                <div class="video-title">726 Years of Celestial Music</div>
+                <p class="video-description">A radio program from the "India Meets Classic" series celebrating 726 years of Indian celestial music, featuring flute performances and commentary on the evolution of Indian classical music from ancient traditions to the modern era.</p>
+                <iframe src="https://archive.org/embed/IMC_presents_726_years_of_celestial_music_short_version_part_1_3_19122011" width="100%" height="60" frameborder="0" allowfullscreen loading="lazy" style="border-radius:8px; margin-top:12px;"></iframe>
+                <p class="source-credit">Source: <a href="https://archive.org/details/IMC_presents_726_years_of_celestial_music_short_version_part_1_3_19122011" target="_blank" rel="noopener noreferrer">Internet Archive — IMC Radio</a></p>
             </div>
         </div>
     </div>
 
-    <!-- Advanced Level -->
-    <div class="category-section">
-        <div class="category-title">🏔️ Advanced Level</div>
-        
-        <div class="video-grid">
-            <div class="video-card">
-                <div class="video-thumbnail">🎼</div>
-                <div class="video-content">
-                    <div class="video-title">Improvisation Techniques - Alaap</div>
-                    <p class="video-description">Master the art of free-form improvisation and creating your own variations on raag frameworks.</p>
-                    <div class="video-meta">
-                        <span class="difficulty-badge difficulty-advanced">Advanced</span>
-                        <span>⏱️ 35 min</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail">🌟</div>
-                <div class="video-content">
-                    <div class="video-title">Master Class - Raag Yaman</div>
-                    <p class="video-description">Deep dive into the most classical and aesthetic raag with performance tips from accomplished musicians.</p>
-                    <div class="video-meta">
-                        <span class="difficulty-badge difficulty-advanced">Advanced</span>
-                        <span>⏱️ 45 min</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail">🔮</div>
-                <div class="video-content">
-                    <div class="video-title">Developing Your Unique Style</div>
-                    <p class="video-description">Explore how to maintain raag identity while expressing personal musicality and creating a distinctive sound.</p>
-                    <div class="video-meta">
-                        <span class="difficulty-badge difficulty-advanced">Advanced</span>
-                        <span>⏱️ 40 min</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail">🎪</div>
-                <div class="video-content">
-                    <div class="video-title">Performance & Stage Techniques</div>
-                    <p class="video-description">Learn how to deliver compelling performances, manage stage presence, and connect with audiences emotionally.</p>
-                    <div class="video-meta">
-                        <span class="difficulty-badge difficulty-advanced">Advanced</span>
-                        <span>⏱️ 32 min</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Learning Path & Recommendations -->
+    <!-- Learning Path (kept — real content) -->
     <div class="playlist-section">
-        <h3>📚 Recommended Learning Path</h3>
+        <h3>Recommended Learning Path</h3>
         
         <div class="recommended-box">
             <h4>Month 1: Foundation</h4>
             <ul>
-                <li>Bansuri Basics - Getting Started</li>
-                <li>The Seven Notes - Sargam</li>
-                <li>Breath Control & Stamina</li>
-                <li>Understanding Indian Classical Music Basics</li>
+                <li>Listen to the Bansuri Bass Bhairav alap (Audio page) — focus on how individual notes are explored</li>
+                <li>Compare the Carnatic flute recording with the Hindustani style — notice the differences in ornamentation</li>
+                <li>Explore the 1969 historical recording — observe how the traditional style laid groundwork for today's artists</li>
             </ul>
         </div>
 
         <div class="recommended-box">
-            <h4>Month 2-3: Core Skills</h4>
+            <h4>Month 2-3: Deeper Listening</h4>
             <ul>
-                <li>Meend - The Art of Gliding</li>
-                <li>Gamak & Ornamentations</li>
-                <li>Playing a Complete Raag - Bhairav</li>
-                <li>Rhythm & Taal - Synchronizing with Tabla</li>
+                <li>Study Pt. Hariprasad Chaurasia's recital — pay attention to his meend (glides) and breath control</li>
+                <li>Listen to the jugalbandi series — notice how two instruments respond to each other</li>
+                <li>Start identifying raags by their characteristic phrases (pakad)</li>
             </ul>
         </div>
 
         <div class="recommended-box">
-            <h4>Month 4+: Mastery</h4>
+            <h4>Month 4+: Active Practice</h4>
             <ul>
-                <li>Advanced Scale Jumping</li>
-                <li>Ear Training for Raag Recognition</li>
-                <li>Improvisation Techniques - Alaap</li>
-                <li>Master Class - Raag Yaman</li>
+                <li>Try to reproduce phrases you hear on your own bansuri</li>
+                <li>Record yourself and compare with the masters</li>
+                <li>Explore more recordings on <a href="https://archive.org/search?query=bansuri+flute&and%5B%5D=mediatype%3A%22audio%22" target="_blank" rel="noopener noreferrer">Internet Archive</a></li>
             </ul>
         </div>
     </div>
