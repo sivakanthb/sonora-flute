@@ -282,12 +282,41 @@ class InteractiveScale {
         const Tone = await this.loadToneJS();
         
         const scaleMap = {
-            'Bhairav': ['C4', 'D4', 'E4', 'F#4', 'G4', 'A4', 'B4', 'C5'],
-            'Yaman': ['G4', 'A4', 'B4', 'C#5', 'D5', 'E5', 'F#5', 'G5'],
-            'Kafi': ['D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5', 'D5'],
+            'Bhairav':   ['C4', 'Db4', 'E4', 'F4', 'G4', 'Ab4', 'B4', 'C5'],
+            'Kalyan':    ['C4', 'D4', 'E4', 'F#4', 'G4', 'A4', 'B4', 'C5'],
+            'Khamaj':    ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'Bb4', 'C5'],
+            'Bilawal':   ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'],
+            'Kafi':      ['C4', 'D4', 'Eb4', 'F4', 'G4', 'A4', 'Bb4', 'C5'],
+            'Asavari':   ['C4', 'D4', 'Eb4', 'F4', 'G4', 'Ab4', 'Bb4', 'C5'],
+            'Bhairavi':  ['C4', 'Db4', 'Eb4', 'F4', 'G4', 'Ab4', 'Bb4', 'C5'],
+            'Todi':      ['C4', 'Db4', 'Eb4', 'F#4', 'G4', 'Ab4', 'B4', 'C5'],
+            'Purvi':     ['C4', 'Db4', 'E4', 'F#4', 'G4', 'Ab4', 'B4', 'C5'],
+            'Marwa':     ['C4', 'Db4', 'E4', 'F#4', 'G4', 'A4', 'B4', 'C5'],
+            'Dheerashankar': ['C4', 'Db4', 'Eb4', 'F#4', 'G4', 'Ab4', 'Bb4', 'C5'],
+            'Yaman':     ['C4', 'D4', 'E4', 'F#4', 'G4', 'A4', 'B4', 'C5'],
+            // Indian ragas
+            'Raga Yaman':    ['C4', 'D4', 'E4', 'F#4', 'G4', 'A4', 'B4', 'C5'],
+            'Raga Bhairav':  ['C4', 'Db4', 'E4', 'F4', 'G4', 'Ab4', 'B4', 'C5'],
+            'Raga Bhimpalasi': ['C4', 'D4', 'Eb4', 'F4', 'G4', 'A4', 'Bb4', 'C5'],
+            'Raga Desh':     ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'Bb4', 'C5'],
+            'Raga Malkauns':  ['C4', 'Eb4', 'F4', 'Ab4', 'Bb4', 'C5'],
+            'Raga Durga':    ['C4', 'D4', 'F4', 'G4', 'A4', 'C5'],
+            // Western scales
+            'Major':     ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'],
+            'Natural Minor': ['C4', 'D4', 'Eb4', 'F4', 'G4', 'Ab4', 'Bb4', 'C5'],
+            'Harmonic Minor': ['C4', 'D4', 'Eb4', 'F4', 'G4', 'Ab4', 'B4', 'C5'],
+            'Melodic Minor': ['C4', 'D4', 'Eb4', 'F4', 'G4', 'A4', 'B4', 'C5'],
+            'Pentatonic Major': ['C4', 'D4', 'E4', 'G4', 'A4', 'C5'],
+            'Pentatonic Minor': ['C4', 'Eb4', 'F4', 'G4', 'Bb4', 'C5'],
+            'Blues':     ['C4', 'Eb4', 'F4', 'F#4', 'G4', 'Bb4', 'C5'],
+            'Dorian':    ['C4', 'D4', 'Eb4', 'F4', 'G4', 'A4', 'Bb4', 'C5'],
+            'Mixolydian': ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'Bb4', 'C5'],
+            'Lydian':    ['C4', 'D4', 'E4', 'F#4', 'G4', 'A4', 'B4', 'C5'],
+            'Phrygian':  ['C4', 'Db4', 'Eb4', 'F4', 'G4', 'Ab4', 'Bb4', 'C5'],
+            'Whole Tone': ['C4', 'D4', 'E4', 'F#4', 'G#4', 'A#4', 'C5'],
         };
 
-        const notes = scaleMap[scaleName] || scaleMap['Bhairav'];
+        const notes = scaleMap[scaleName] || scaleMap[scaleName.replace(' Scale', '')] || scaleMap['Bhairav'];
 
         // Create a simple synth for playing the scale
         const synth = new Tone.Synth({
@@ -356,13 +385,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const scaleOfDay = new ScaleOfTheDay();
     scaleOfDay.renderToDOM('scale-of-day-widget');
 
-    // Listen button event
+    // Listen button event — handles .listen-btn, .play-button, .listen-button
     document.addEventListener('click', async (e) => {
-        if (e.target.classList.contains('listen-btn')) {
-            const scaleName = e.target.getAttribute('data-scale');
-            const scalePlayer = new InteractiveScale();
-            await scalePlayer.playScale(scaleName);
+        var btn = e.target.closest('.listen-btn, .play-button, .listen-button');
+        if (!btn) return;
+        var scaleName = btn.getAttribute('data-scale');
+        if (!scaleName) {
+            // Try to infer scale name from card heading
+            var card = btn.closest('.thaat-card, .scale-card');
+            if (card) {
+                var h3 = card.querySelector('h3');
+                if (h3) scaleName = h3.textContent.replace(/[^\w\s]/g, '').trim();
+            }
         }
+        if (!scaleName) return;
+        btn.textContent = '♪ Playing...';
+        btn.disabled = true;
+        try {
+            var scalePlayer = new InteractiveScale();
+            await scalePlayer.playScale(scaleName);
+        } catch (err) {
+            console.error('Scale playback failed:', err);
+        }
+        setTimeout(function () {
+            btn.textContent = '▶ Listen to Scale';
+            btn.disabled = false;
+        }, scaleName ? 4500 : 1000);
     });
 
     // Scale search and filter functionality
@@ -460,3 +508,39 @@ window.ThemeManager = ThemeManager;
 window.MusicManager = MusicManager;
 window.ScaleOfTheDay = ScaleOfTheDay;
 window.InteractiveScale = InteractiveScale;
+
+// ============================================================
+// Collapsible Cards — click to expand/collapse
+// ============================================================
+document.addEventListener('DOMContentLoaded', function () {
+    // Toggle expand/collapse on card header click
+    document.addEventListener('click', function (e) {
+        var header = e.target.closest('.card-header');
+        if (!header) return;
+        var card = header.closest('.card-collapsible');
+        if (card) card.classList.toggle('expanded');
+    });
+
+    // "Show More / Show Less" toggle for timeline, grids, etc.
+    document.querySelectorAll('.show-more-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var target = document.getElementById(btn.dataset.target);
+            if (!target) return;
+            var hidden = target.querySelectorAll('.hidden-item');
+            var isShowing = btn.dataset.showing === 'true';
+            hidden.forEach(function (el) {
+                el.style.display = isShowing ? 'none' : '';
+            });
+            btn.dataset.showing = isShowing ? 'false' : 'true';
+            btn.textContent = isShowing ? 'Show more ▾' : 'Show less ▴';
+        });
+    });
+
+    // FAQ accordion (works with both .faq-question and .faq-question-text)
+    document.querySelectorAll('.faq-question').forEach(function (q) {
+        q.addEventListener('click', function () {
+            var item = q.closest('.faq-item');
+            if (item) item.classList.toggle('open');
+        });
+    });
+});

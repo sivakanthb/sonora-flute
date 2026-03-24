@@ -95,7 +95,7 @@
             <section class="history-section card">
                 <h2>📖 Flute History Through Time</h2>
                 
-                <div class="timeline">
+                <div class="timeline" id="timeline-items">
                     <div class="timeline-item">
                         <div class="timeline-marker"></div>
                         <div class="timeline-content">
@@ -133,7 +133,7 @@
                         </div>
                     </div>
 
-                    <div class="timeline-item">
+                    <div class="timeline-item hidden-item" style="display:none">
                         <div class="timeline-marker"></div>
                         <div class="timeline-content">
                             <h3>Medieval & Renaissance Era</h3>
@@ -145,7 +145,7 @@
                         </div>
                     </div>
 
-                    <div class="timeline-item">
+                    <div class="timeline-item hidden-item" style="display:none">
                         <div class="timeline-marker"></div>
                         <div class="timeline-content">
                             <h3>17th-18th Century - Classical Golden Age</h3>
@@ -156,7 +156,7 @@
                         </div>
                     </div>
 
-                    <div class="timeline-item">
+                    <div class="timeline-item hidden-item" style="display:none">
                         <div class="timeline-marker"></div>
                         <div class="timeline-content">
                             <h3>19th-20th Centuries - Modern Evolution</h3>
@@ -167,7 +167,7 @@
                         </div>
                     </div>
 
-                    <div class="timeline-item">
+                    <div class="timeline-item hidden-item" style="display:none">
                         <div class="timeline-marker"></div>
                         <div class="timeline-content">
                             <h3>21st Century - Future of Flute</h3>
@@ -178,6 +178,10 @@
                             </p>
                         </div>
                     </div>
+                </div>
+
+                <div class="show-more-container">
+                    <button class="show-more-btn" data-target="timeline-items" data-showing="false">Show more ▾</button>
                 </div>
 
                 <div class="history-links">

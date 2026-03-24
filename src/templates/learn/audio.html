@@ -2,129 +2,7 @@
 
 {% block title %}Audio Examples - Sonora{% endblock %}
 
-{% block extra_css %}
-<style>
-    .audio-container {
-        max-width: 1000px;
-        margin: 0 auto;
-        padding: 40px 20px;
-    }
 
-    .audio-header {
-        text-align: center;
-        margin-bottom: 50px;
-    }
-
-    .audio-header h1 { margin-bottom: 10px; }
-
-    .audio-header p {
-        max-width: 650px;
-        margin: 0 auto;
-        color: var(--text2);
-    }
-
-    .section-title {
-        margin-top: 50px;
-        margin-bottom: 25px;
-        padding-bottom: 15px;
-        border-bottom: 2px solid var(--gold);
-    }
-
-    .video-card {
-        background: var(--bg-card);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-        padding: 24px;
-        margin-bottom: 30px;
-        transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .video-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 25px rgba(107, 182, 214, 0.25);
-    }
-
-    .video-card h3 { margin-bottom: 8px; }
-
-    .video-card .card-desc {
-        color: var(--text2);
-        line-height: 1.6;
-        margin-bottom: 16px;
-    }
-
-    .video-card iframe {
-        border-radius: 8px;
-    }
-
-    .video-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 24px;
-        margin-bottom: 40px;
-    }
-
-    .video-grid .video-card { margin-bottom: 0; }
-
-    .note-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-bottom: 18px;
-    }
-
-    .note-list span {
-        display: inline-block;
-        padding: 6px 16px;
-        border-radius: 20px;
-        background: rgba(107, 182, 214, 0.15);
-        border: 1px solid var(--teal);
-        font-weight: 600;
-    }
-
-    .tips-section {
-        background: var(--bg-card);
-        border-radius: var(--radius);
-        padding: 30px;
-        margin-top: 50px;
-        border: 2px solid var(--secondary);
-    }
-
-    .tips-section h3 {
-        color: var(--secondary);
-        margin-bottom: 20px;
-    }
-
-    .tips-section ul { list-style: none; padding: 0; }
-
-    .tips-section li {
-        margin-bottom: 15px;
-        padding-left: 30px;
-        position: relative;
-        line-height: 1.6;
-    }
-
-    .tips-section li:before {
-        content: "🎵";
-        position: absolute;
-        left: 0;
-    }
-
-    .audio-credit {
-        font-size: 0.78rem;
-        color: var(--text3);
-        margin-top: 8px;
-    }
-
-    .audio-credit a {
-        color: var(--teal);
-    }
-
-    @media (max-width: 768px) {
-        .video-grid { grid-template-columns: 1fr; }
-    }
-</style>
-{% endblock %}
 
 {% block content %}
     <div class="audio-container">
@@ -138,7 +16,7 @@
         <div class="video-card">
             <h3>Bass Bansuri in E — Raag Bhairav</h3>
             <p class="card-desc">A meditative alap on a bass bansuri tuned to E. Raag Bhairav is a deeply devotional early-morning raag with contemplative character. Recorded by Prithwin and released into the public domain.</p>
-            <audio controls preload="none" style="width:100%; margin-top:12px;">
+            <audio controls preload="none">
                 <source src="https://upload.wikimedia.org/wikipedia/commons/transcoded/8/8e/Bansuri_sample_E_bass.ogg/Bansuri_sample_E_bass.ogg.mp3" type="audio/mpeg">
                 <source src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Bansuri_sample_E_bass.ogg" type="audio/ogg">
                 Your browser does not support the audio element.
@@ -151,7 +29,7 @@
         <div class="video-card">
             <h3>8-Hole Carnatic Flute</h3>
             <p class="card-desc">A demonstration of Raga Mayamalavagowla on an 8-hole Carnatic flute. This raga (equivalent of Thaat Bhairav in Hindustani) is the foundation scale taught to every Carnatic music student. Recorded by Bansuri Arvind.</p>
-            <audio controls preload="none" style="width:100%; margin-top:12px;">
+            <audio controls preload="none">
                 <source src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Carnatic_flute.ogg" type="audio/ogg">
                 Your browser does not support the audio element.
             </audio>
@@ -163,7 +41,7 @@
         <div class="video-card">
             <h3>Folk Classical Bansuri</h3>
             <p class="card-desc">A soulful bansuri performance rooted in the folk and classical heritage of India. The bamboo flute's soft, melodic tones evoke deep emotions — connecting the listener with nature, spirituality, and Indian tradition. Recorded by MayankSingh33.</p>
-            <audio controls preload="none" style="width:100%; margin-top:12px;">
+            <audio controls preload="none">
                 <source src="https://upload.wikimedia.org/wikipedia/commons/1/1d/Indian_Folk_Classical_Flute_Music_%281%29.wav" type="audio/wav">
                 Your browser does not support the audio element.
             </audio>
@@ -175,7 +53,7 @@
         <div class="video-card">
             <h3>Flute Recital by Pandit Hariprasad Chaurasia</h3>
             <p class="card-desc">A live flute recital by the legendary Pandit Hariprasad Chaurasia, one of the greatest Bansuri maestros of all time. From the Indian cultural archives.</p>
-            <iframe src="https://archive.org/embed/dni.ncaa.IGRMS-A_184-AC" width="100%" height="60" frameborder="0" allowfullscreen loading="lazy" style="border-radius:8px; margin-top:12px;"></iframe>
+            <iframe src="https://archive.org/embed/dni.ncaa.IGRMS-A_184-AC" width="100%" height="60" frameborder="0" allowfullscreen loading="lazy"></iframe>
             <p class="audio-credit">Source: <a href="https://archive.org/details/dni.ncaa.IGRMS-A_184-AC" target="_blank" rel="noopener noreferrer">Internet Archive — Cultural Resources of India</a></p>
         </div>
 
@@ -184,7 +62,7 @@
         <div class="video-card">
             <h3>Historical Recording — North Indian Flute</h3>
             <p class="card-desc">A historical recording of flute music from Northern India, capturing the traditional playing style and melodic sensibility of the region.</p>
-            <iframe src="https://archive.org/embed/C_1969_XX_XX_02" width="100%" height="60" frameborder="0" allowfullscreen loading="lazy" style="border-radius:8px; margin-top:12px;"></iframe>
+            <iframe src="https://archive.org/embed/C_1969_XX_XX_02" width="100%" height="60" frameborder="0" allowfullscreen loading="lazy"></iframe>
             <p class="audio-credit">Source: <a href="https://archive.org/details/C_1969_XX_XX_02" target="_blank" rel="noopener noreferrer">Internet Archive</a></p>
         </div>
 
@@ -193,7 +71,7 @@
         <div class="video-card">
             <h3>Jugalbandi — Flute and Santoor</h3>
             <p class="card-desc">A beautiful jugalbandi (duet) between flute and santoor. Two instruments weaving melodies together in the Indian classical tradition — showcasing the interplay of the breathy flute with the resonant hammered strings of the santoor.</p>
-            <iframe src="https://archive.org/embed/dni.ncaa.ICCR-1839-AC" width="100%" height="60" frameborder="0" allowfullscreen loading="lazy" style="border-radius:8px; margin-top:12px;"></iframe>
+            <iframe src="https://archive.org/embed/dni.ncaa.ICCR-1839-AC" width="100%" height="60" frameborder="0" allowfullscreen loading="lazy"></iframe>
             <p class="audio-credit">Source: <a href="https://archive.org/details/dni.ncaa.ICCR-1839-AC" target="_blank" rel="noopener noreferrer">Internet Archive — Cultural Resources of India</a></p>
         </div>
 
@@ -211,7 +89,7 @@
                 <span>Dha (Dhaivat)</span>
                 <span>Ni (Nishad)</span>
             </div>
-            <p class="card-desc" style="margin-top:12px;">Listen to the recordings above to hear how these notes come alive on the bansuri. The bass bansuri clip demonstrates a slow alap where individual notes are explored with meend (gliding) and andolan (gentle oscillation).</p>
+            <p class="card-desc">Listen to the recordings above to hear how these notes come alive on the bansuri. The bass bansuri clip demonstrates a slow alap where individual notes are explored with meend (gliding) and andolan (gentle oscillation).</p>
         </div>
 
         <!-- Ear Training Tips -->

@@ -1,163 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}Indian Classical Scales - Sonora{% endblock %}
 
-{% block extra_css %}
-<style>
-    .Indian-scales-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 40px 20px;
-    }
 
-    .Indian-scales-header {
-        text-align: center;
-        margin-bottom: 50px;
-    }
-
-    .Indian-scales-header h1 {
-        font-size: 1.7rem;
-        color: var(--gold);
-        margin-bottom: 10px;
-    }
-
-    .Indian-scales-header p {
-        font-size: 1.1rem;
-        color: var(--text2);
-        max-width: 800px;
-        margin: 0 auto;
-        line-height: 1.8;
-    }
-
-    .scales-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 30px;
-        margin: 40px 0;
-    }
-
-    .scale-card {
-        background: linear-gradient(135deg, rgba(107, 182, 214, 0.1), rgba(168, 230, 207, 0.1));
-        border: 2px solid var(--gold);
-        border-radius: var(--radius);
-        padding: 30px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: var(--shadow);
-    }
-
-    .scale-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 8px 25px rgba(107, 182, 214, 0.3);
-        background: linear-gradient(135deg, rgba(107, 182, 214, 0.2), rgba(168, 230, 207, 0.2));
-    }
-
-    .scale-card h3 {
-        color: var(--gold);
-        font-size: 1.5rem;
-        margin-bottom: 15px;
-    }
-
-    .scale-description {
-        color: var(--text2);
-        font-size: 0.95rem;
-        line-height: 1.6;
-        margin-bottom: 15px;
-    }
-
-    .notes-display {
-        background: var(--bg-card);
-        padding: 15px;
-        border-radius: 10px;
-        font-family: 'Courier New', monospace;
-        color: var(--gold);
-        font-weight: bold;
-        text-align: center;
-        font-size: 1rem;
-        letter-spacing: 2px;
-        margin-bottom: 15px;
-        border: 1px solid var(--border);
-    }
-
-    .scale-info-grid {
-        font-size: 0.9rem;
-        color: var(--text2);
-        margin-bottom: 15px;
-        padding: 15px;
-        background: rgba(107, 182, 214, 0.05);
-        border-radius: 8px;
-    }
-
-    .scale-info-grid div {
-        margin: 8px 0;
-    }
-
-    .scale-info-grid strong {
-        color: var(--primary-dark);
-        display: inline-block;
-        min-width: 100px;
-    }
-
-    .listen-button {
-        background: linear-gradient(135deg, var(--gold), var(--teal));
-        color: var(--bg-deep);
-        border: none;
-        padding: 12px 24px;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 0.95rem;
-        font-weight: bold;
-        transition: all 0.3s ease;
-        width: 100%;
-        margin-bottom: 15px;
-    }
-
-    .listen-button:hover {
-        transform: scale(1.05);
-        box-shadow: 0 4px 12px rgba(107, 182, 214, 0.4);
-    }
-
-    .scale-icon {
-        font-size: 1.5rem;
-        margin-right: 8px;
-    }
-
-    .intro-section {
-        background: linear-gradient(135deg, rgba(107, 182, 214, 0.1), rgba(168, 230, 207, 0.1));
-        padding: 30px;
-        border-radius: var(--radius);
-        border-left: 5px solid var(--gold);
-        margin-bottom: 50px;
-    }
-
-    .intro-section h2 {
-        color: var(--gold);
-        margin-bottom: 15px;
-        font-size: 1.3rem;
-    }
-
-    .intro-section p {
-        color: var(--text2);
-        line-height: 1.8;
-        margin-bottom: 12px;
-    }
-
-    @media (max-width: 768px) {
-        .Indian-scales-header h1 {
-            font-size: 1.4rem;
-        }
-
-        .scales-grid {
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-
-        .notes-display {
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-        }
-    }
-</style>
-{% endblock %}
 
 {% block content %}
 <div class="Indian-scales-container">
@@ -183,7 +27,7 @@
                 <div><strong>Mood:</strong> Serious, Devotional</div>
                 <div><strong>Famous Raga:</strong> Bhairav, Ahir Bhairav</div>
             </div>
-            <button class="listen-button">▶ Listen to Bhairav</button>
+            <button class="listen-button" data-scale="Bhairav">▶ Listen to Bhairav</button>
         </div>
 
         <!-- Kalyan -->
@@ -196,7 +40,7 @@
                 <div><strong>Mood:</strong> Joyful, Auspicious</div>
                 <div><strong>Famous Raga:</strong> Yaman, Kamod</div>
             </div>
-            <button class="listen-button">▶ Listen to Kalyan</button>
+            <button class="listen-button" data-scale="Kalyan">▶ Listen to Kalyan</button>
         </div>
 
         <!-- Khamaj -->
@@ -209,7 +53,7 @@
                 <div><strong>Mood:</strong> Light, Relaxed</div>
                 <div><strong>Famous Raga:</strong> Khammaj, Sarang</div>
             </div>
-            <button class="listen-button">▶ Listen to Khamaj</button>
+            <button class="listen-button" data-scale="Khamaj">▶ Listen to Khamaj</button>
         </div>
 
         <!-- Bilaval -->
@@ -222,7 +66,7 @@
                 <div><strong>Mood:</strong> Pure, Natural</div>
                 <div><strong>Famous Raga:</strong> Bilaval, Bhoop</div>
             </div>
-            <button class="listen-button">▶ Listen to Bilaval</button>
+            <button class="listen-button" data-scale="Bilaval">▶ Listen to Bilaval</button>
         </div>
 
         <!-- Marwa -->
@@ -235,7 +79,7 @@
                 <div><strong>Mood:</strong> Mystical, Spiritual</div>
                 <div><strong>Famous Raga:</strong> Marwa, Bhairav Marwa</div>
             </div>
-            <button class="listen-button">▶ Listen to Marwa</button>
+            <button class="listen-button" data-scale="Marwa">▶ Listen to Marwa</button>
         </div>
 
         <!-- Purvi -->
@@ -248,16 +92,16 @@
                 <div><strong>Mood:</strong> Romantic, Introspective</div>
                 <div><strong>Famous Raga:</strong> Puriya, Adana</div>
             </div>
-            <button class="listen-button">▶ Listen to Purvi</button>
+            <button class="listen-button" data-scale="Purvi">▶ Listen to Purvi</button>
         </div>
     </div>
 
-    <div style="margin-top: 60px; padding: 30px; background: linear-gradient(135deg, rgba(107, 182, 214, 0.1), rgba(168, 230, 207, 0.1)); border-radius: var(--radius);">
-        <h2 style="color: var(--gold); margin-bottom: 20px;">About Hindustani Scales</h2>
-        <p style="color: var(--text2); line-height: 1.8;">
+    <div class="scale-bottom-section">
+        <h2>About Hindustani Scales</h2>
+        <p>
             Hindustani classical music has evolved over centuries in North India. The Thaat system provides a systematic way to understand and practice Indian classical music. Each Thaat is like a "parent scale" from which multiple Ragas can be derived. A Raga is a specific melodic framework that defines rules about which notes to use, how to approach them, and in what order they should appear.
         </p>
-        <p style="color: var(--text2); line-height: 1.8; margin-top: 15px;">
+        <p>
             Master musicians often spend decades learning and performing a single Raga, exploring its infinite variations and emotional depths. The flute, particularly the bamboo Bansuri, is considered one of the most expressive instruments for Indian classical music.
         </p>
     </div>
